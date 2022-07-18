@@ -1,0 +1,11 @@
+.vuero-demos {
+  .demo-section {
+    .demo-section-title {
+      img {
+        [dir='rtl'] & {
+          transform: scaleX(-1);
+        }
+      }
+    }
+  }
+}

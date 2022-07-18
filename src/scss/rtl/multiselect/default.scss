@@ -1,0 +1,48 @@
+.multiselect-multiple-label,
+.multiselect-single-label,
+.multiselect-placeholder {
+  [dir='rtl'] & {
+    left: unset;
+    right: 0;
+    padding-left: unset;
+    padding-right: var(--ms-px, 0.875rem);
+  }
+}
+
+.multiselect-caret {
+  margin: 0 0 0 var(--ms-px, 0.875rem);
+}
+
+.multiselect-search {
+  [dir='rtl'] & {
+    padding-left: unset;
+    padding-right: var(--ms-px, 0.875rem);
+  }
+}
+
+.multiselect-tags {
+  [dir='rtl'] & {
+    padding-left: unset;
+    padding-right: var(--ms-py, 0.5rem);
+  }
+}
+
+.multiselect-tag {
+  [dir='rtl'] & {
+    margin-right: unset;
+    margin-left: var(--ms-tag-mx, 0.25rem);
+  }
+
+  &.is-disabled {
+    [dir='rtl'] & {
+      padding-right: unset;
+      padding-left: var(--ms-tag-px, 0.5rem);
+    }
+  }
+}
+
+.multiselect-option {
+  [dir='rtl'] & {
+    text-align: right;
+  }
+}

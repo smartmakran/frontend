@@ -1,0 +1,30 @@
+.notyf__wrapper {
+  [dir='rtl'] & {
+    padding-right: unset;
+    padding-left: 15px;
+  }
+}
+
+.notyf__icon {
+  [dir='rtl'] & {
+    margin-right: unset;
+    margin-left: 13px;
+  }
+}
+
+.notyf__dismiss {
+  [dir='rtl'] & {
+    left: 0;
+    right: unset;
+    margin-right: unset;
+    margin-left: -15px;
+  }
+}
+
+.notyf__dismiss-btn::after,
+.notyf__dismiss-btn::before {
+  [dir='rtl'] & {
+    left: unset;
+    right: calc(50% - 1px);
+  }
+}

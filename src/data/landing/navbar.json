@@ -1,0 +1,1220 @@
+[
+  {
+    "name": "نقشه‌ها ۱",
+    "category": "اپلیکیشن",
+    "displayOrder": 211,
+    "new": true,
+    "route": {
+      "name": "navbar-maps-1",
+      "path": "/navbar/maps-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/maps-v1-light.webp",
+      "dark": "/images/screenshots/navbar/maps-v1-dark.webp"
+    }
+  },
+  {
+    "name": "نقشه‌ها ۲",
+    "category": "اپلیکیشن",
+    "displayOrder": 212,
+    "new": true,
+    "route": {
+      "name": "navbar-maps-2",
+      "path": "/navbar/maps-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/maps-v2-light.webp",
+      "dark": "/images/screenshots/navbar/maps-v2-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه‌ی اکشن نسخه‌ی ۱",
+    "category": "طرح‌ها",
+    "displayOrder": 590,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-action-page-1",
+      "path": "/navbar/layouts/action-page-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/action-page-v1-light.webp",
+      "dark": "/images/screenshots/navbar/action-page-v1-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه‌ی اکشن نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 600,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-action-page-2",
+      "path": "/navbar/layouts/action-page-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/action-page-v2-light.webp",
+      "dark": "/images/screenshots/navbar/action-page-v2-dark.webp"
+    }
+  },
+  {
+    "name": "فرم نسخه‌ی ۱",
+    "category": "فرم‌ها",
+    "displayOrder": 360,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-form-layouts-1",
+      "path": "/navbar/layouts/form-layouts-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/form-v1-light.webp",
+      "dark": "/images/screenshots/navbar/form-v1-dark.webp"
+    }
+  },
+  {
+    "name": "فرم نسخه‌ی ۲",
+    "category": "فرم‌ها",
+    "displayOrder": 370,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-form-layouts-2",
+      "path": "/navbar/layouts/form-layouts-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/form-v2-light.webp",
+      "dark": "/images/screenshots/navbar/form-v2-dark.webp"
+    }
+  },
+  {
+    "name": "فرم نسخه‌ی ۳",
+    "category": "فرم‌ها",
+    "displayOrder": 380,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-form-layouts-3",
+      "path": "/navbar/layouts/form-layouts-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/form-v3-light.webp",
+      "dark": "/images/screenshots/navbar/form-v3-dark.webp"
+    }
+  },
+  {
+    "name": "فرم نسخه‌ی ۴",
+    "category": "فرم‌ها",
+    "displayOrder": 390,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-form-layouts-4",
+      "path": "/navbar/layouts/form-layouts-4"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/form-v4-light.webp",
+      "dark": "/images/screenshots/navbar/form-v4-dark.webp"
+    }
+  },
+  {
+    "name": "فرم نسخه‌ی ۵",
+    "category": "فرم‌ها",
+    "displayOrder": 395,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-form-layouts-5",
+      "path": "/navbar/layouts/form-layouts-5"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/form-v5-light.webp",
+      "dark": "/images/screenshots/navbar/form-v5-dark.webp"
+    }
+  },
+  {
+    "name": "کارت‌های شبکه‌ای نسخه‌ی ۱",
+    "category": "طرح‌ها",
+    "displayOrder": 400,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-cards-1",
+      "path": "/navbar/layouts/grid-cards-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-card-v1-light.webp",
+      "dark": "/images/screenshots/navbar/grid-card-v1-dark.webp"
+    }
+  },
+  {
+    "name": "کارت‌های شبکه‌ای نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 410,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-cards-2",
+      "path": "/navbar/layouts/grid-cards-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-card-v2-light.webp",
+      "dark": "/images/screenshots/navbar/grid-card-v2-dark.webp"
+    }
+  },
+  {
+    "name": "کارت‌های شبکه‌ای نسخه‌ی ۳",
+    "category": "طرح‌ها",
+    "displayOrder": 420,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-cards-3",
+      "path": "/navbar/layouts/grid-cards-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-card-v3-light.webp",
+      "dark": "/images/screenshots/navbar/grid-card-v3-dark.webp"
+    }
+  },
+  {
+    "name": "کارت‌های شبکه‌ای نسخه‌ی ۴",
+    "category": "طرح‌ها",
+    "displayOrder": 430,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-cards-4",
+      "path": "/navbar/layouts/grid-cards-4"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-card-v4-light.webp",
+      "dark": "/images/screenshots/navbar/grid-card-v4-dark.webp"
+    }
+  },
+  {
+    "name": "کاشی‌های شبکه‌ای نسخه‌ی ۱",
+    "category": "طرح‌ها",
+    "displayOrder": 440,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-tiles-1",
+      "path": "/navbar/layouts/grid-tiles-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-tiles-v1-light.webp",
+      "dark": "/images/screenshots/navbar/grid-tiles-v1-dark.webp"
+    }
+  },
+  {
+    "name": "کاشی‌های شبکه‌ای نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 450,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-tiles-2",
+      "path": "/navbar/layouts/grid-tiles-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-tiles-v2-light.webp",
+      "dark": "/images/screenshots/navbar/grid-tiles-v2-dark.webp"
+    }
+  },
+  {
+    "name": "کاشی‌های شبکه‌ای نسخه‌ی ۳",
+    "category": "طرح‌ها",
+    "displayOrder": 460,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-tiles-3",
+      "path": "/navbar/layouts/grid-tiles-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-tiles-v3-light.webp",
+      "dark": "/images/screenshots/navbar/grid-tiles-v3-dark.webp"
+    }
+  },
+  {
+    "name": "کاربرهای شبکه‌ای نسخه‌ی ۱",
+    "category": "طرح‌ها",
+    "displayOrder": 470,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-users-1",
+      "path": "/navbar/layouts/grid-users-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-users-v1-light.webp",
+      "dark": "/images/screenshots/navbar/grid-users-v1-dark.webp"
+    }
+  },
+  {
+    "name": "کاربرهای شبکه‌ای نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 480,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-users-2",
+      "path": "/navbar/layouts/grid-users-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-users-v2-light.webp",
+      "dark": "/images/screenshots/navbar/grid-users-v2-dark.webp"
+    }
+  },
+  {
+    "name": "کاربرهای شبکه‌ای نسخه‌ی ۳",
+    "category": "طرح‌ها",
+    "displayOrder": 490,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-users-3",
+      "path": "/navbar/layouts/grid-users-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-users-v3-light.webp",
+      "dark": "/images/screenshots/navbar/grid-users-v3-dark.webp"
+    }
+  },
+  {
+    "name": "کاربرهای شبکه‌ای نسخه‌ی ۴",
+    "category": "طرح‌ها",
+    "displayOrder": 500,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-grid-users-4",
+      "path": "/navbar/layouts/grid-users-4"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/grid-users-v4-light.webp",
+      "dark": "/images/screenshots/navbar/grid-users-v4-dark.webp"
+    }
+  },
+  {
+    "name": "طرح چیدمان کارمند",
+    "category": "طرح‌ها",
+    "displayOrder": 320,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-onboarding-welcome",
+      "path": "/navbar/layouts/onboarding-welcome"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/onboarding-standard-light.webp",
+      "dark": "/images/screenshots/navbar/onboarding-standard-dark.webp"
+    }
+  },
+  {
+    "name": "تخته کانبان",
+    "category": "طرح‌ها",
+    "displayOrder": 650,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-kanban-board",
+      "path": "/navbar/layouts/kanban-board"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/kanban-board-light.webp",
+      "dark": "/images/screenshots/navbar/kanban-board-dark.webp"
+    }
+  },
+  {
+    "name": "جدول داده‌های لیست وار نسخه‌ی ۱",
+    "category": "طرح‌ها",
+    "displayOrder": 320,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-datatable-1",
+      "path": "/navbar/layouts/list-datatable-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-datatable-v1-light.webp",
+      "dark": "/images/screenshots/navbar/list-datatable-v1-dark.webp"
+    }
+  },
+  {
+    "name": "جدول داده‌های لیست وار نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 330,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-datatable-2",
+      "path": "/navbar/layouts/list-datatable-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-datatable-v2-light.webp",
+      "dark": "/images/screenshots/navbar/list-datatable-v2-dark.webp"
+    }
+  },
+  {
+    "name": "جدول داده‌های لیست وار نسخه‌ی ۳",
+    "category": "طرح‌ها",
+    "displayOrder": 340,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-datatable-3",
+      "path": "/navbar/layouts/list-datatable-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-datatable-v3-light.webp",
+      "dark": "/images/screenshots/navbar/list-datatable-v3-dark.webp"
+    }
+  },
+  {
+    "name": "جدول داده‌های لیست وار نسخه‌ی ۴",
+    "category": "طرح‌ها",
+    "displayOrder": 350,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-datatable-4",
+      "path": "/navbar/layouts/list-datatable-4"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-datatable-v4-light.webp",
+      "dark": "/images/screenshots/navbar/list-datatable-v4-dark.webp"
+    }
+  },
+  {
+    "name": "لیست فلکس نسخه‌ی ۱",
+    "category": "طرح‌ها",
+    "displayOrder": 290,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-flex-1",
+      "path": "/navbar/layouts/list-flex-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-flex-v1-light.webp",
+      "dark": "/images/screenshots/navbar/list-flex-v1-dark.webp"
+    }
+  },
+  {
+    "name": "لیست فلکس نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 300,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-flex-2",
+      "path": "/navbar/layouts/list-flex-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-flex-v2-light.webp",
+      "dark": "/images/screenshots/navbar/list-flex-v2-dark.webp"
+    }
+  },
+  {
+    "name": "لیست فلکس نسخه‌ی ۳",
+    "category": "طرح‌ها",
+    "displayOrder": 310,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-flex-3",
+      "path": "/navbar/layouts/list-flex-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-flex-v3-light.webp",
+      "dark": "/images/screenshots/navbar/list-flex-v3-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه اصلی (نمایش لیست وار نسخه‌ی ۱)",
+    "category": "طرح‌ها",
+    "displayOrder": 250,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts",
+      "path": "/navbar/layouts/"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/homepage-list-view-v1--light.webp",
+      "dark": "/images/screenshots/navbar/homepage-list-view-v1--dark.webp"
+    }
+  },
+  {
+    "name": "نمایش لیست وار نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 260,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-view-2",
+      "path": "/navbar/layouts/list-view-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-view-v2-light.webp",
+      "dark": "/images/screenshots/navbar/list-view-v2-dark.webp"
+    }
+  },
+  {
+    "name": "نمایش لیست وار نسخه‌ی ۳",
+    "category": "طرح‌ها",
+    "displayOrder": 270,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-view-3",
+      "path": "/navbar/layouts/list-view-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-view-v3-light.webp",
+      "dark": "/images/screenshots/navbar/list-view-v3-dark.webp"
+    }
+  },
+  {
+    "name": "نمایش لیست وار نسخه‌ی ۴",
+    "category": "طرح‌ها",
+    "displayOrder": 280,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-list-view-4",
+      "path": "/navbar/layouts/list-view-4"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/list-view-v4-light.webp",
+      "dark": "/images/screenshots/navbar/list-view-v4-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه‌ی چیدمان کارمند نسخه‌ی ۱",
+    "category": "طرح‌ها",
+    "displayOrder": 700,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-onboarding-page-1",
+      "path": "/navbar/layouts/onboarding-page-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/onboarding-page-v1-light.webp",
+      "dark": "/images/screenshots/navbar/onboarding-page-v1-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه‌ی چیدمان کارمند نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 710,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-onboarding-page-2",
+      "path": "/navbar/layouts/onboarding-page-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/onboarding-page-v2-light.webp",
+      "dark": "/images/screenshots/navbar/onboarding-page-v2-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه‌ی چیدمان کارمند نسخه‌ی ۳",
+    "category": "طرح‌ها",
+    "displayOrder": 720,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-onboarding-page-3",
+      "path": "/navbar/layouts/onboarding-page-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/onboarding-page-v3-light.webp",
+      "dark": "/images/screenshots/navbar/onboarding-page-v3-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه‌ی چیدمان کارمند نسخه‌ی ۴",
+    "category": "طرح‌ها",
+    "displayOrder": 730,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-onboarding-page-4",
+      "path": "/navbar/layouts/onboarding-page-4"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/onboarding-page-v4-light.webp",
+      "dark": "/images/screenshots/navbar/onboarding-page-v4-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه‌ی چیدمان کارمند نسخه‌ی ۵",
+    "category": "طرح‌ها",
+    "displayOrder": 740,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-onboarding-page-5",
+      "path": "/navbar/layouts/onboarding-page-5"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/onboarding-page-v5-light.webp",
+      "dark": "/images/screenshots/navbar/onboarding-page-v5-dark.webp"
+    }
+  },
+  {
+    "name": "پروفایل ویرایش",
+    "category": "طرح‌ها",
+    "displayOrder": 520,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-profile-edit",
+      "path": "/navbar/layouts/profile-edit"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/profile-edit-light.webp",
+      "dark": "/images/screenshots/navbar/profile-edit-dark.webp"
+    }
+  },
+  {
+    "name": "پروفایل ویرایش تجربیات",
+    "category": "طرح‌ها",
+    "displayOrder": 530,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-profile-edit-experience",
+      "path": "/navbar/layouts/profile-edit/experience"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/profile-edit-experience-light.webp",
+      "dark": "/images/screenshots/navbar/profile-edit-experience-dark.webp"
+    }
+  },
+  {
+    "name": "پروفایل ویرایش مهارت‌ها",
+    "category": "طرح‌ها",
+    "displayOrder": 540,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-profile-edit-skills",
+      "path": "/navbar/layouts/profile-edit/skills"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/profile-edit-skills-light.webp",
+      "dark": "/images/screenshots/navbar/profile-edit-skills-dark.webp"
+    }
+  },
+  {
+    "name": "پروفایل ویرایش تنظیمات",
+    "category": "طرح‌ها",
+    "displayOrder": 550,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-profile-edit-settings",
+      "path": "/navbar/layouts/profile-edit/settings"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/profile-edit-settings-light.webp",
+      "dark": "/images/screenshots/navbar/profile-edit-settings-dark.webp"
+    }
+  },
+  {
+    "name": "پروفایل اعلانات",
+    "category": "طرح‌ها",
+    "displayOrder": 270,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-profile-notifications",
+      "path": "/navbar/layouts/profile-notifications"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/profile-notifications-light.webp",
+      "dark": "/images/screenshots/navbar/profile-notifications-dark.webp"
+    }
+  },
+  {
+    "name": "پروفایل تنظیمات",
+    "category": "طرح‌ها",
+    "displayOrder": 280,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-profile-settings",
+      "path": "/navbar/layouts/profile-settings"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/profile-settings-light.webp",
+      "dark": "/images/screenshots/navbar/profile-settings-dark.webp"
+    }
+  },
+  {
+    "name": "پروفایل مشاهده",
+    "category": "طرح‌ها",
+    "displayOrder": 510,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-profile-view",
+      "path": "/navbar/layouts/profile-view"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/profile-view-light.webp",
+      "dark": "/images/screenshots/navbar/profile-view-dark.webp"
+    }
+  },
+  {
+    "name": "پروژه‌ها جزئیات",
+    "category": "طرح‌ها",
+    "displayOrder": 640,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-projects-details",
+      "path": "/navbar/layouts/projects-details"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/projects-details-light.webp",
+      "dark": "/images/screenshots/navbar/projects-details-dark.webp"
+    }
+  },
+  {
+    "name": "پروژه‌ها لیست نسخه‌ی ۱",
+    "category": "طرح‌ها",
+    "displayOrder": 600,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-projects-projects-1",
+      "path": "/navbar/layouts/projects-projects-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/projects-list-v1-light.webp",
+      "dark": "/images/screenshots/navbar/projects-list-v1-dark.webp"
+    }
+  },
+  {
+    "name": "پروژه‌ها لیست نسخه‌ی ۲",
+    "category": "طرح‌ها",
+    "displayOrder": 610,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-projects-projects-2",
+      "path": "/navbar/layouts/projects-projects-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/projects-list-v2-light.webp",
+      "dark": "/images/screenshots/navbar/projects-list-v2-dark.webp"
+    }
+  },
+  {
+    "name": "پروژه‌ها لیست نسخه‌ی ۳",
+    "category": "طرح‌ها",
+    "displayOrder": 620,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-projects-projects-3",
+      "path": "/navbar/layouts/projects-projects-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/projects-list-v3-light.webp",
+      "dark": "/images/screenshots/navbar/projects-list-v3-dark.webp"
+    }
+  },
+  {
+    "name": "SaaS پرداخت",
+    "category": "طرح‌ها",
+    "displayOrder": 580,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-saas-billing",
+      "path": "/navbar/layouts/saas-billing"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/saas-billing-light.webp",
+      "dark": "/images/screenshots/navbar/saas-billing-dark.webp"
+    }
+  },
+  {
+    "name": "جستجو خالی",
+    "category": "طرح‌ها",
+    "displayOrder": 570,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-search-empty",
+      "path": "/navbar/layouts/search-empty"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/search-empty-light.webp",
+      "dark": "/images/screenshots/navbar/search-empty-dark.webp"
+    }
+  },
+  {
+    "name": "نتایج جستجو",
+    "category": "طرح‌ها",
+    "displayOrder": 560,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-search-results",
+      "path": "/navbar/layouts/search-results"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/search-results-light.webp",
+      "dark": "/images/screenshots/navbar/search-results-dark.webp"
+    }
+  },
+  {
+    "name": "تائید حساب کاربری",
+    "category": "کاربردی",
+    "displayOrder": 660,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-utility-account-confirm",
+      "path": "/navbar/layouts/utility-account-confirm"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/account-confirm-light.webp",
+      "dark": "/images/screenshots/navbar/account-confirm-dark.webp"
+    }
+  },
+  {
+    "name": "فاکتور",
+    "category": "کاربردی",
+    "displayOrder": 680,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-utility-invoice",
+      "path": "/navbar/layouts/utility-invoice"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/invoice-light.webp",
+      "dark": "/images/screenshots/navbar/invoice-dark.webp"
+    }
+  },
+  {
+    "name": "ارتقا",
+    "category": "کاربردی",
+    "displayOrder": 670,
+    "new": false,
+    "route": {
+      "name": "navbar-layouts-utility-promotion",
+      "path": "/navbar/layouts/utility-promotion"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/promotion-light.webp",
+      "dark": "/images/screenshots/navbar/promotion-dark.webp"
+    }
+  },
+  {
+    "name": "لودر تصویری لیست",
+    "category": "کاربردی",
+    "displayOrder": 750,
+    "new": true,
+    "route": {
+      "name": "navbar-layouts-placeload-1",
+      "path": "/navbar/layouts/placeload-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/placeload-list-light.webp",
+      "dark": "/images/screenshots/navbar/placeload-list-dark.webp"
+    }
+  },
+  {
+    "name": "لودر تصویری جدول",
+    "category": "کاربردی",
+    "displayOrder": 760,
+    "new": true,
+    "route": {
+      "name": "navbar-layouts-placeload-2",
+      "path": "/navbar/layouts/placeload-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/placeload-table-light.webp",
+      "dark": "/images/screenshots/navbar/placeload-table-dark.webp"
+    }
+  },
+  {
+    "name": "لودر تصویری شبکه",
+    "category": "کاربردی",
+    "displayOrder": 770,
+    "new": true,
+    "route": {
+      "name": "navbar-layouts-placeload-3",
+      "path": "/navbar/layouts/placeload-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/placeload-grid-light.webp",
+      "dark": "/images/screenshots/navbar/placeload-grid-dark.webp"
+    }
+  },
+  {
+    "name": "لودر تصویری کاشی‌ها",
+    "category": "کاربردی",
+    "displayOrder": 780,
+    "new": true,
+    "route": {
+      "name": "navbar-layouts-placeload-4",
+      "path": "/navbar/layouts/placeload-4"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/placeload-tiles-light.webp",
+      "dark": "/images/screenshots/navbar/placeload-tiles-dark.webp"
+    }
+  },
+  {
+    "name": "ارسال غذا",
+    "category": "اپلیکیشن",
+    "displayOrder": 200,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-food-delivery",
+      "path": "/navbar/dashboards/food-delivery"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/food-delivery-light.webp",
+      "dark": "/images/screenshots/navbar/food-delivery-dark.webp"
+    }
+  },
+  {
+    "name": "حسابداری نسخه‌ی ۱",
+    "category": "داشبرد",
+    "displayOrder": 70,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-banking-1",
+      "path": "/navbar/dashboards/banking-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/banking-v1-light.webp",
+      "dark": "/images/screenshots/navbar/banking-v1-dark.webp"
+    }
+  },
+  {
+    "name": "حسابداری نسخه‌ی ۲",
+    "category": "داشبرد",
+    "displayOrder": 80,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-banking-2",
+      "path": "/navbar/dashboards/banking-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/banking-v2-light.webp",
+      "dark": "/images/screenshots/navbar/banking-v2-dark.webp"
+    }
+  },
+  {
+    "name": "حسابداری نسخه‌ی ۳",
+    "category": "داشبرد",
+    "displayOrder": 90,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-banking-3",
+      "path": "/navbar/dashboards/banking-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/banking-v3-light.webp",
+      "dark": "/images/screenshots/navbar/banking-v3-dark.webp"
+    }
+  },
+  {
+    "name": "پرواز‌ها",
+    "category": "داشبرد",
+    "displayOrder": 100,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-flights",
+      "path": "/navbar/dashboards/flights"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/flights-light.webp",
+      "dark": "/images/screenshots/navbar/flights-dark.webp"
+    }
+  },
+  {
+    "name": "شرکت",
+    "category": "داشبرد",
+    "displayOrder": 110,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-company",
+      "path": "/navbar/dashboards/company"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/company-light.webp",
+      "dark": "/images/screenshots/navbar/company-dark.webp"
+    }
+  },
+  {
+    "name": "منابع انسانی",
+    "category": "داشبرد",
+    "displayOrder": 120,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-human-ressources",
+      "path": "/navbar/dashboards/human-ressources"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/human-ressources-light.webp",
+      "dark": "/images/screenshots/navbar/human-ressources-dark.webp"
+    }
+  },
+  {
+    "name": "داشبرد دوره",
+    "category": "داشبرد",
+    "displayOrder": 130,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-course",
+      "path": "/navbar/dashboards/course"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/course-dashboard-light.webp",
+      "dark": "/images/screenshots/navbar/course-dashboard-dark.webp"
+    }
+  },
+  {
+    "name": "داشبورد استخدام",
+    "category": "DASHBOARD",
+    "displayOrder": 131,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-jobs",
+      "path": "/navbar/dashboards/jobs"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/jobs-dashboard-light.webp",
+      "dark": "/images/screenshots/navbar/jobs-dashboard-dark.webp"
+    }
+  },
+  {
+    "name": "چارت‌های Apex",
+    "category": "داشبرد",
+    "displayOrder": 220,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-charts-apex",
+      "path": "/navbar/dashboards/charts-apex"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/charts-apex-light.webp",
+      "dark": "/images/screenshots/navbar/charts-apex-dark.webp"
+    }
+  },
+  {
+    "name": "چارت‌های BillboardsJS",
+    "category": "داشبرد",
+    "displayOrder": 230,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-charts-billboardsjs",
+      "path": "/navbar/dashboards/charts-billboardsjs"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/charts-billboardsjs-light.webp",
+      "dark": "/images/screenshots/navbar/charts-billboardsjs-dark.webp"
+    }
+  },
+  {
+    "name": "فروشگاه نسخه‌ی ۱",
+    "category": "داشبرد",
+    "displayOrder": 190,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-ecommerce-1",
+      "path": "/navbar/dashboards/ecommerce-1"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/ecommerce-v1-light.webp",
+      "dark": "/images/screenshots/navbar/ecommerce-v1-dark.webp"
+    }
+  },
+  {
+    "name": "تجزیه و تحلیل",
+    "category": "داشبرد",
+    "displayOrder": 40,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-analytics",
+      "path": "/navbar/dashboards/analytics"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/analytics-light.webp",
+      "dark": "/images/screenshots/navbar/analytics-dark.webp"
+    }
+  },
+  {
+    "name": "سهام",
+    "category": "داشبرد",
+    "displayOrder": 50,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-stocks",
+      "path": "/navbar/dashboards/stocks"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/stocks-light.webp",
+      "dark": "/images/screenshots/navbar/stocks-dark.webp"
+    }
+  },
+  {
+    "name": "حراجی",
+    "category": "داشبرد",
+    "displayOrder": 60,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-sales",
+      "path": "/navbar/dashboards/sales"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/sales-light.webp",
+      "dark": "/images/screenshots/navbar/sales-dark.webp"
+    }
+  },
+  {
+    "name": "اینفلوئنسر",
+    "category": "داشبرد",
+    "displayOrder": 140,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-influencer",
+      "path": "/navbar/dashboards/influencer"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/influencer-light.webp",
+      "dark": "/images/screenshots/navbar/influencer-dark.webp"
+    }
+  },
+  {
+    "name": "سرگرمی‌ها",
+    "category": "داشبرد",
+    "displayOrder": 150,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-hobbies",
+      "path": "/navbar/dashboards/hobbies"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/hobbies-light.webp",
+      "dark": "/images/screenshots/navbar/hobbies-dark.webp"
+    }
+  },
+  {
+    "name": "سلامت",
+    "category": "داشبرد",
+    "displayOrder": 160,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-health",
+      "path": "/navbar/dashboards/health"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/health-light.webp",
+      "dark": "/images/screenshots/navbar/health-dark.webp"
+    }
+  },
+  {
+    "name": "نویسنده",
+    "category": "داشبرد",
+    "displayOrder": 170,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-writer",
+      "path": "/navbar/dashboards/writer"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/writer-light.webp",
+      "dark": "/images/screenshots/navbar/writer-dark.webp"
+    }
+  },
+  {
+    "name": "ویدئو",
+    "category": "داشبرد",
+    "displayOrder": 180,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-video",
+      "path": "/navbar/dashboards/video"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/video-light.webp",
+      "dark": "/images/screenshots/navbar/video-dark.webp"
+    }
+  },
+  {
+    "name": "Soccer league",
+    "category": "DASHBOARD",
+    "displayOrder": 181,
+    "new": true,
+    "route": {
+      "name": "navbar-dashboards-soccer",
+      "path": "/navbar/dashboards/soccer"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/soccer-league-light.webp",
+      "dark": "/images/screenshots/navbar/soccer-league-dark.webp"
+    }
+  },
+  {
+    "name": "صفحه اصلی (شخصی نسخه‌ی ۱)",
+    "category": "داشبرد",
+    "displayOrder": 0,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards",
+      "path": "/navbar/dashboards/"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/homepage-personal-v1--light.webp",
+      "dark": "/images/screenshots/navbar/homepage-personal-v1--dark.webp"
+    }
+  },
+  {
+    "name": "شخصی نسخه‌ی ۲",
+    "category": "داشبرد",
+    "displayOrder": 10,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-personal-2",
+      "path": "/navbar/dashboards/personal-2"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/personal-v2-light.webp",
+      "dark": "/images/screenshots/navbar/personal-v2-dark.webp"
+    }
+  },
+  {
+    "name": "شخصی نسخه‌ی ۳",
+    "category": "داشبرد",
+    "displayOrder": 20,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-personal-3",
+      "path": "/navbar/dashboards/personal-3"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/personal-v3-light.webp",
+      "dark": "/images/screenshots/navbar/personal-v3-dark.webp"
+    }
+  },
+  {
+    "name": "ابزارک‌های خلاقانه",
+    "category": "داشبرد",
+    "displayOrder": 250,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-widgets-sample-creative",
+      "path": "/navbar/dashboards/widgets-sample-creative"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/widgets-creative-light.webp",
+      "dark": "/images/screenshots/navbar/widgets-creative-dark.webp"
+    }
+  },
+  {
+    "name": "لیست ابزارک‌ها",
+    "category": "داشبرد",
+    "displayOrder": 260,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-widgets-sample-list",
+      "path": "/navbar/dashboards/widgets-sample-list"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/widgets-list-light.webp",
+      "dark": "/images/screenshots/navbar/widgets-list-dark.webp"
+    }
+  },
+  {
+    "name": "ابزارک‌های آمار",
+    "category": "داشبرد",
+    "displayOrder": 270,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-widgets-sample-stats",
+      "path": "/navbar/dashboards/widgets-sample-stats"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/widgets-stats-light.webp",
+      "dark": "/images/screenshots/navbar/widgets-stats-dark.webp"
+    }
+  },
+  {
+    "name": "ابزارک‌های رابط کاربری",
+    "category": "داشبرد",
+    "displayOrder": 240,
+    "new": false,
+    "route": {
+      "name": "navbar-dashboards-widgets-sample-ui",
+      "path": "/navbar/dashboards/widgets-sample-ui"
+    },
+    "screenshot": {
+      "light": "/images/screenshots/navbar/widgets-ui-light.webp",
+      "dark": "/images/screenshots/navbar/widgets-ui-dark.webp"
+    }
+  }
+]

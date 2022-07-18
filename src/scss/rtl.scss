@@ -1,0 +1,26 @@
+@import './rtl/multiselect/default';
+@import './rtl/simple-datatables/style';
+@import './rtl/notyf/notyf';
+@import './rtl/demo';
+
+.tns-outer {
+  direction: ltr;
+}
+
+.control.is-loading::after {
+  [dir='rtl'] & {
+    right: unset;
+    left: 0.75em;
+  }
+}
+
+.scaleX--1 {
+  [dir='rtl'] & {
+    transform: scaleX(-1);
+  }
+}
+
+input[type='email'],
+input[type='url'] {
+  direction: ltr;
+}
