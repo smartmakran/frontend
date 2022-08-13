@@ -2,44 +2,72 @@
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useHead } from '@vueuse/head'
+import { Field, useForm } from 'vee-validate'
+import * as yup from 'yup'
+import { useI18n } from 'vue-i18n'
 
 import { useDarkmode } from '/@src/stores/darkmode'
 import { useUserSession } from '/@src/stores/userSession'
 import { useNotyf } from '/@src/composable/useNotyf'
-import sleep from '/@src/utils/sleep'
+import { login } from '/@src/services/modules/auth/accounts'
 
 const isLoading = ref(false)
 const darkmode = useDarkmode()
 const router = useRouter()
 const route = useRoute()
-const notif = useNotyf()
+const notyf = useNotyf()
 const userSession = useUserSession()
 const redirect = route.query.redirect as string
+const { t } = useI18n()
 
-const handleLogin = async () => {
+const schema = yup.object({
+  phone: yup
+    .string()
+    .required(t('auth.errors.phone.required'))
+    .matches(/^\+?[0-9]{10,15}$/, t('auth.errors.phone.invalid')),
+  password: yup.string().required(t('auth.errors.password.required')),
+})
+
+const { handleSubmit } = useForm({
+  validationSchema: schema,
+})
+
+const onLogin = handleSubmit(async (values) => {
   if (!isLoading.value) {
     isLoading.value = true
 
-    await sleep(2000)
-    userSession.setToken('logged-in')
-
-    notif.dismissAll()
-    notif.success('خوش آمدید، کاربر عزیز')
-
-    if (redirect) {
-      router.push(redirect)
-    } else {
-      router.push({
-        name: 'app',
+    try {
+      await login('auth/login', {
+        phone: values.phone || '',
+        password: values.password || '',
       })
-    }
 
-    isLoading.value = false
+      if (redirect) {
+        router.push(redirect)
+      } else {
+        router.push({
+          name: 'app',
+        })
+      }
+
+      notyf.dismissAll()
+      notyf.success(`${t('auth.login.success')}, ${userSession.user!.fullName}`)
+    } catch (error: any) {
+      if (error.response?.status) {
+        if (error.response.status !== 401) throw error
+        notyf.error({
+          message: error.response.data.message,
+          duration: 3000,
+        })
+      }
+    } finally {
+      isLoading.value = false
+    }
   }
-}
+})
 
 useHead({
-  title: 'ورود کاربر - ویوئِرو',
+  title: `${t('app.title')} | ${t('auth.login.title')}`,
 })
 </script>
 
@@ -97,72 +125,67 @@ useHead({
             <div class="columns">
               <div class="column is-12">
                 <div class="auth-content">
-                  <h2>خوش آمدی.</h2>
-                  <p>لطفا وارد حساب کربری خود شوید</p>
-                  <RouterLink :to="{ name: 'auth-signup' }">
-                    من درحال حاضر حساب کاربری ندارم
-                  </RouterLink>
+                  <h2>{{ t('auth.login.title') }}</h2>
                 </div>
                 <div class="auth-form-wrapper">
                   <!-- Login Form -->
-                  <form @submit.prevent="handleLogin">
-                    <div class="login-form">
-                      <!-- Username -->
-                      <VField>
-                        <VControl icon="feather:user">
-                          <input
-                            class="input"
-                            type="text"
-                            placeholder="نام کاربری"
-                            autocomplete="username"
-                          />
-                        </VControl>
-                      </VField>
+                  <form @submit="onLogin">
+                    <div id="login-form" class="login-form">
+                      <!-- Phone -->
+                      <Field v-slot="{ field, errorMessage }" name="phone">
+                        <VField>
+                          <VControl
+                            icon="feather:phone"
+                            :has-error="Boolean(errorMessage)"
+                          >
+                            <input
+                              v-bind="field"
+                              class="input"
+                              type="text"
+                              :placeholder="t('auth.placeholder.phone')"
+                              autocomplete="phone"
+                            />
+                            <p v-if="errorMessage" class="help is-danger">
+                              {{ errorMessage }}
+                            </p>
+                          </VControl>
+                        </VField>
+                      </Field>
 
                       <!-- Password -->
-                      <VField>
-                        <VControl icon="feather:lock">
-                          <input
-                            class="input"
-                            type="password"
-                            placeholder="گذرواژه"
-                            autocomplete="current-password"
-                          />
-                        </VControl>
-                      </VField>
-
-                      <!-- Switch -->
-                      <VControl class="setting-item">
-                        <label for="remember-me" class="form-switch is-primary">
-                          <input id="remember-me" type="checkbox" class="is-switch" />
-                          <i aria-hidden="true"></i>
-                        </label>
-                        <div class="setting-meta">
-                          <label for="remember-me">
-                            <span>بیاد بسپار</span>
-                          </label>
-                        </div>
-                      </VControl>
+                      <Field v-slot="{ field, errorMessage }" name="password">
+                        <VField>
+                          <VControl
+                            icon="feather:lock"
+                            :has-error="Boolean(errorMessage)"
+                          >
+                            <input
+                              v-bind="field"
+                              class="input"
+                              type="password"
+                              :placeholder="t('auth.placeholder.password')"
+                              autocomplete="new-password"
+                            />
+                            <p v-if="errorMessage" class="help is-danger">
+                              {{ errorMessage }}
+                            </p>
+                          </VControl>
+                        </VField>
+                      </Field>
 
                       <!-- Submit -->
-                      <VControl class="login">
-                        <VButton
-                          :loading="isLoading"
-                          color="primary"
-                          type="submit"
-                          bold
-                          fullwidth
-                          raised
-                        >
-                          ورود
-                        </VButton>
-                      </VControl>
-
-                      <div class="forgot-link has-text-centered">
-                        <a>بازیابی گذرواژه</a>
-                      </div>
+                      <VField>
+                        <VControl class="login">
+                          <VButton type="submit" color="primary" bold fullwidth raised>
+                            {{ t('auth.login.submit') }}
+                          </VButton>
+                        </VControl>
+                      </VField>
                     </div>
                   </form>
+                  <RouterLink :to="{ name: 'auth-register' }">
+                    {{ t('auth.register.link') }}
+                  </RouterLink>
                 </div>
               </div>
             </div>

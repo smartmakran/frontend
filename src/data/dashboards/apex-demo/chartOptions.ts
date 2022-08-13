@@ -196,13 +196,8 @@ export const options4 = {
   },
 }
 
-export const options5 = {
-  series: [
-    {
-      name: 'بالانس',
-      data: series.monthDataSeries1.prices,
-    },
-  ],
+export const ph = {
+  series: [{ name: 'ph', data: series.monthDataSeries1.prices }],
   chart: {
     type: 'area',
     height: 280,
@@ -222,7 +217,7 @@ export const options5 = {
   },
   colors: [themeColors.green],
   title: {
-    text: 'نمودار محیطی',
+    text: 'pH',
     align: 'right',
   },
   labels: series.monthDataSeries1.dates,
@@ -231,6 +226,274 @@ export const options5 = {
   },
   yaxis: {
     opposite: true,
+    min: 2,
+    max: 8,
+  },
+  legend: {
+    horizontalAlign: 'left',
+  },
+}
+
+export const oxygen = {
+  series: [{ name: 'oxygen', data: series.monthDataSeries1.prices }],
+  chart: {
+    type: 'area',
+    height: 280,
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    width: [2, 2, 2],
+    curve: 'straight',
+  },
+  colors: [themeColors.blue],
+  title: {
+    text: 'Oxygen',
+    align: 'right',
+  },
+  labels: series.monthDataSeries1.dates,
+  xaxis: {
+    type: 'datetime',
+  },
+  yaxis: {
+    opposite: true,
+    min: 5,
+    max: 12
+  },
+  legend: {
+    horizontalAlign: 'left',
+  },
+}
+
+export const orp = {
+  series: [{ name: 'orp', data: series.monthDataSeries1.prices }],
+  chart: {
+    type: 'area',
+    height: 280,
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    width: [2, 2, 2],
+    curve: 'straight',
+  },
+  colors: [themeColors.yellow],
+  title: {
+    text: 'ORP',
+    align: 'right',
+  },
+  labels: series.monthDataSeries1.dates,
+  xaxis: {
+    type: 'datetime',
+  },
+  yaxis: {
+    opposite: true,
+    min: 495,
+    max: 510
+  },
+  legend: {
+    horizontalAlign: 'left',
+  },
+}
+
+export const ec = {
+  series: [{ name: 'ec', data: series.monthDataSeries1.prices }],
+  chart: {
+    type: 'area',
+    height: 280,
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    width: [2, 2, 2],
+    curve: 'straight',
+  },
+  colors: [themeColors.green],
+  title: {
+    text: 'EC',
+    align: 'right',
+  },
+  labels: series.monthDataSeries1.dates,
+  xaxis: {
+    type: 'datetime',
+  },
+  yaxis: {
+    opposite: true,
+    min: 39,
+    max: 42
+  },
+  legend: {
+    horizontalAlign: 'left',
+  },
+}
+
+export const ammonia = {
+  series: [{ name: 'ammonia', data: series.monthDataSeries1.prices }],
+  chart: {
+    type: 'area',
+    height: 280,
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    width: [2, 2, 2],
+    curve: 'straight',
+  },
+  colors: [themeColors.blue],
+  title: {
+    text: 'Ammonia',
+    align: 'right',
+  },
+  labels: series.monthDataSeries1.dates,
+  xaxis: {
+    type: 'datetime',
+  },
+  yaxis: {
+    opposite: true,
+    min: 0.5,
+    max: 0.7
+  },
+  legend: {
+    horizontalAlign: 'left',
+  },
+}
+
+export const nitrite = {
+  series: [{ name: 'nitrite', data: series.monthDataSeries1.prices }],
+  chart: {
+    type: 'area',
+    height: 280,
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    width: [2, 2, 2],
+    curve: 'straight',
+  },
+  colors: [themeColors.yellow],
+  title: {
+    text: 'Nitrite',
+    align: 'right',
+  },
+  labels: series.monthDataSeries1.dates,
+  xaxis: {
+    type: 'datetime',
+  },
+  yaxis: {
+    opposite: true,
+    min: 48,
+    max: 53
+  },
+  legend: {
+    horizontalAlign: 'left',
+  },
+}
+
+export const nitrate = {
+  series: [{ name: 'nitrate', data: series.monthDataSeries1.prices }],
+  chart: {
+    type: 'area',
+    height: 280,
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    width: [2, 2, 2],
+    curve: 'straight',
+  },
+  colors: [themeColors.green],
+  title: {
+    text: 'Nitrate',
+    align: 'right',
+  },
+  labels: series.monthDataSeries1.dates,
+  xaxis: {
+    type: 'datetime',
+  },
+  yaxis: {
+    opposite: true,
+    min: 38,
+    max: 45
+  },
+  legend: {
+    horizontalAlign: 'left',
+  },
+}
+
+export const temperature = {
+  series: [{ name: 'temperature', data: series.monthDataSeries1.prices }],
+  chart: {
+    type: 'area',
+    height: 280,
+    zoom: {
+      enabled: false,
+    },
+    toolbar: {
+      show: false,
+    },
+  },
+  dataLabels: {
+    enabled: false,
+  },
+  stroke: {
+    width: [2, 2, 2],
+    curve: 'straight',
+  },
+  colors: [themeColors.danger],
+  title: {
+    text: 'Temperature',
+    align: 'right',
+  },
+  labels: series.monthDataSeries1.dates,
+  xaxis: {
+    type: 'datetime',
+  },
+  yaxis: {
+    opposite: true,
+    min: 22,
+    max: 27
   },
   legend: {
     horizontalAlign: 'left',
@@ -257,7 +520,7 @@ export const options6 = {
   },
   colors: [themeColors.green, themeColors.info, themeColors.purple],
   title: {
-    text: 'چند محیطی',
+    text: 'Temperature',
     align: 'right',
   },
   legend: {
@@ -385,7 +648,7 @@ export const options7 = {
   },
   colors: [themeColors.accent, themeColors.info, themeColors.green],
   title: {
-    text: 'چند محیطی',
+    text: 'Temprature',
     align: 'right',
   },
   tooltip: {

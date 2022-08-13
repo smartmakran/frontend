@@ -10,8 +10,7 @@
 import { ref, computed } from 'vue'
 import { acceptHMRUpdate, defineStore } from 'pinia'
 
-import type { Conversation, Message } from '/@src/composable/useChatApi'
-import { useChatApi } from '/@src/composable/useChatApi'
+import { Conversation, Message, useChatApi } from '/@src/composable/useChatApi'
 
 const defaultConversation: Conversation = {
   id: 0,

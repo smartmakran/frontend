@@ -185,6 +185,7 @@ declare module 'vue' {
     TableWidgetRowMembers: typeof import('./src/components/partials/widgets/table/content/TableWidgetRowMembers.vue')['default']
     TaskPanel: typeof import('./src/components/partials/panels/TaskPanel.vue')['default']
     TeamCardDropdown: typeof import('./src/components/partials/dropdowns/TeamCardDropdown.vue')['default']
+    TestDashboard: typeof import('./src/components/pages/dashboards/finance/TestDashboard.vue')['default']
     TilesGridV1: typeof import('./src/components/pages/layouts/tiles-grid/TilesGridV1.vue')['default']
     TilesGridV2: typeof import('./src/components/pages/layouts/tiles-grid/TilesGridV2.vue')['default']
     TilesGridV3: typeof import('./src/components/pages/layouts/tiles-grid/TilesGridV3.vue')['default']

@@ -4,7 +4,7 @@ import { createHead } from '@vueuse/head'
 import { createPinia } from 'pinia'
 import { createI18n } from './i18n'
 import { createRouter } from './router'
-import VueroApp from './VueroApp.vue'
+import App from './App.vue'
 import './styles'
 
 import { initDarkmode } from '/@src/stores/darkmode'
@@ -49,7 +49,7 @@ export async function createApp() {
          * @see https://v3.vuejs.org/guide/migration/suspense.html
          */
         return h(Suspense, null, {
-          default: () => h(VueroApp),
+          default: () => h(App),
         })
       }
     },

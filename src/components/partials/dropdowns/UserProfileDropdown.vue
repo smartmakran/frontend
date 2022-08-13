@@ -17,7 +17,7 @@
         <VAvatar size="large" picture="/images/avatars/svg/vuero-1.svg" />
 
         <div class="meta">
-          <span>جمال خاشقچی</span>
+          <span>ali</span>
           <span>مدیر محصول</span>
         </div>
       </div>

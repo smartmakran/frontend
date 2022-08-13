@@ -25,12 +25,12 @@ const props = withDefaults(
     </div>
     <div class="line-stats">
       <div class="line-stat">
-        <span>{{ props.currentLabel }}</span>
-        <span class="current">{{ props.currentValue }}</span>
+        <!-- <span>{{ props.currentLabel }}</span> -->
+        <!-- <span class="current">{{ props.currentValue }}</span> -->
       </div>
       <div class="line-stat">
-        <span>{{ props.previousLabel }}</span>
-        <span class="dark-inverted">{{ props.previousValue }}</span>
+        <!-- <span>{{ props.previousLabel }}</span> -->
+        <!-- <span class="dark-inverted">{{ props.previousValue }}</span> -->
       </div>
     </div>
     <slot></slot>

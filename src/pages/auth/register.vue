@@ -1,18 +1,20 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useHead } from '@vueuse/head'
 import { Field, useForm } from 'vee-validate'
 import * as yup from 'yup'
 
 import { useDarkmode } from '/@src/stores/darkmode'
 import { useNotyf } from '/@src/composable/useNotyf'
-import sleep from '/@src/utils/sleep'
+import { register } from '/@src/services/modules/auth/accounts'
 
 const darkmode = useDarkmode()
 const router = useRouter()
-const notif = useNotyf()
+const route = useRoute()
+const notyf = useNotyf()
+const redirect = route.query.redirect as string
 
 const isLoading = ref(false)
 const { t } = useI18n()
@@ -21,14 +23,18 @@ const { t } = useI18n()
 const schema = yup.object({
   promotional: yup.mixed(),
   name: yup.string().required(t('auth.errors.name.required')),
-  email: yup
+  phone: yup
     .string()
-    .required(t('auth.errors.email.required'))
-    .email(t('auth.errors.email.format')),
+    .required(t('auth.errors.phone.required'))
+    .matches(/^\+?[0-9]{10,15}$/, t('auth.errors.phone.invalid')),
   password: yup
     .string()
     .required(t('auth.errors.password.required'))
-    .min(8, t('auth.errors.password.length')),
+    .min(8, t('auth.errors.password.length'))
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      t('auth.errors.password.invalid')
+    ),
   passwordCheck: yup
     .string()
     .required(t('auth.errors.passwordCheck.required'))
@@ -39,25 +45,43 @@ const { handleSubmit } = useForm({
   validationSchema: schema,
 })
 
-const onSignup = handleSubmit(async (values) => {
-  console.log('handleSignup values')
-  console.table(values)
-
+const onRegister = handleSubmit(async (values) => {
   if (!isLoading.value) {
     isLoading.value = true
 
-    await sleep(800)
+    try {
+      await register('auth/register', {
+        fullName: values.name || '',
+        phone: values.phone || '',
+        password: values.password || '',
+      })
 
-    notif.dismissAll()
-    notif.success('خوش آمدی جمال')
+      if (redirect) {
+        router.push(redirect)
+      } else {
+        router.push({
+          name: 'app',
+        })
+      }
 
-    router.push({ name: 'app' })
-    isLoading.value = false
+      notyf.dismissAll()
+      notyf.success(t('auth.notifications.register.success'))
+    } catch (error: any) {
+      if (error.response?.status !== undefined) {
+        if (error.response.status !== 422) throw error
+        notyf.error({
+          message: Object.values<string>(error.response.data.errors).join(', '),
+          duration: 5000,
+        })
+      }
+    } finally {
+      isLoading.value = false
+    }
   }
 })
 
 useHead({
-  title: 'Auth Signup 2 - ویوئِرو',
+  title: ` ${t('app.title')} | ${t('auth.register.title')}`,
 })
 </script>
 
@@ -90,12 +114,12 @@ useHead({
             <div class="columns">
               <div class="column is-12">
                 <div class="auth-content">
-                  <h2>{{ t('auth.title') }}</h2>
+                  <h2>{{ t('auth.register.title') }}</h2>
                 </div>
                 <div class="auth-form-wrapper">
-                  <!-- Login Form -->
-                  <form @submit="onSignup">
-                    <div id="signin-form" class="login-form">
+                  <!-- Register Form -->
+                  <form @submit="onRegister">
+                    <div id="register-form" class="login-form">
                       <!-- Input -->
                       <Field v-slot="{ field, errorMessage }" name="name">
                         <VField>
@@ -107,7 +131,7 @@ useHead({
                               v-bind="field"
                               class="input"
                               type="text"
-                              :placeholder="t('auth.placeholder.name')"
+                              :placeholder="t('auth.placeholder.fullname')"
                               autocomplete="name"
                             />
                             <p v-if="errorMessage" class="help is-danger">
@@ -118,18 +142,18 @@ useHead({
                       </Field>
 
                       <!-- Input -->
-                      <Field v-slot="{ field, errorMessage }" name="email">
+                      <Field v-slot="{ field, errorMessage }" name="phone">
                         <VField>
                           <VControl
-                            icon="feather:mail"
+                            icon="feather:phone"
                             :has-error="Boolean(errorMessage)"
                           >
                             <input
                               v-bind="field"
                               class="input"
                               type="text"
-                              :placeholder="t('auth.placeholder.email')"
-                              autocomplete="email"
+                              :placeholder="t('auth.placeholder.phone')"
+                              autocomplete="phone"
                             />
                             <p v-if="errorMessage" class="help is-danger">
                               {{ errorMessage }}
@@ -179,39 +203,18 @@ useHead({
                         </VField>
                       </Field>
 
-                      <VField>
-                        <VControl class="setting-item">
-                          <label for="promotional" class="form-switch is-primary">
-                            <Field
-                              id="promotional"
-                              type="checkbox"
-                              name="promotional"
-                              value="yes"
-                            />
-
-                            <i aria-hidden="true"></i>
-                          </label>
-                          <div class="setting-meta">
-                            <label for="promotional">
-                              <span>{{ t('auth.label.promotional') }} </span>
-                            </label>
-                          </div>
-                        </VControl>
-                      </VField>
-
                       <!-- Submit -->
-
                       <VField>
                         <VControl class="login">
                           <VButton type="submit" color="primary" bold fullwidth raised>
-                            {{ t('auth.action.signup') }}
+                            {{ t('auth.register.submit') }}
                           </VButton>
                         </VControl>
                       </VField>
                     </div>
                   </form>
                   <RouterLink :to="{ name: 'auth-login' }">
-                    {{ t('auth.action.login') }}
+                    {{ t('auth.login.link') }}
                   </RouterLink>
                 </div>
               </div>

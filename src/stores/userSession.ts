@@ -1,46 +1,53 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { useStorage } from '@vueuse/core'
+import { User } from '../models/user.model'
 
-export type UserData = Record<string, any> | null
+export const useUserSession = defineStore({
+  id: 'userSession',
+  state: () => {
+    // token will be synced with local storage
+    // @see https://vueuse.org/core/usestorage/
+    const token = useStorage('token', '')
 
-export const useUserSession = defineStore('userSession', () => {
-  // token will be synced with local storage
-  // @see https://vueuse.org/core/usestorage/
-  const token = useStorage('token', '')
+    const user = useStorage<string>('user', null, localStorage)
+    const loading = ref(true)
 
-  const user = ref<Partial<UserData>>()
-  const loading = ref(true)
+    const isLoggedIn = computed(() => token.value !== undefined && token.value !== '')
 
-  const isLoggedIn = computed(() => token.value !== undefined && token.value !== '')
+    function setUser(newUser: User) {
+      user.value = JSON.stringify(newUser)
+    }
 
-  function setUser(newUser: Partial<UserData>) {
-    user.value = newUser
-  }
+    function getUser(): User {
+      return JSON.parse(user.value)
+    }
 
-  function setToken(newToken: string) {
-    token.value = newToken
-  }
+    function setToken(newToken: string) {
+      token.value = newToken
+    }
 
-  function setLoading(newLoading: boolean) {
-    loading.value = newLoading
-  }
+    function setLoading(newLoading: boolean) {
+      loading.value = newLoading
+    }
 
-  async function logoutUser() {
-    token.value = undefined
-    user.value = undefined
-  }
+    async function logoutUser() {
+      token.value = undefined
+      user.value = undefined
+    }
 
-  return {
-    user,
-    token,
-    isLoggedIn,
-    loading,
-    logoutUser,
-    setUser,
-    setToken,
-    setLoading,
-  } as const
+    return {
+      user,
+      token,
+      isLoggedIn,
+      loading,
+      logoutUser,
+      setUser,
+      getUser,
+      setToken,
+      setLoading,
+    } as const
+  },
 })
 
 /**

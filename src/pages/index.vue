@@ -2,7 +2,7 @@
 import { useHead } from '@vueuse/head'
 
 useHead({
-  title: 'ویوئِرو - کاملترین سیستم مدیریت با ویو نسخه‌ی ۳',
+  title: import.meta.env.VITE_SITE_TITLE as string,
 })
 </script>
 

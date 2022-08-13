@@ -1,4 +1,7 @@
 {
+  "app": {
+    "title":"Join Us Now."
+  },
   "select-language": "Select Language",
   "auth": {
     "title": "Join Us Now.",
