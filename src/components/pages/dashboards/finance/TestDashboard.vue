@@ -1,33 +1,20 @@
 <script setup lang="ts">
 import ApexChart from 'vue3-apexcharts'
-
-import { flexRadialChartCircleOptions } from '/@src/data/widgets/charts/flexRadialChartCircleChart'
-import { flexRadialChartStripesOptions } from '/@src/data/widgets/charts/flexRadialChartStripesChart'
-import {
-  widgetRadialGroup1Options,
-  widgetRadialGroup2Options,
-  widgetRadialGroup3Options,
-} from '/@src/data/widgets/charts/groupedCircleCharts'
-import {
-  widgetGaugeGroup1Options,
-  widgetGaugeGroup2Options,
-  widgetGaugeGroup3Options,
-} from '/@src/data/widgets/charts/groupedRadialCharts'
-import {
-  spark1,
-  spark2,
-  spark3,
-  spark4,
-} from '/@src/data/dashboards/ecommerce/sparksCharts'
-
-import { onBeforeMount } from 'vue'
 import moment from 'moment-jalaali'
-import * as chartOptions from '/@src/data/dashboards/apex-demo/chartOptions'
 import { useUserSession } from '/@src/stores/userSession'
 import { dashboard } from '/@src/services/modules/dashboard/dashboard.service'
-
-const userSession = useUserSession()
-const user = userSession.getUser()
+import {
+  AmmoniaChartOptions,
+  ECChartOptions,
+  NitrateChartOptions,
+  NitriteChartOptions,
+  OrpChartOptions,
+  OxygenChartOptions,
+  PHChartOptions,
+  TemperatureChartOptions,
+} from '/@src/models/chart.model'
+import { SocketService } from '/@src/services/modules/socket/socket.service'
+import { ref } from 'vue'
 
 type SensorData = {
   ph: number
@@ -40,39 +27,84 @@ type SensorData = {
   temperature: number
   createdAt: Date
 }
+const { socket } = new SocketService()
+const userSession = useUserSession()
+const user = userSession.getUser()
 
-const { sensorData } = await dashboard(`/dashboard/${user._id}`)
+let sensorData = ref<SensorData>()
 
-const dates = sensorData
-  .slice(0, 5)
-  .map((d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss'))
+const result = await dashboard(`/dashboard/${user._id}`)
 
-const ph = sensorData.slice(0, 5).map((d: SensorData) => d.ph)
-const oxygen = sensorData.slice(0, 5).map((d: SensorData) => d.oxygen)
-const orp = sensorData.slice(0, 5).map((d: SensorData) => d.orp)
-const ec = sensorData.slice(0, 5).map((d: SensorData) => d.ec)
-const ammonia = sensorData.slice(0, 5).map((d: SensorData) => d.ammonia)
-const nitrite = sensorData.slice(0, 5).map((d: SensorData) => d.nitrite)
-const nitrate = sensorData.slice(0, 5).map((d: SensorData) => d.nitrate)
-const temperature = sensorData.slice(0, 5).map((d: SensorData) => d.temperature)
+sensorData = result.sensorData
 
-chartOptions.ph.series = [{ name: 'ph', data: ph }]
-chartOptions.oxygen.series = [{ name: 'oxygen', data: oxygen }]
-chartOptions.orp.series = [{ name: 'orp', data: orp }]
-chartOptions.ec.series = [{ name: 'ec', data: ec }]
-chartOptions.ammonia.series = [{ name: 'ammonia', data: ammonia }]
-chartOptions.nitrite.series = [{ name: 'nitrite', data: nitrite }]
-chartOptions.nitrate.series = [{ name: 'nitrate', data: nitrate }]
-chartOptions.temperature.series = [{ name: 'temperature', data: temperature }]
+function extractData(data: any) {
+  const dates = data
+    .slice(0, 5)
+    .map((d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss'))
+  const phData = sensorData
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.ph)
+  const oxygenData = sensorData
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.oxygen)
+  const orpData = sensorData
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.orp)
+  const ecData = sensorData
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.ec)
+  const ammoniaData = sensorData
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.ammonia)
+  const nitriteData = sensorData
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.nitrite)
+  const nitrateData = sensorData
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.nitrate)
+  const temperatureData = sensorData
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.temperature)
 
-chartOptions.ph.labels = dates
-chartOptions.oxygen.labels = dates
-chartOptions.orp.labels = dates
-chartOptions.ec.labels = dates
-chartOptions.ammonia.labels = dates
-chartOptions.nitrite.labels = dates
-chartOptions.nitrate.labels = dates
-chartOptions.temperature.labels = dates
+  return {
+    dates,
+    phData,
+    oxygenData,
+    orpData,
+    ecData,
+    ammoniaData,
+    nitriteData,
+    nitrateData,
+    temperatureData,
+  }
+}
+
+socket.on('message', (data) => {
+  sensorData.value = data
+})
+
+const {
+  dates,
+  phData,
+  oxygenData,
+  orpData,
+  ecData,
+  ammoniaData,
+  nitriteData,
+  nitrateData,
+  temperatureData,
+} = extractData(sensorData)
+
+console.log('ppppppppp', sensorData)
+
+const ph = new PHChartOptions(phData, dates)
+const oxygen = new OxygenChartOptions(oxygenData, dates)
+const orp = new OrpChartOptions(orpData, dates)
+const ec = new ECChartOptions(ecData, dates)
+const ammonia = new AmmoniaChartOptions(ammoniaData, dates)
+const nitrite = new NitriteChartOptions(nitriteData, dates)
+const nitrate = new NitrateChartOptions(nitrateData, dates)
+const temperature = new TemperatureChartOptions(temperatureData, dates)
 </script>
 
 <template>
@@ -91,97 +123,16 @@ chartOptions.temperature.labels = dates
     </div>
 
     <div class="columns is-multiline">
-      <!--Grouped Stat Widget-->
-      <div class="column is-6">
-        <GroupedStatWidget
-          title="مشخصات استخر"
-          :values="['264', '1,203', '3,078']"
-          :labels="['pH', 'Oxygen', 'Nitrite']"
-        >
-          <template #chart1>
-            <ApexChart
-              id="group-radial-1"
-              :height="widgetRadialGroup1Options.chart.height"
-              :type="widgetRadialGroup1Options.chart.type"
-              :series="widgetRadialGroup1Options.series"
-              :options="widgetRadialGroup1Options"
-            >
-            </ApexChart>
-          </template>
-          <template #chart2>
-            <ApexChart
-              id="group-radial-2"
-              :height="widgetRadialGroup2Options.chart.height"
-              :type="widgetRadialGroup2Options.chart.type"
-              :series="widgetRadialGroup2Options.series"
-              :options="widgetRadialGroup2Options"
-            >
-            </ApexChart>
-          </template>
-          <template #chart3>
-            <ApexChart
-              id="group-radial-3"
-              :height="widgetRadialGroup3Options.chart.height"
-              :type="widgetRadialGroup3Options.chart.type"
-              :series="widgetRadialGroup3Options.series"
-              :options="widgetRadialGroup3Options"
-            >
-            </ApexChart>
-          </template>
-        </GroupedStatWidget>
-      </div>
-
-      <!--Grouped Stat Widget-->
-      <div class="column is-6">
-        <GroupedStatWidget
-          title="مشخصات استخر"
-          :values="['264', '1,203', '3,078']"
-          :labels="['pH', 'Oxygen', 'Nitrite']"
-          gauge
-        >
-          <template #chart1>
-            <ApexChart
-              id="group-gauge-1"
-              :height="widgetGaugeGroup1Options.chart.height"
-              :type="widgetGaugeGroup1Options.chart.type"
-              :series="widgetGaugeGroup1Options.series"
-              :options="widgetGaugeGroup1Options"
-            >
-            </ApexChart>
-          </template>
-          <template #chart2>
-            <ApexChart
-              id="group-gauge-2"
-              :height="widgetGaugeGroup2Options.chart.height"
-              :type="widgetGaugeGroup2Options.chart.type"
-              :series="widgetGaugeGroup2Options.series"
-              :options="widgetGaugeGroup2Options"
-            >
-            </ApexChart>
-          </template>
-          <template #chart3>
-            <ApexChart
-              id="group-gauge-3"
-              :height="widgetGaugeGroup3Options.chart.height"
-              :type="widgetGaugeGroup3Options.chart.type"
-              :series="widgetGaugeGroup3Options.series"
-              :options="widgetGaugeGroup3Options"
-            >
-            </ApexChart>
-          </template>
-        </GroupedStatWidget>
-      </div>
-
       <!--Line Stats Widget-->
       <div class="column is-6">
         <div class="s-card">
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="chartOptions.ph.chart.height"
-            :type="chartOptions.ph.chart.type"
-            :series="chartOptions.ph.series"
-            :options="chartOptions.ph"
+            :height="ph.chart.height"
+            :type="ph.chart.type"
+            :series="ph.series"
+            :options="ph"
           >
           </ApexChart>
         </div>
@@ -193,10 +144,10 @@ chartOptions.temperature.labels = dates
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="chartOptions.oxygen.chart.height"
-            :type="chartOptions.oxygen.chart.type"
-            :series="chartOptions.oxygen.series"
-            :options="chartOptions.oxygen"
+            :height="oxygen.chart.height"
+            :type="oxygen.chart.type"
+            :series="oxygen.series"
+            :options="oxygen"
           >
           </ApexChart>
         </div>
@@ -208,10 +159,10 @@ chartOptions.temperature.labels = dates
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="chartOptions.orp.chart.height"
-            :type="chartOptions.orp.chart.type"
-            :series="chartOptions.orp.series"
-            :options="chartOptions.orp"
+            :height="orp.chart.height"
+            :type="orp.chart.type"
+            :series="orp.series"
+            :options="orp"
           >
           </ApexChart>
         </div>
@@ -223,10 +174,10 @@ chartOptions.temperature.labels = dates
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="chartOptions.ec.chart.height"
-            :type="chartOptions.ec.chart.type"
-            :series="chartOptions.ec.series"
-            :options="chartOptions.ec"
+            :height="ec.chart.height"
+            :type="ec.chart.type"
+            :series="ec.series"
+            :options="ec"
           >
           </ApexChart>
         </div>
@@ -238,10 +189,10 @@ chartOptions.temperature.labels = dates
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="chartOptions.ammonia.chart.height"
-            :type="chartOptions.ammonia.chart.type"
-            :series="chartOptions.ammonia.series"
-            :options="chartOptions.ammonia"
+            :height="ammonia.chart.height"
+            :type="ammonia.chart.type"
+            :series="ammonia.series"
+            :options="ammonia"
           >
           </ApexChart>
         </div>
@@ -253,10 +204,10 @@ chartOptions.temperature.labels = dates
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="chartOptions.nitrite.chart.height"
-            :type="chartOptions.nitrite.chart.type"
-            :series="chartOptions.nitrite.series"
-            :options="chartOptions.nitrite"
+            :height="nitrite.chart.height"
+            :type="nitrite.chart.type"
+            :series="nitrite.series"
+            :options="nitrite"
           >
           </ApexChart>
         </div>
@@ -268,10 +219,10 @@ chartOptions.temperature.labels = dates
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="chartOptions.nitrate.chart.height"
-            :type="chartOptions.nitrate.chart.type"
-            :series="chartOptions.nitrate.series"
-            :options="chartOptions.nitrate"
+            :height="nitrate.chart.height"
+            :type="nitrate.chart.type"
+            :series="nitrate.series"
+            :options="nitrate"
           >
           </ApexChart>
         </div>
@@ -283,10 +234,10 @@ chartOptions.temperature.labels = dates
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="chartOptions.temperature.chart.height"
-            :type="chartOptions.temperature.chart.type"
-            :series="chartOptions.temperature.series"
-            :options="chartOptions.temperature"
+            :height="temperature.chart.height"
+            :type="temperature.chart.type"
+            :series="temperature.series"
+            :options="temperature"
           >
           </ApexChart>
         </div>
