@@ -27,42 +27,46 @@ type SensorData = {
   temperature: number
   createdAt: Date
 }
+
+const props = withDefaults(
+  defineProps<{
+    activeTab?: string
+  }>(),
+  {
+    activeTab: 'daily',
+  }
+)
 const { socket } = new SocketService()
 const userSession = useUserSession()
 const user = userSession.getUser()
+const tab = ref(props.activeTab)
 
-let sensorData = ref<SensorData>()
+const { sensorData } = await dashboard(`/dashboard/${user._id}`)
 
-const result = await dashboard(`/dashboard/${user._id}`)
-
-sensorData = result.sensorData
+console.log(sensorData)
 
 function extractData(data: any) {
   const dates = data
-    .slice(0, 5)
+    .slice(data.length, data.length - 5)
     .map((d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss'))
-  const phData = sensorData
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.ph)
-  const oxygenData = sensorData
+  const phData = data.slice(data.length - 5, data.length + 1).map((d: SensorData) => d.ph)
+  const oxygenData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.oxygen)
-  const orpData = sensorData
+  const orpData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.orp)
-  const ecData = sensorData
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.ec)
-  const ammoniaData = sensorData
+  const ecData = data.slice(data.length - 5, data.length + 1).map((d: SensorData) => d.ec)
+  const ammoniaData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.ammonia)
-  const nitriteData = sensorData
+  const nitriteData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.nitrite)
-  const nitrateData = sensorData
+  const nitrateData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.nitrate)
-  const temperatureData = sensorData
+  const temperatureData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.temperature)
 
@@ -77,6 +81,10 @@ function extractData(data: any) {
     nitrateData,
     temperatureData,
   }
+}
+function changeFilter(filter: string) {
+  console.log('ttttttttt', filter)
+  tab.value = filter
 }
 
 socket.on('message', (data) => {
@@ -94,8 +102,6 @@ const {
   nitrateData,
   temperatureData,
 } = extractData(sensorData)
-
-console.log('ppppppppp', sensorData)
 
 const ph = new PHChartOptions(phData, dates)
 const oxygen = new OxygenChartOptions(oxygenData, dates)
@@ -117,11 +123,46 @@ const temperature = new TemperatureChartOptions(temperatureData, dates)
         <p>پنل مدیریت استخرها</p>
       </div>
       <div class="end">
-        <VButton dark="3">مشاهده گزارشات</VButton>
-        <VButton color="primary" elevated>مدیریت مزرعه</VButton>
+        <VButton color="primary" elevated>مدیریت استخر</VButton>
       </div>
     </div>
 
+    <!-- Filter -->
+    <div class="tabs-wrapper is-triple-slider">
+      <div class="tabs-inner">
+        <div class="tabs">
+          <ul>
+            <li :class="[tab === 'daily' && 'is-active']">
+              <a
+                tabindex="0"
+                @keydown.space.prevent="tab = 'daily'"
+                @click="changeFilter('daily')"
+                ><span>روزانه</span></a
+              >
+            </li>
+            <li :class="[tab === 'weekly' && 'is-active']">
+              <a
+                tabindex="0"
+                @keydown.space.prevent="tab = 'weekly'"
+                @click="changeFilter('weekly')"
+                ><span>هفتگی</span></a
+              >
+            </li>
+            <li :class="[tab === 'monthly' && 'is-active']">
+              <a
+                tabindex="0"
+                @keydown.space.prevent="tab = 'monthly'"
+                @click="changeFilter('monthly')"
+                ><span>ماهانه</span></a
+              >
+            </li>
+            <li class="tab-naver"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts -->
     <div class="columns is-multiline">
       <!--Line Stats Widget-->
       <div class="column is-6">
@@ -366,6 +407,15 @@ const temperature = new TemperatureChartOptions(temperatureData, dates)
 
           min-width: 180px;
         }
+      }
+    }
+  }
+
+  .tabs-wrapper {
+    .tabs-inner {
+      .tabs {
+        margin: 20px auto;
+        background: var(--white);
       }
     }
   }
