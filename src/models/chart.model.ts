@@ -58,8 +58,16 @@ export abstract class ChartBaseOption {
 }
 
 export class PHChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'ph', data: [] }]
-  colors: string[] = [useThemeColors().green]
+  series: ChartSeries[] = [
+    { name: 'ph', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().primary,
+  ]
   title: ChartTitle = {
     text: 'pH',
     align: 'left',
@@ -70,149 +78,261 @@ export class PHChartOptions extends ChartBaseOption {
     max: 8,
   }
 
-  constructor(data: number[], lables: string[]) {
+  constructor(
+    data: number[],
+    optimizeUp: number[],
+    optimizeDown: number[],
+    lables: string[]
+  ) {
     super()
     this.series[0].data = data
+    this.series[1].data = optimizeUp
+    this.series[2].data = optimizeDown
     this.labels = lables
   }
 }
 
 export class OxygenChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'oxygen', data: [] }]
-  colors: string[] = [useThemeColors().blue]
+  series: ChartSeries[] = [
+    { name: 'oxygen', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().danger,
+  ]
   title: ChartTitle = {
     text: 'Oxygen',
     align: 'left',
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 5,
+    min: 0,
     max: 12,
   }
 
-  constructor(data: number[], lables: string[]) {
+  constructor(
+    data: number[],
+    optimizeUp: number[],
+    optimizeDown: number[],
+    lables: string[]
+  ) {
     super()
     this.series[0].data = data
+    this.series[1].data = optimizeUp
+    this.series[2].data = optimizeDown
     this.labels = lables
   }
 }
 
 export class OrpChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'orp', data: [] }]
-  colors: string[] = [useThemeColors().yellow]
+  series: ChartSeries[] = [
+    { name: 'orp', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().primary,
+  ]
   title: ChartTitle = {
     text: 'ORP',
     align: 'left',
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 495,
-    max: 510,
+    min: 250,
+    max: 450,
   }
 
-  constructor(data: number[], lables: string[]) {
+  constructor(
+    data: number[],
+    optimizeUp: number[],
+    optimizeDown: number[],
+    lables: string[]
+  ) {
     super()
     this.series[0].data = data
+    this.series[1].data = optimizeUp
+    this.series[2].data = optimizeDown
     this.labels = lables
   }
 }
 
 export class ECChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'ec', data: [] }]
-  colors: string[] = [useThemeColors().yellow]
+  series: ChartSeries[] = [
+    { name: 'ec', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().primary,
+  ]
   title: ChartTitle = {
     text: 'EC',
     align: 'left',
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 39,
-    max: 42,
+    min: 10,
+    max: 35,
   }
 
-  constructor(data: number[], lables: string[]) {
+  constructor(
+    data: number[],
+    optimizeUp: number[],
+    optimizeDown: number[],
+    lables: string[]
+  ) {
     super()
     this.series[0].data = data
+    this.series[1].data = optimizeUp
+    this.series[2].data = optimizeDown
     this.labels = lables
   }
 }
 
 export class AmmoniaChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'ammonia', data: [] }]
-  colors: string[] = [useThemeColors().blue]
+  series: ChartSeries[] = [
+    { name: 'ammonia', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().primary,
+  ]
   title: ChartTitle = {
     text: 'Ammonia',
     align: 'left',
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 0.5,
+    min: 0,
     max: 0.7,
   }
 
-  constructor(data: number[], lables: string[]) {
+  constructor(
+    data: number[],
+    optimizeUp: number[],
+    optimizeDown: number[],
+    lables: string[]
+  ) {
     super()
     this.series[0].data = data
+    this.series[1].data = optimizeUp
+    this.series[2].data = optimizeDown
     this.labels = lables
   }
 }
 
 export class NitriteChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'nitrite', data: [] }]
-  colors: string[] = [useThemeColors().blue]
+  series: ChartSeries[] = [
+    { name: 'nitrite', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().primary,
+  ]
   title: ChartTitle = {
     text: 'Nitrite',
     align: 'left',
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 48,
-    max: 53,
+    min: 0,
+    max: 2,
   }
 
-  constructor(data: number[], lables: string[]) {
+  constructor(
+    data: number[],
+    optimizeUp: number[],
+    optimizeDown: number[],
+    lables: string[]
+  ) {
     super()
     this.series[0].data = data
+    this.series[1].data = optimizeUp
+    this.series[2].data = optimizeDown
     this.labels = lables
   }
 }
 
 export class NitrateChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'nitrate', data: [] }]
-  colors: string[] = [useThemeColors().green]
+  series: ChartSeries[] = [
+    { name: 'nitrate', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().primary,
+  ]
   title: ChartTitle = {
-    text: 'Nitrite',
+    text: 'Nitrate',
     align: 'left',
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 38,
-    max: 45,
+    min: 0,
+    max: 2,
   }
 
-  constructor(data: number[], lables: string[]) {
+  constructor(
+    data: number[],
+    optimizeUp: number[],
+    optimizeDown: number[],
+    lables: string[]
+  ) {
     super()
     this.series[0].data = data
+    this.series[1].data = optimizeUp
+    this.series[2].data = optimizeDown
     this.labels = lables
   }
 }
 
 export class TemperatureChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'temperature', data: [] }]
-  colors: string[] = [useThemeColors().danger]
+  series: ChartSeries[] = [
+    { name: 'temperature', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().primary,
+  ]
   title: ChartTitle = {
     text: 'Temperature',
     align: 'left',
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 22,
-    max: 27,
+    min: 20,
+    max: 40,
   }
 
-  constructor(data: number[], lables: string[]) {
+  constructor(
+    data: number[],
+    optimizeUp: number[],
+    optimizeDown: number[],
+    lables: string[]
+  ) {
     super()
     this.series[0].data = data
+    this.series[1].data = optimizeUp
+    this.series[2].data = optimizeDown
     this.labels = lables
   }
 }

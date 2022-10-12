@@ -49,37 +49,111 @@ function extractData(data: any) {
   const dates = data
     .slice(data.length, data.length - 5)
     .map((d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss'))
+
+  console.log('dddddddd', dates)
+
   const phData = data.slice(data.length - 5, data.length + 1).map((d: SensorData) => d.ph)
+  const phUp = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.ph + 0.5)
+  const phDown = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.ph - 0.5)
+
   const oxygenData = data
     .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.oxygen)
+    .map((d: SensorData) => d.oxygen + 3)
+  const oxygenUp = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => (d.oxygen - 1).toFixed(2))
+  const oxygenDown = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => (d.oxygen - 2).toFixed(2))
+
   const orpData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.orp)
+  const orpUp = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.orp + 20)
+  const orpDown = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.orp - 20)
+
   const ecData = data.slice(data.length - 5, data.length + 1).map((d: SensorData) => d.ec)
+  const ecUp = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.ec + 4)
+  const ecDown = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.ec - 4)
+
   const ammoniaData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.ammonia)
+  const ammoniaUp = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => (d.ammonia + 0.05).toFixed(2))
+  const ammoniaDown = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => (d.ammonia - 0.05).toFixed(2))
+
   const nitriteData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.nitrite)
+  const nitriteUp = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => (d.nitrite + 0.1).toFixed(2))
+  const nitriteDown = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => (d.nitrite - 0.1).toFixed(2))
+
   const nitrateData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.nitrate)
+  const nitrateUp = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => (d.nitrate + 0.1).toFixed(2))
+  const nitrateDown = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => (d.nitrate - 0.1).toFixed(2))
+
   const temperatureData = data
     .slice(data.length - 5, data.length + 1)
     .map((d: SensorData) => d.temperature)
+  const temperatureUp = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.temperature + 3)
+  const temperatureDown = data
+    .slice(data.length - 5, data.length + 1)
+    .map((d: SensorData) => d.temperature - 3)
 
   return {
     dates,
     phData,
+    phUp,
+    phDown,
     oxygenData,
+    oxygenUp,
+    oxygenDown,
     orpData,
+    orpUp,
+    orpDown,
     ecData,
+    ecUp,
+    ecDown,
     ammoniaData,
+    ammoniaUp,
+    ammoniaDown,
     nitriteData,
+    nitriteUp,
+    nitriteDown,
     nitrateData,
+    nitrateUp,
+    nitrateDown,
     temperatureData,
+    temperatureUp,
+    temperatureDown,
   }
 }
 function changeFilter(filter: string) {
@@ -87,30 +161,51 @@ function changeFilter(filter: string) {
   tab.value = filter
 }
 
-socket.on('message', (data) => {
-  sensorData.value = data
-})
+// socket.on('message', (data) => {
+//   sensorData.value = data
+// })
 
 const {
   dates,
   phData,
+  phUp,
+  phDown,
   oxygenData,
+  oxygenUp,
+  oxygenDown,
   orpData,
+  orpUp,
+  orpDown,
   ecData,
+  ecUp,
+  ecDown,
   ammoniaData,
+  ammoniaUp,
+  ammoniaDown,
   nitriteData,
+  nitriteUp,
+  nitriteDown,
   nitrateData,
+  nitrateUp,
+  nitrateDown,
   temperatureData,
+  temperatureUp,
+  temperatureDown,
 } = extractData(sensorData)
 
-const ph = new PHChartOptions(phData, dates)
-const oxygen = new OxygenChartOptions(oxygenData, dates)
-const orp = new OrpChartOptions(orpData, dates)
-const ec = new ECChartOptions(ecData, dates)
-const ammonia = new AmmoniaChartOptions(ammoniaData, dates)
-const nitrite = new NitriteChartOptions(nitriteData, dates)
-const nitrate = new NitrateChartOptions(nitrateData, dates)
-const temperature = new TemperatureChartOptions(temperatureData, dates)
+const ph = new PHChartOptions(phData, phUp, phDown, dates)
+const oxygen = new OxygenChartOptions(oxygenData, oxygenUp, oxygenDown, dates)
+const orp = new OrpChartOptions(orpData, orpUp, orpDown, dates)
+const ec = new ECChartOptions(ecData, ecUp, ecDown, dates)
+const ammonia = new AmmoniaChartOptions(ammoniaData, ammoniaUp, ammoniaDown, dates)
+const nitrite = new NitriteChartOptions(nitriteData, nitriteUp, nitriteDown, dates)
+const nitrate = new NitrateChartOptions(nitrateData, nitrateUp, nitrateDown, dates)
+const temperature = new TemperatureChartOptions(
+  temperatureData,
+  temperatureUp,
+  temperatureDown,
+  dates
+)
 </script>
 
 <template>
