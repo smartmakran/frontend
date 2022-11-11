@@ -43,14 +43,10 @@ const tab = ref(props.activeTab)
 
 const { sensorData } = await dashboard(`/dashboard/${user._id}`)
 
-console.log(sensorData)
-
 function extractData(data: any) {
   const dates = data
     .slice(data.length, data.length - 5)
     .map((d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss'))
-
-  console.log('dddddddd', dates)
 
   const phData = data.slice(data.length - 5, data.length + 1).map((d: SensorData) => d.ph)
   const phUp = data
@@ -156,14 +152,6 @@ function extractData(data: any) {
     temperatureDown,
   }
 }
-function changeFilter(filter: string) {
-  console.log('ttttttttt', filter)
-  tab.value = filter
-}
-
-// socket.on('message', (data) => {
-//   sensorData.value = data
-// })
 
 const {
   dates,
@@ -193,7 +181,7 @@ const {
   temperatureDown,
 } = extractData(sensorData)
 
-const ph = new PHChartOptions(phData, phUp, phDown, dates)
+// const ph = new PHChartOptions(phData, phUp, phDown, dates)
 const oxygen = new OxygenChartOptions(oxygenData, oxygenUp, oxygenDown, dates)
 const orp = new OrpChartOptions(orpData, orpUp, orpDown, dates)
 const ec = new ECChartOptions(ecData, ecUp, ecDown, dates)
@@ -206,6 +194,16 @@ const temperature = new TemperatureChartOptions(
   temperatureDown,
   dates
 )
+
+const ph = ref<ApexChart>()
+
+ph.value = phData
+
+socket.on('message', (data) => {
+  console.log('dddddddddd', data)
+  ph.value = data
+  console.log('pppppp', ph)
+})
 </script>
 
 <template>
@@ -265,8 +263,8 @@ const temperature = new TemperatureChartOptions(
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="ph.chart.height"
-            :type="ph.chart.type"
+            :height="ph.height"
+            :type="ph.type"
             :series="ph.series"
             :options="ph"
           >
