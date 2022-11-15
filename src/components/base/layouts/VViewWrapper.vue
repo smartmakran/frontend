@@ -121,7 +121,7 @@ const props = defineProps<VViewWrapperProps>()
     position: fixed;
     top: 0;
     left: 0;
-    margin-left: 80px;
+    margin-right: 80px;
     width: calc(100% - 80px);
     z-index: 14;
   }

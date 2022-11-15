@@ -14,7 +14,7 @@ import {
   TemperatureChartOptions,
 } from '/@src/models/chart.model'
 import { SocketService } from '/@src/services/modules/socket/socket.service'
-import { ref } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 
 type SensorData = {
   ph: number
@@ -41,88 +41,48 @@ const userSession = useUserSession()
 const user = userSession.getUser()
 const tab = ref(props.activeTab)
 
-const { sensorData } = await dashboard(`/dashboard/${user._id}`)
+const { sensorData, optimalData, pools } = await dashboard(`/dashboard/${user._id}`)
 
-function extractData(data: any) {
-  const dates = data
-    .slice(data.length, data.length - 5)
-    .map((d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss'))
+function extractData(data: any, optimal: any) {
+  if (data.length > 10) {
+    data = data.slice(data.length - 5, data.length)
+  }
 
-  const phData = data.slice(data.length - 5, data.length + 1).map((d: SensorData) => d.ph)
-  const phUp = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.ph + 0.5)
-  const phDown = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.ph - 0.5)
+  const dates = data.map((d: SensorData) =>
+    moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
+  )
 
-  const oxygenData = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.oxygen + 3)
-  const oxygenUp = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => (d.oxygen - 1).toFixed(2))
-  const oxygenDown = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => (d.oxygen - 2).toFixed(2))
+  const phData = data.map((d: SensorData) => d.ph)
+  const phUp = data.map(() => optimal[0].ph + 0.5)
+  const phDown = data.map(() => optimal[0].ph - 0.5)
 
-  const orpData = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.orp)
-  const orpUp = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.orp + 20)
-  const orpDown = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.orp - 20)
+  const oxygenData = data.map((d: SensorData) => d.oxygen)
+  const oxygenUp = data.map(() => (optimal[0].oxygen + 2).toFixed(2))
+  const oxygenDown = data.map(() => (optimal[0].oxygen - 2).toFixed(2))
 
-  const ecData = data.slice(data.length - 5, data.length + 1).map((d: SensorData) => d.ec)
-  const ecUp = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.ec + 4)
-  const ecDown = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.ec - 4)
+  const orpData = data.map((d: SensorData) => d.orp)
+  const orpUp = data.map(() => optimal[0].orp + 20)
+  const orpDown = data.map(() => optimal[0].orp - 20)
 
-  const ammoniaData = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.ammonia)
-  const ammoniaUp = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => (d.ammonia + 0.05).toFixed(2))
-  const ammoniaDown = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => (d.ammonia - 0.05).toFixed(2))
+  const ecData = data.map((d: SensorData) => d.ec)
+  const ecUp = data.map(() => optimal[0].ec + 4)
+  const ecDown = data.map(() => optimal[0].ec - 4)
 
-  const nitriteData = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.nitrite)
-  const nitriteUp = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => (d.nitrite + 0.1).toFixed(2))
-  const nitriteDown = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => (d.nitrite - 0.1).toFixed(2))
+  const ammoniaData = data.map((d: SensorData) => d.ammonia)
+  const ammoniaUp = data.map(() => (optimal[0].ammonia + 0.05).toFixed(2))
+  const ammoniaDown = data.map(() => (optimal[0].ammonia - 0.05).toFixed(2))
 
-  const nitrateData = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.nitrate)
-  const nitrateUp = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => (d.nitrate + 0.1).toFixed(2))
-  const nitrateDown = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => (d.nitrate - 0.1).toFixed(2))
+  const nitriteData = data.map((d: SensorData) => d.nitrite)
+  const nitriteUp = data.map(() => (optimal[0].nitrite + 0.1).toFixed(2))
+  const nitriteDown = data.map(() => (optimal[0].nitrite - 0.1).toFixed(2))
 
-  const temperatureData = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.temperature)
-  const temperatureUp = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.temperature + 3)
-  const temperatureDown = data
-    .slice(data.length - 5, data.length + 1)
-    .map((d: SensorData) => d.temperature - 3)
+  const nitrateData = data.map((d: SensorData) => d.nitrate)
+  const nitrateUp = data.map(() => (optimal[0].nitrate + 0.1).toFixed(2))
+  const nitrateDown = data.map(() => (optimal[0].nitrate - 0.1).toFixed(2))
+
+  const temperatureData = data.map((d: SensorData) => d.temperature)
+  const temperatureUp = data.map(() => optimal[0].temperature + 3)
+  const temperatureDown = data.map(() => optimal[0].temperature - 3)
 
   return {
     dates,
@@ -179,30 +139,103 @@ const {
   temperatureData,
   temperatureUp,
   temperatureDown,
-} = extractData(sensorData)
+} = extractData(sensorData, optimalData)
 
-// const ph = new PHChartOptions(phData, phUp, phDown, dates)
-const oxygen = new OxygenChartOptions(oxygenData, oxygenUp, oxygenDown, dates)
-const orp = new OrpChartOptions(orpData, orpUp, orpDown, dates)
-const ec = new ECChartOptions(ecData, ecUp, ecDown, dates)
-const ammonia = new AmmoniaChartOptions(ammoniaData, ammoniaUp, ammoniaDown, dates)
-const nitrite = new NitriteChartOptions(nitriteData, nitriteUp, nitriteDown, dates)
-const nitrate = new NitrateChartOptions(nitrateData, nitrateUp, nitrateDown, dates)
-const temperature = new TemperatureChartOptions(
-  temperatureData,
-  temperatureUp,
-  temperatureDown,
-  dates
-)
+const ph = reactive<any>({
+  ...new PHChartOptions(phData, phUp, phDown, dates),
+})
+const oxygen = reactive<any>({
+  ...new OxygenChartOptions(oxygenData, oxygenUp, oxygenDown, dates),
+})
+const orp = reactive<any>({ ...new OrpChartOptions(orpData, orpUp, orpDown, dates) })
+const ec = reactive<any>({ ...new ECChartOptions(ecData, ecUp, ecDown, dates) })
+const ammonia = reactive<any>({
+  ...new AmmoniaChartOptions(ammoniaData, ammoniaUp, ammoniaDown, dates),
+})
+const nitrite = reactive<any>({
+  ...new NitriteChartOptions(nitriteData, nitriteUp, nitriteDown, dates),
+})
+const nitrate = reactive<any>({
+  ...new NitrateChartOptions(nitrateData, nitrateUp, nitrateDown, dates),
+})
+const temperature = reactive<any>({
+  ...new TemperatureChartOptions(temperatureData, temperatureUp, temperatureDown, dates),
+})
 
-const ph = ref<ApexChart>()
+onMounted(async () => {
+  socket.on('message', (data) => {
+    const {
+      dates,
+      phData,
+      phUp,
+      phDown,
+      oxygenData,
+      oxygenUp,
+      oxygenDown,
+      orpData,
+      orpUp,
+      orpDown,
+      ecData,
+      ecUp,
+      ecDown,
+      ammoniaData,
+      ammoniaUp,
+      ammoniaDown,
+      nitriteData,
+      nitriteUp,
+      nitriteDown,
+      nitrateData,
+      nitrateUp,
+      nitrateDown,
+      temperatureData,
+      temperatureUp,
+      temperatureDown,
+    } = extractData(data, optimalData)
 
-ph.value = phData
+    console.log(dates)
 
-socket.on('message', (data) => {
-  console.log('dddddddddd', data)
-  ph.value = data
-  console.log('pppppp', ph)
+    ph.labels = []
+    ph.series[0].data = phData
+    ph.series[1].data = phUp
+    ph.series[2].data = phDown
+
+    oxygen.series[0].data = oxygenData
+    oxygen.series[1].data = oxygenUp
+    oxygen.series[2].data = oxygenDown
+    oxygen.labels = dates
+
+    orp.series[0].data = orpData
+    orp.series[1].data = orpUp
+    orp.series[2].data = orpDown
+    orp.labels = dates
+
+    ec.series[0].data = ecData
+    ec.series[1].data = ecUp
+    ec.series[2].data = ecDown
+    ec.labels = dates
+
+    ammonia.series[0].data = ammoniaData
+    ammonia.series[1].data = ammoniaUp
+    ammonia.series[2].data = ammoniaDown
+    ammonia.labels = dates
+
+    nitrite.series[0].data = nitriteData
+    nitrite.series[1].data = nitriteUp
+    nitrite.series[2].data = nitriteDown
+    nitrite.labels = dates
+
+    nitrate.series[0].data = nitrateData
+    nitrate.series[1].data = nitrateUp
+    nitrate.series[2].data = nitrateDown
+    nitrate.labels = dates
+
+    temperature.series[0].data = temperatureData
+    temperature.series[1].data = temperatureUp
+    temperature.series[2].data = temperatureDown
+    temperature.labels = dates
+
+    console.log(ph, oxygen.labels)
+  })
 })
 </script>
 
@@ -216,7 +249,9 @@ socket.on('message', (data) => {
         <p>پنل مدیریت استخرها</p>
       </div>
       <div class="end">
-        <VButton color="primary" elevated>مدیریت استخر</VButton>
+        <VButton :to="`/app/pool/${pools[0].pools._id}`" color="primary" elevated
+          >مدیریت استخر</VButton
+        >
       </div>
     </div>
 
@@ -263,8 +298,8 @@ socket.on('message', (data) => {
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="ph.height"
-            :type="ph.type"
+            :height="ph.chart.height"
+            :type="ph.chart.type"
             :series="ph.series"
             :options="ph"
           >

@@ -106,7 +106,20 @@ export const barData2 = [
 ]
 
 export const usersBarOptions = reactive<any>({
-  series: [],
+  series: [
+    {
+      name: 'ph',
+      data: [10, 12, 12, 5, 12],
+    },
+    {
+      name: 'بهینه بالا',
+      data: [10.5, 12.5, 12.5, 5.5, 12.5],
+    },
+    {
+      name: 'بهینه پایین',
+      data: [9.5, 11.5, 11.5, 4.5, 11.5],
+    },
+  ],
   chart: {
     height: 235,
     type: 'bar',

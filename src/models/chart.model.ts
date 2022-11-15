@@ -82,13 +82,13 @@ export class PHChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
-    lables: string[]
+    labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
-    this.labels = lables
+    this.labels = labels
   }
 }
 
@@ -117,13 +117,13 @@ export class OxygenChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
-    lables: string[]
+    labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
-    this.labels = lables
+    this.labels = labels
   }
 }
 
@@ -152,13 +152,13 @@ export class OrpChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
-    lables: string[]
+    labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
-    this.labels = lables
+    this.labels = labels
   }
 }
 
@@ -187,13 +187,13 @@ export class ECChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
-    lables: string[]
+    labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
-    this.labels = lables
+    this.labels = labels
   }
 }
 
@@ -222,13 +222,13 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
-    lables: string[]
+    labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
-    this.labels = lables
+    this.labels = labels
   }
 }
 
@@ -257,13 +257,13 @@ export class NitriteChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
-    lables: string[]
+    labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
-    this.labels = lables
+    this.labels = labels
   }
 }
 
@@ -292,13 +292,13 @@ export class NitrateChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
-    lables: string[]
+    labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
-    this.labels = lables
+    this.labels = labels
   }
 }
 
@@ -327,12 +327,12 @@ export class TemperatureChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
-    lables: string[]
+    labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
-    this.labels = lables
+    this.labels = labels
   }
 }
