@@ -31,7 +31,7 @@ export const useUserSession = defineStore({
       loading.value = newLoading
     }
 
-    async function logoutUser() {
+    function logoutUser() {
       token.value = undefined
       user.value = undefined
     }

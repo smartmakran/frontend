@@ -15,6 +15,7 @@ import {
 } from '/@src/models/chart.model'
 import { SocketService } from '/@src/services/modules/socket/socket.service'
 import { ref, onMounted, reactive } from 'vue'
+import { useThemeColors } from '../../../../composable/useThemeColors'
 
 type SensorData = {
   ph: number
@@ -44,72 +45,131 @@ const tab = ref(props.activeTab)
 const { sensorData, optimalData, pools } = await dashboard(`/dashboard/${user._id}`)
 
 function extractData(data: any, optimal: any) {
-  if (data.length > 10) {
-    data = data.slice(data.length - 5, data.length)
+  if (data.length > 55) {
+    data = data.slice(data.length - 50, data.length)
   }
 
   const dates = data.map((d: SensorData) =>
     moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
   )
 
-  const phData = data.map((d: SensorData) => d.ph)
+  const phData: number[] = data.map((d: SensorData) => d.ph)
   const phUp = data.map(() => optimal[0].ph + 0.5)
   const phDown = data.map(() => optimal[0].ph - 0.5)
+  let phColor = useThemeColors().primary
+  for (const k in phData) {
+    if (phData[k] > phUp[k] || phData[k] < phDown[k]) {
+      phColor = useThemeColors().danger
+    }
+  }
 
-  const oxygenData = data.map((d: SensorData) => d.oxygen)
+  const oxygenData: number[] = data.map((d: SensorData) => d.oxygen)
   const oxygenUp = data.map(() => (optimal[0].oxygen + 2).toFixed(2))
   const oxygenDown = data.map(() => (optimal[0].oxygen - 2).toFixed(2))
+  let oxygenColor = useThemeColors().primary
+  for (const k in oxygenData) {
+    if (oxygenData[k] > oxygenUp[k] || oxygenData[k] < oxygenDown[k]) {
+      oxygenColor = useThemeColors().danger
+    }
+  }
 
   const orpData = data.map((d: SensorData) => d.orp)
   const orpUp = data.map(() => optimal[0].orp + 20)
   const orpDown = data.map(() => optimal[0].orp - 20)
+  let orpColor = useThemeColors().primary
+  for (const k in orpData) {
+    if (orpData[k] > orpUp[k] || orpData[k] < orpDown[k]) {
+      orpColor = useThemeColors().danger
+    }
+  }
 
   const ecData = data.map((d: SensorData) => d.ec)
   const ecUp = data.map(() => optimal[0].ec + 4)
   const ecDown = data.map(() => optimal[0].ec - 4)
+  let ecColor = useThemeColors().primary
+  for (const k in ecData) {
+    if (ecData[k] > ecUp[k] || ecData[k] < ecDown[k]) {
+      ecColor = useThemeColors().danger
+    }
+  }
 
   const ammoniaData = data.map((d: SensorData) => d.ammonia)
   const ammoniaUp = data.map(() => (optimal[0].ammonia + 0.05).toFixed(2))
   const ammoniaDown = data.map(() => (optimal[0].ammonia - 0.05).toFixed(2))
+  let ammoniaColor = useThemeColors().primary
+  for (const k in ammoniaData) {
+    if (ammoniaData[k] > ammoniaUp[k] || ammoniaData[k] < ammoniaDown[k]) {
+      ammoniaColor = useThemeColors().danger
+    }
+  }
 
   const nitriteData = data.map((d: SensorData) => d.nitrite)
   const nitriteUp = data.map(() => (optimal[0].nitrite + 0.1).toFixed(2))
   const nitriteDown = data.map(() => (optimal[0].nitrite - 0.1).toFixed(2))
+  let nitriteColor = useThemeColors().primary
+  for (const k in nitriteData) {
+    if (nitriteData[k] > nitriteUp[k] || nitriteData[k] < nitriteDown[k]) {
+      nitriteColor = useThemeColors().danger
+    }
+  }
 
   const nitrateData = data.map((d: SensorData) => d.nitrate)
   const nitrateUp = data.map(() => (optimal[0].nitrate + 0.1).toFixed(2))
   const nitrateDown = data.map(() => (optimal[0].nitrate - 0.1).toFixed(2))
+  let nitrateColor = useThemeColors().primary
+  for (const k in nitrateData) {
+    if (nitrateData[k] > nitrateUp[k] || nitrateData[k] < nitrateDown[k]) {
+      nitrateColor = useThemeColors().danger
+    }
+  }
 
   const temperatureData = data.map((d: SensorData) => d.temperature)
   const temperatureUp = data.map(() => optimal[0].temperature + 3)
   const temperatureDown = data.map(() => optimal[0].temperature - 3)
+  let temperatureColor = useThemeColors().primary
+  for (const k in temperatureData) {
+    if (
+      temperatureData[k] > temperatureUp[k] ||
+      temperatureData[k] < temperatureDown[k]
+    ) {
+      temperatureColor = useThemeColors().danger
+    }
+  }
 
   return {
     dates,
     phData,
     phUp,
     phDown,
+    phColor,
     oxygenData,
     oxygenUp,
     oxygenDown,
+    oxygenColor,
     orpData,
     orpUp,
     orpDown,
+    orpColor,
     ecData,
     ecUp,
     ecDown,
+    ecColor,
     ammoniaData,
     ammoniaUp,
     ammoniaDown,
+    ammoniaColor,
     nitriteData,
     nitriteUp,
     nitriteDown,
+    nitriteColor,
     nitrateData,
     nitrateUp,
     nitrateDown,
+    nitrateColor,
     temperatureData,
     temperatureUp,
     temperatureDown,
+    temperatureColor,
   }
 }
 
@@ -118,49 +178,67 @@ const {
   phData,
   phUp,
   phDown,
+  phColor,
   oxygenData,
   oxygenUp,
   oxygenDown,
+  oxygenColor,
   orpData,
   orpUp,
   orpDown,
+  orpColor,
   ecData,
   ecUp,
   ecDown,
+  ecColor,
   ammoniaData,
   ammoniaUp,
   ammoniaDown,
+  ammoniaColor,
   nitriteData,
   nitriteUp,
   nitriteDown,
+  nitriteColor,
   nitrateData,
   nitrateUp,
   nitrateDown,
+  nitrateColor,
   temperatureData,
   temperatureUp,
   temperatureDown,
+  temperatureColor,
 } = extractData(sensorData, optimalData)
 
 const ph = reactive<any>({
-  ...new PHChartOptions(phData, phUp, phDown, dates),
+  ...new PHChartOptions(phData, phUp, phDown, phColor, dates),
 })
 const oxygen = reactive<any>({
-  ...new OxygenChartOptions(oxygenData, oxygenUp, oxygenDown, dates),
+  ...new OxygenChartOptions(oxygenData, oxygenUp, oxygenDown, oxygenColor, dates),
 })
-const orp = reactive<any>({ ...new OrpChartOptions(orpData, orpUp, orpDown, dates) })
-const ec = reactive<any>({ ...new ECChartOptions(ecData, ecUp, ecDown, dates) })
+const orp = reactive<any>({
+  ...new OrpChartOptions(orpData, orpUp, orpDown, orpColor, dates),
+})
+const ec = reactive<any>({ ...new ECChartOptions(ecData, ecUp, ecDown, ecColor, dates) })
 const ammonia = reactive<any>({
-  ...new AmmoniaChartOptions(ammoniaData, ammoniaUp, ammoniaDown, dates),
+  ...new AmmoniaChartOptions(ammoniaData, ammoniaUp, ammoniaDown, ammoniaColor, dates),
 })
 const nitrite = reactive<any>({
-  ...new NitriteChartOptions(nitriteData, nitriteUp, nitriteDown, dates),
+  ...new NitriteChartOptions(nitriteData, nitriteUp, nitriteDown, nitriteColor, dates),
 })
 const nitrate = reactive<any>({
-  ...new NitrateChartOptions(nitrateData, nitrateUp, nitrateDown, dates),
+  ...new NitrateChartOptions(nitrateData, nitrateUp, nitrateDown, nitrateColor, dates),
 })
 const temperature = reactive<any>({
-  ...new TemperatureChartOptions(temperatureData, temperatureUp, temperatureDown, dates),
+  ...new TemperatureChartOptions(
+    temperatureData,
+    temperatureUp,
+    temperatureDown,
+    temperatureColor,
+    dates
+  ),
 })
+
+console.log(ph)
 
 onMounted(async () => {
   socket.on('message', (data) => {
@@ -169,72 +247,86 @@ onMounted(async () => {
       phData,
       phUp,
       phDown,
+      phColor,
       oxygenData,
       oxygenUp,
       oxygenDown,
+      oxygenColor,
       orpData,
       orpUp,
       orpDown,
+      orpColor,
       ecData,
       ecUp,
       ecDown,
+      ecColor,
       ammoniaData,
       ammoniaUp,
       ammoniaDown,
+      ammoniaColor,
       nitriteData,
       nitriteUp,
       nitriteDown,
+      nitriteColor,
       nitrateData,
       nitrateUp,
       nitrateDown,
+      nitrateColor,
       temperatureData,
       temperatureUp,
       temperatureDown,
+      temperatureColor,
     } = extractData(data, optimalData)
 
-    console.log(dates)
-
-    ph.labels = []
     ph.series[0].data = phData
     ph.series[1].data = phUp
     ph.series[2].data = phDown
+    ph.colors[0] = phColor
+    ph.labels = dates
 
     oxygen.series[0].data = oxygenData
     oxygen.series[1].data = oxygenUp
     oxygen.series[2].data = oxygenDown
+    oxygen.colors[0] = oxygenColor
     oxygen.labels = dates
 
     orp.series[0].data = orpData
     orp.series[1].data = orpUp
     orp.series[2].data = orpDown
+    orp.colors[0] = orpColor
     orp.labels = dates
 
     ec.series[0].data = ecData
     ec.series[1].data = ecUp
     ec.series[2].data = ecDown
+    ec.colors[0] = ecColor
     ec.labels = dates
 
     ammonia.series[0].data = ammoniaData
     ammonia.series[1].data = ammoniaUp
     ammonia.series[2].data = ammoniaDown
+    ammonia.colors[0] = ammoniaColor
     ammonia.labels = dates
 
     nitrite.series[0].data = nitriteData
     nitrite.series[1].data = nitriteUp
     nitrite.series[2].data = nitriteDown
+    nitrite.colors[0] = nitriteColor
     nitrite.labels = dates
 
     nitrate.series[0].data = nitrateData
     nitrate.series[1].data = nitrateUp
     nitrate.series[2].data = nitrateDown
+    nitrate.colors[0] = nitrateColor
     nitrate.labels = dates
 
     temperature.series[0].data = temperatureData
     temperature.series[1].data = temperatureUp
     temperature.series[2].data = temperatureDown
+    temperature.colors[0] = temperatureColor
     temperature.labels = dates
 
-    console.log(ph, oxygen.labels)
+    console.log('sssssssssss', ph)
   })
 })
 </script>

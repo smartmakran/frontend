@@ -19,6 +19,8 @@ const props = withDefaults(
   }
 )
 
+const emit = defineEmits(['exit'])
+
 const viewWrapper = useViewWrapper()
 const route = useRoute()
 const isMobileSidebarOpen = ref(false)
@@ -117,6 +119,22 @@ watch(
               aria-hidden="true"
               class="iconify sidebar-svg"
               data-icon="feather:home"
+            ></i>
+          </a>
+        </li>
+      </template>
+      <template #bottom-links>
+        <li>
+          <a
+            data-content="Dashboards"
+            tabindex="0"
+            @keydown.space.prevent="switchSidebar('dashboard')"
+            @click="emit('exit')"
+          >
+            <i
+              aria-hidden="true"
+              class="iconify sidebar-svg"
+              data-icon="feather:arrow-right-circle"
             ></i>
           </a>
         </li>

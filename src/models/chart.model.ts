@@ -64,9 +64,9 @@ export class PHChartOptions extends ChartBaseOption {
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
+    useThemeColors().primary,
     useThemeColors().lightText,
-    useThemeColors().primary,
-    useThemeColors().primary,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
     text: 'pH',
@@ -82,12 +82,14 @@ export class PHChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
+    color: string,
     labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
+    this.colors[0] = color
     this.labels = labels
   }
 }
@@ -99,9 +101,9 @@ export class OxygenChartOptions extends ChartBaseOption {
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
+    useThemeColors().primary,
     useThemeColors().lightText,
-    useThemeColors().danger,
-    useThemeColors().danger,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
     text: 'Oxygen',
@@ -117,12 +119,14 @@ export class OxygenChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
+    color: string,
     labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
+    this.colors[0] = color
     this.labels = labels
   }
 }
@@ -134,9 +138,9 @@ export class OrpChartOptions extends ChartBaseOption {
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
+    useThemeColors().primary,
     useThemeColors().lightText,
-    useThemeColors().primary,
-    useThemeColors().primary,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
     text: 'ORP',
@@ -152,12 +156,14 @@ export class OrpChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
+    color: string,
     labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
+    this.colors[0] = color
     this.labels = labels
   }
 }
@@ -169,9 +175,9 @@ export class ECChartOptions extends ChartBaseOption {
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
+    useThemeColors().primary,
     useThemeColors().lightText,
-    useThemeColors().primary,
-    useThemeColors().primary,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
     text: 'EC',
@@ -187,12 +193,14 @@ export class ECChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
+    color: string,
     labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
+    this.colors[0] = color
     this.labels = labels
   }
 }
@@ -204,9 +212,9 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
+    useThemeColors().primary,
     useThemeColors().lightText,
-    useThemeColors().primary,
-    useThemeColors().primary,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
     text: 'Ammonia',
@@ -222,12 +230,14 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
+    color: string,
     labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
+    this.colors[0] = color
     this.labels = labels
   }
 }
@@ -239,9 +249,9 @@ export class NitriteChartOptions extends ChartBaseOption {
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
+    useThemeColors().primary,
     useThemeColors().lightText,
-    useThemeColors().primary,
-    useThemeColors().primary,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
     text: 'Nitrite',
@@ -257,12 +267,14 @@ export class NitriteChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
+    color: string,
     labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
+    this.colors[0] = color
     this.labels = labels
   }
 }
@@ -274,9 +286,9 @@ export class NitrateChartOptions extends ChartBaseOption {
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
+    useThemeColors().primary,
     useThemeColors().lightText,
-    useThemeColors().primary,
-    useThemeColors().primary,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
     text: 'Nitrate',
@@ -292,12 +304,14 @@ export class NitrateChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
+    color: string,
     labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
+    this.colors[0] = color
     this.labels = labels
   }
 }
@@ -309,9 +323,9 @@ export class TemperatureChartOptions extends ChartBaseOption {
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
+    useThemeColors().primary,
     useThemeColors().lightText,
-    useThemeColors().primary,
-    useThemeColors().primary,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
     text: 'Temperature',
@@ -327,12 +341,14 @@ export class TemperatureChartOptions extends ChartBaseOption {
     data: number[],
     optimizeUp: number[],
     optimizeDown: number[],
+    color: string,
     labels: string[]
   ) {
     super()
     this.series[0].data = data
     this.series[1].data = optimizeUp
     this.series[2].data = optimizeDown
+    this.colors[0] = color
     this.labels = labels
   }
 }

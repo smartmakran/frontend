@@ -4,13 +4,20 @@ meta:
 </route>
 
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { useUserSession } from '/@src/stores/userSession'
 
+const router = useRouter()
 const route = useRoute()
+
+function exit() {
+  useUserSession().logoutUser()
+  router.push({ name: 'auth' })
+}
 </script>
 
 <template>
-  <AppLayout>
+  <AppLayout @exit="exit()">
     <!-- Content Wrapper -->
     <RouterView v-slot="{ Component }">
       <Transition name="fade-fast" mode="out-in">
