@@ -111,8 +111,8 @@ export class OxygenChartOptions extends ChartBaseOption {
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 0,
-    max: 12,
+    min: 5,
+    max: 10,
   }
 
   constructor(
@@ -148,8 +148,8 @@ export class OrpChartOptions extends ChartBaseOption {
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 250,
-    max: 450,
+    min: 300,
+    max: 400,
   }
 
   constructor(
@@ -185,8 +185,8 @@ export class ECChartOptions extends ChartBaseOption {
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 10,
-    max: 35,
+    min: 17,
+    max: 27,
   }
 
   constructor(
@@ -222,8 +222,8 @@ export class AmmoniaChartOptions extends ChartBaseOption {
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 0,
-    max: 0.7,
+    min: 0.3,
+    max: 0.6,
   }
 
   constructor(
@@ -333,7 +333,7 @@ export class TemperatureChartOptions extends ChartBaseOption {
   }
   labels: string[]
   yaxis: ChartYaxis = {
-    min: 20,
+    min: 15,
     max: 40,
   }
 

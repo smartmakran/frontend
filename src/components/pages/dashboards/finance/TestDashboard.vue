@@ -54,8 +54,8 @@ function extractData(data: any, optimal: any) {
   )
 
   const phData: number[] = data.map((d: SensorData) => d.ph)
-  const phUp = data.map(() => optimal[0].ph + 0.5)
-  const phDown = data.map(() => optimal[0].ph - 0.5)
+  const phUp = data.map(() => optimal[0].ph + 1.5)
+  const phDown = data.map(() => optimal[0].ph - 1.5)
   let phColor = useThemeColors().primary
   for (const k in phData) {
     if (phData[k] > phUp[k] || phData[k] < phDown[k]) {
@@ -64,8 +64,8 @@ function extractData(data: any, optimal: any) {
   }
 
   const oxygenData: number[] = data.map((d: SensorData) => d.oxygen)
-  const oxygenUp = data.map(() => (optimal[0].oxygen + 2).toFixed(2))
-  const oxygenDown = data.map(() => (optimal[0].oxygen - 2).toFixed(2))
+  const oxygenUp = data.map(() => (optimal[0].oxygen + 2.5).toFixed(2))
+  const oxygenDown = data.map(() => (optimal[0].oxygen - 2.5).toFixed(2))
   let oxygenColor = useThemeColors().primary
   for (const k in oxygenData) {
     if (oxygenData[k] > oxygenUp[k] || oxygenData[k] < oxygenDown[k]) {
@@ -74,8 +74,8 @@ function extractData(data: any, optimal: any) {
   }
 
   const orpData = data.map((d: SensorData) => d.orp)
-  const orpUp = data.map(() => optimal[0].orp + 20)
-  const orpDown = data.map(() => optimal[0].orp - 20)
+  const orpUp = data.map(() => optimal[0].orp + 50)
+  const orpDown = data.map(() => optimal[0].orp - 50)
   let orpColor = useThemeColors().primary
   for (const k in orpData) {
     if (orpData[k] > orpUp[k] || orpData[k] < orpDown[k]) {
@@ -84,8 +84,8 @@ function extractData(data: any, optimal: any) {
   }
 
   const ecData = data.map((d: SensorData) => d.ec)
-  const ecUp = data.map(() => optimal[0].ec + 4)
-  const ecDown = data.map(() => optimal[0].ec - 4)
+  const ecUp = data.map(() => optimal[0].ec + 5)
+  const ecDown = data.map(() => optimal[0].ec - 5)
   let ecColor = useThemeColors().primary
   for (const k in ecData) {
     if (ecData[k] > ecUp[k] || ecData[k] < ecDown[k]) {
@@ -94,8 +94,8 @@ function extractData(data: any, optimal: any) {
   }
 
   const ammoniaData = data.map((d: SensorData) => d.ammonia)
-  const ammoniaUp = data.map(() => (optimal[0].ammonia + 0.05).toFixed(2))
-  const ammoniaDown = data.map(() => (optimal[0].ammonia - 0.05).toFixed(2))
+  const ammoniaUp = data.map(() => (optimal[0].ammonia + 0.15).toFixed(2))
+  const ammoniaDown = data.map(() => (optimal[0].ammonia - 0.15).toFixed(2))
   let ammoniaColor = useThemeColors().primary
   for (const k in ammoniaData) {
     if (ammoniaData[k] > ammoniaUp[k] || ammoniaData[k] < ammoniaDown[k]) {
@@ -104,8 +104,8 @@ function extractData(data: any, optimal: any) {
   }
 
   const nitriteData = data.map((d: SensorData) => d.nitrite)
-  const nitriteUp = data.map(() => (optimal[0].nitrite + 0.1).toFixed(2))
-  const nitriteDown = data.map(() => (optimal[0].nitrite - 0.1).toFixed(2))
+  const nitriteUp = data.map(() => (optimal[0].nitrite + 0.5).toFixed(2))
+  const nitriteDown = data.map(() => (optimal[0].nitrite - 0.5).toFixed(2))
   let nitriteColor = useThemeColors().primary
   for (const k in nitriteData) {
     if (nitriteData[k] > nitriteUp[k] || nitriteData[k] < nitriteDown[k]) {
@@ -114,8 +114,8 @@ function extractData(data: any, optimal: any) {
   }
 
   const nitrateData = data.map((d: SensorData) => d.nitrate)
-  const nitrateUp = data.map(() => (optimal[0].nitrate + 0.1).toFixed(2))
-  const nitrateDown = data.map(() => (optimal[0].nitrate - 0.1).toFixed(2))
+  const nitrateUp = data.map(() => (optimal[0].nitrate + 0.5).toFixed(2))
+  const nitrateDown = data.map(() => (optimal[0].nitrate - 0.5).toFixed(2))
   let nitrateColor = useThemeColors().primary
   for (const k in nitrateData) {
     if (nitrateData[k] > nitrateUp[k] || nitrateData[k] < nitrateDown[k]) {
