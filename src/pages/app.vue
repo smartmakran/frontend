@@ -6,6 +6,16 @@ meta:
 <script setup lang="ts">
 import { useRoute, useRouter } from 'vue-router'
 import { useUserSession } from '/@src/stores/userSession'
+import { useHead } from '@vueuse/head'
+import { useI18n } from 'vue-i18n'
+import { useViewWrapper } from '../stores/viewWrapper'
+
+const { t } = useI18n()
+const viewWrapper = useViewWrapper()
+viewWrapper.setPageTitle('داشبورد اصلی')
+useHead({
+  title: `${t('app.title')} | ${t('dashboard.title')}`,
+})
 
 const router = useRouter()
 const route = useRoute()

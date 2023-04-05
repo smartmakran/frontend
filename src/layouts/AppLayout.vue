@@ -186,5 +186,6 @@ watch(
         </VPageContent>
       </VPageContentWrapper>
     </VViewWrapper>
+    <ToDoSidebar></ToDoSidebar>
   </div>
 </template>
