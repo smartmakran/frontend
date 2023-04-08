@@ -7,16 +7,14 @@ import * as yup from 'yup'
 import { useI18n } from 'vue-i18n'
 
 import { useDarkmode } from '/@src/stores/darkmode'
-import { useUserSession } from '/@src/stores/userSession'
 import { useNotyf } from '/@src/composable/useNotyf'
-import { login } from '/@src/services/modules/auth/accounts'
+import { useUserStore } from '/@src/stores/user'
 
 const isLoading = ref(false)
 const darkmode = useDarkmode()
 const router = useRouter()
 const route = useRoute()
 const notyf = useNotyf()
-const userSession = useUserSession()
 const redirect = route.query.redirect as string
 const { t } = useI18n()
 
@@ -32,12 +30,14 @@ const { handleSubmit } = useForm({
   validationSchema: schema,
 })
 
+const userStore = useUserStore()
+
 const onLogin = handleSubmit(async (values) => {
   if (!isLoading.value) {
     isLoading.value = true
 
     try {
-      await login('auth/login', {
+      await userStore.login({
         phone: values.phone || '',
         password: values.password || '',
       })
@@ -51,7 +51,7 @@ const onLogin = handleSubmit(async (values) => {
       }
 
       notyf.dismissAll()
-      notyf.success(`${t('auth.login.success')}, ${userSession.user!.fullName}`)
+      notyf.success(`${t('auth.login.success')}, ${userStore.user!.fullName}`)
     } catch (error: any) {
       if (error.response?.status) {
         if (error.response.status !== 401) throw error

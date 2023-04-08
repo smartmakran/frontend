@@ -3,9 +3,9 @@ import { SetupCalendar } from 'v-calendar'
 import { plugin as VueTippy } from 'vue-tippy'
 
 import { useNotyf } from './composable/useNotyf'
-import { useUserSession } from './stores/userSession'
 
 import type { VueroAppContext } from './app'
+import { useUserStore } from './stores/user'
 
 // Lazy load aditional components
 export async function registerGlobalComponents({ app }: VueroAppContext) {
@@ -82,12 +82,12 @@ export async function registerGlobalComponents({ app }: VueroAppContext) {
 export function registerRouterNavigationGuards({ router }: VueroAppContext) {
   router.beforeEach(async (to) => {
 
-    const userSession = useUserSession()
+    const userStore = useUserStore()
     const notyf = useNotyf()
 
     if (to.meta.requiresAuth) {
-      if (userSession.isLoggedIn) {
-        const user = userSession.getUser()
+      if (userStore.isLoggedIn) {
+        const user = userStore.user
         notyf.success(`خوش برگشتی, ${user?.fullName}`)
       } else {
         notyf.error({
@@ -104,7 +104,7 @@ export function registerRouterNavigationGuards({ router }: VueroAppContext) {
       }
     }
     if (to.path === '/auth/login' || to.path === '/auth/register') {
-      if (userSession.isLoggedIn) {
+      if (userStore.isLoggedIn) {
         return {
           name: 'app',
         }

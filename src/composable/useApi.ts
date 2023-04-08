@@ -1,6 +1,6 @@
-import axios, { AxiosInstance } from 'axios'
 import { useNotyf } from './useNotyf'
-import { useUserSession } from '/@src/stores/userSession'
+import { useUserStore } from '../stores/user'
+import axios, { AxiosInstance } from 'axios'
 
 let api: AxiosInstance
 
@@ -22,12 +22,12 @@ export function createApi() {
   // include Bearer token to the request if user is logged in
   api.interceptors.request.use(
     (config) => {
-      const userSession = useUserSession()
+      const userStore = useUserStore()
 
-      if (userSession.isLoggedIn) {
+      if (userStore.isLoggedIn) {
         config.headers = {
           ...config.headers,
-          Authorization: `${userSession.token}`,
+          Authorization: `${userStore.token}`,
         }
       }
 
