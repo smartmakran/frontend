@@ -5,6 +5,6 @@ const api = useApi()
 
 export async function getTasksList(userId: string): Promise<ITask[]> {
   const { data } = await api.get(`/task/user/${userId}`)
-  return data
+  return data.data
 }
 

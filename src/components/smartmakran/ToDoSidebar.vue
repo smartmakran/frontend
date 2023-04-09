@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import { tasks } from '/@src/data/smartmakran/todolist'
+import { computed, onMounted } from 'vue'
+// import { tasks } from '/@src/data/smartmakran/todolist'
+import { useTaskStore } from '/@src/stores/task'
+import { useUserStore } from '/@src/stores/user'
 
 export type SidebarTheme =
   | 'default'
@@ -20,6 +22,15 @@ const props = withDefaults(
     theme: 'default',
   }
 )
+
+const userStore = useUserStore()
+const taskStore = useTaskStore()
+
+onMounted(() => {
+  taskStore.getTasksList(userStore.user.id)
+})
+
+const tasks = computed(() => taskStore.list)
 
 const themeClasses = computed(() => {
   switch (props.theme) {
@@ -78,7 +89,7 @@ const themeClasses = computed(() => {
           <template v-else-if="column.key === 'title'">
             <div>
               <span class="item-name dark-inverted">{{ row.title }}</span>
-              <div class="meta-right light-text">{{ row.location }}</div>
+              <div class="meta-right light-text">{{ row.pond?.name }}</div>
             </div>
           </template>
           <template v-else-if="column.key === 'priority'">
@@ -102,7 +113,7 @@ const themeClasses = computed(() => {
             </VTag>
           </template>
           <template v-else-if="column.key === 'link'">
-            <RouterLink :to="{ name: 'index' }">
+            <RouterLink :to="{ name: 'app-task-id', params: { id: row.id } }">
               <VAction class="action-button is-dark-outlined is-pushed-mobile"
                 >جزئیات</VAction
               >

@@ -13,6 +13,11 @@ const { y } = useWindowScroll()
 const isStuck = computed(() => {
   return y.value > 30
 })
+
+const date = ref({
+  start: moment().format('jYYYY-jMM-jDD'),
+  end: moment().format('jYYYY-jMM-jDD'),
+})
 </script>
 
 <template>
@@ -58,15 +63,41 @@ const isStuck = computed(() => {
           <!--Fieldset-->
           <div class="form-fieldset">
             <div class="fieldset-heading">
-              <h4>اطلاعات تماس</h4>
-              <p>شماره تلفن‌های خود را اینجا وارد کنید</p>
+              <h4>ابعاد</h4>
+              <p>ابعاد کامل حوضچه را اینجا وارد کنید</p>
             </div>
 
             <div class="columns is-multiline">
-              <div class="column is-12">
+              <div class="column is-4">
                 <VField>
-                  <label>شماره‌های تماس</label>
-                  <VControl icon="feather:briefcase">
+                  <label>عرض</label>
+                  <VControl>
+                    <input
+                      type="text"
+                      class="input"
+                      placeholder=""
+                      autocomplete="organization"
+                    />
+                  </VControl>
+                </VField>
+              </div>
+              <div class="column is-4">
+                <VField>
+                  <label>طول</label>
+                  <VControl>
+                    <input
+                      type="text"
+                      class="input"
+                      placeholder=""
+                      autocomplete="organization"
+                    />
+                  </VControl>
+                </VField>
+              </div>
+              <div class="column is-4">
+                <VField>
+                  <label>ارتفاع</label>
+                  <VControl>
                     <input
                       type="text"
                       class="input"
@@ -81,80 +112,33 @@ const isStuck = computed(() => {
           <!--Fieldset-->
           <div class="form-fieldset">
             <div class="fieldset-heading">
-              <h4>آدرس</h4>
-              <p>نشانی کامل حوضچه را اینجا وارد کنید</p>
+              <h4>اطلاعات اضافه</h4>
             </div>
 
             <div class="columns is-multiline">
-              <div class="column is-4">
+              <div class="column is-6">
                 <VField>
-                  <label>کشور</label>
+                  <label>تاریخ غذادهی</label>
                   <VControl>
-                    <Multiselect
-                      v-model="productToDemo"
-                      :options="['ویوئِرو استارتر', 'ویوئِرو پرو', 'ویوئِرو تجاری']"
-                    />
-                  </VControl>
-                </VField>
-              </div>
-              <div class="column is-4">
-                <VField>
-                  <label>استان</label>
-                  <VControl>
-                    <Multiselect
-                      v-model="productToDemo"
-                      :options="['ویوئِرو استارتر', 'ویوئِرو پرو', 'ویوئِرو تجاری']"
-                    />
-                  </VControl>
-                </VField>
-              </div>
-              <div class="column is-4">
-                <VField>
-                  <label>شهر</label>
-                  <VControl>
-                    <Multiselect
-                      v-model="productToDemo"
-                      :options="['ویوئِرو استارتر', 'ویوئِرو پرو', 'ویوئِرو تجاری']"
-                    />
-                  </VControl>
-                </VField>
-              </div>
-              <div class="column is-12">
-                <VField>
-                  <label>آدرس</label>
-                  <VControl>
-                    <input
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="organization"
-                    />
+                    <date-picker
+                      v-model="date.start"
+                      class="control"
+                      auto-submit
+                      format="jYYYY/jMM/jDD"
+                    ></date-picker>
                   </VControl>
                 </VField>
               </div>
               <div class="column is-6">
                 <VField>
-                  <label>عرض جغرافیایی</label>
+                  <label>تاریخ نمونه‌برداری</label>
                   <VControl>
-                    <input
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="organization"
-                    />
-                  </VControl>
-                </VField>
-              </div>
-              <div class="column is-6">
-                <VField>
-                  <label>طول جغرافیایی</label>
-                  <VControl>
-                    <input
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="organization"
-                    />
+                    <date-picker
+                      v-model="date.end"
+                      class="control"
+                      auto-submit
+                      format="jYYYY/jMM/jDD"
+                    ></date-picker>
                   </VControl>
                 </VField>
               </div>

@@ -23,11 +23,11 @@ const router = useRouter()
 const route = useRoute()
 
 const userStore = useUserStore()
-const taskStore = useTaskStore()
+// const taskStore = useTaskStore()
 
-onMounted(() => {
-  taskStore.getTasksList(userStore.user.id)
-})
+// onMounted(() => {
+//   taskStore.getTasksList(userStore.user.id)
+// })
 
 function exit() {
   userStore.logout()
