@@ -7,6 +7,8 @@ import { useNotyf } from './composable/useNotyf'
 import type { VueroAppContext } from './app'
 import { useUserStore } from './stores/user'
 
+import Vue3PersianDatetimePicker from 'vue3-persian-datetime-picker'
+
 // Lazy load aditional components
 export async function registerGlobalComponents({ app }: VueroAppContext) {
   const background = (await import('./directives/background')).default
@@ -17,6 +19,19 @@ export async function registerGlobalComponents({ app }: VueroAppContext) {
     component: 'Tippy',
     defaultProps: {
       theme: 'light',
+    },
+  })
+
+  app.use(Vue3PersianDatetimePicker, {
+    name: 'CustomDatePicker',
+    props: {
+      format: 'YYYY-MM-DD HH:mm',
+      displayFormat: 'jYYYY-jMM-jDD HH:mm',
+      editable: false,
+      placeholder: 'یک تاریخ را انتخاب کنید',
+      altFormat: 'YYYY-MM-DD hh:mm',
+      color: '#41b983',
+      autoSubmit: false,
     },
   })
 
@@ -81,7 +96,6 @@ export async function registerGlobalComponents({ app }: VueroAppContext) {
  */
 export function registerRouterNavigationGuards({ router }: VueroAppContext) {
   router.beforeEach(async (to) => {
-
     const userStore = useUserStore()
     const notyf = useNotyf()
 

@@ -20,18 +20,17 @@
   left: 80px;
   [dir='rtl'] & {
     left: auto;
-    right: 80px;
+    right: 0;
   }
 
   height: 100%;
-  width: 240px;
+  width: 200px;
   background: var(--white);
   z-index: 31;
 
   .inner {
     position: relative;
     height: calc(100vh - 60px);
-    width: 240px;
     overflow-y: auto;
     overflow-x: hidden;
     background: var(--white);

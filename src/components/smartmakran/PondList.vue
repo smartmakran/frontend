@@ -12,7 +12,7 @@ let filteredPonds = computed<IPond[]>(() => {
 
 <template>
   <!--Grid item-->
-  <div class="column is-12">
+  <div class="column is-6">
     <div class="dashboard-title">
       <div class="left">
         <h2 class="dark-inverted">حوضچه‌ها</h2>
@@ -83,12 +83,6 @@ let filteredPonds = computed<IPond[]>(() => {
                     <span
                       >تاریخ ثبت:
                       {{ new Date(pond.createdAt).toLocaleDateString('fa') }}</span
-                    >
-                    <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
-                    <i aria-hidden="true" class="iconify" data-icon="feather:clock"></i>
-                    <span
-                      >آخرین تغییر:
-                      {{ new Date(pond.updatedAt).toLocaleDateString('fa') }}</span
                     >
                   </span>
                 </div>

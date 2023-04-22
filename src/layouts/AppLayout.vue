@@ -104,9 +104,9 @@ watch(
       />
     </Transition>
 
+    <!--
     <Sidebar :theme="props.theme" :is-open="isDesktopSidebarOpen">
       <template #links>
-        <!-- Dashboards -->
         <li>
           <a
             :class="[activeMobileSubsidebar === 'dashboard' && 'is-active']"
@@ -140,13 +140,14 @@ watch(
         </li>
       </template>
     </Sidebar>
+    -->
 
-    <Transition name="slide-x">
-      <DashboardsSubsidebar
-        v-if="isDesktopSidebarOpen && activeMobileSubsidebar === 'dashboard'"
-        @close="isDesktopSidebarOpen = false"
-      />
-    </Transition>
+    <DashboardsSidebar
+      v-if="activeMobileSubsidebar === 'dashboard'"
+      @close="isDesktopSidebarOpen = false"
+    />
+
+    <Transition name="slide-x"> </Transition>
 
     <LanguagesPanel />
 
@@ -157,24 +158,6 @@ watch(
         </template>
         <VPageContent v-else class="is-relative">
           <div class="page-title has-text-centered">
-            <!-- Sidebar Trigger -->
-            <div
-              class="vuero-hamburger nav-trigger push-resize"
-              tabindex="0"
-              @keydown.space.prevent="isDesktopSidebarOpen = !isDesktopSidebarOpen"
-              @click="isDesktopSidebarOpen = !isDesktopSidebarOpen"
-            >
-              <span class="menu-toggle has-chevron">
-                <span :class="[isDesktopSidebarOpen && 'active']" class="icon-box-toggle">
-                  <span class="rotate">
-                    <i aria-hidden="true" class="icon-line-top"></i>
-                    <i aria-hidden="true" class="icon-line-center"></i>
-                    <i aria-hidden="true" class="icon-line-bottom"></i>
-                  </span>
-                </span>
-              </span>
-            </div>
-
             <div class="title-wrap">
               <h1 class="title is-4">{{ viewWrapper.pageTitle }}</h1>
             </div>

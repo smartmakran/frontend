@@ -419,7 +419,7 @@ select {
     .form-icon {
       position: absolute;
       top: 0;
-      left: 0;
+      right: 0;
       height: 38px;
       width: 38px;
       display: flex;
@@ -451,7 +451,7 @@ select {
 
     .input {
       height: 38px;
-      padding-left: 38px;
+      // padding-left: 38px;
       transition: all 0.3s; // transition-all test
 
       &:focus {

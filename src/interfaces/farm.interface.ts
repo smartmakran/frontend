@@ -1,4 +1,4 @@
-import { IPond } from "./pond.interface"
+import { IPond } from './pond.interface'
 
 export interface IFarm {
   id: string
@@ -6,8 +6,8 @@ export interface IFarm {
   address: IFarmAddress
   name: string
   owner: string
-  phones: [Number]
-  ponds: [IPond]
+  phones: number[]
+  ponds: IPond[]
   createdAt: Date
   updatedAt: Date
 }
@@ -15,7 +15,14 @@ export interface IFarm {
 export interface IFarmAddress {
   address: string
   city: string
-  coordinates: [Number]
+  coordinates: number[]
   country: string
   province: string
+}
+
+export interface ICreateFarm {
+  name: string
+  owner: string
+  phones: string[]
+  address: IFarmAddress
 }

@@ -1,28 +1,64 @@
 <script setup lang="ts">
-import { useWindowScroll } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import * as yup from 'yup'
+import { Field, useForm } from 'vee-validate'
 import moment from 'moment-jalaali'
+import { ICreatePond } from '/@src/interfaces/pond.interface'
+import { useFarmStore } from '/@src/stores/farm'
+import { usePondStore } from '/@src/stores/pond'
+import { useNotyf } from '/@src/composable/useNotyf'
 
-const companySize = ref('')
-const businessType = ref('')
-const productToDemo = ref('')
-const jdate = moment().format('jYYYY-jMM-jDD')
+const notyf = useNotyf()
+const farmStore = useFarmStore()
+const pondStore = usePondStore()
 
-const { y } = useWindowScroll()
-
-const isStuck = computed(() => {
-  return y.value > 30
+const schema = yup.object({
+  name: yup.string().required('عنوان حوضچه الزامی است'),
+  width: yup.number().required('عرض حوضچه الزامی است'),
+  length: yup.number().required('طول حوضچه الزامی است'),
+  depth: yup.number().required('عمق حوضچه الزامی است'),
+  waterHeight: yup.number().required('ارتفاع سطح آب حوضچه الزامی است'),
+  startFarmingDate: yup.date().required('تاریخ شروع کشت الزامی است'),
+  larvaCount: yup.number().required('تعداد لاروا الزامی است'),
 })
 
-const date = ref({
-  start: moment().format('jYYYY-jMM-jDD'),
-  end: moment().format('jYYYY-jMM-jDD'),
+const { handleSubmit } = useForm({
+  validationSchema: schema,
+})
+
+const createPondForm = handleSubmit(async (values) => {
+  const { name, width, length, depth, waterHeight, startFarmingDate, larvaCount } = values
+  const startFarming = moment.utc(startFarmingDate).format('YYYY-MM-DD HH:mm:ss')
+
+  const pond: ICreatePond = {
+    farm: farmStore.currentFarm.id,
+    name: name as string,
+    dimensions: {
+      width: Number(width),
+      length: Number(length),
+      depth: Number(depth),
+      waterHeight: Number(waterHeight),
+    },
+    startFarming,
+    larvaCount: Number(larvaCount),
+  }
+
+  const result = await pondStore.createPond(pond)
+  if (result === 201) {
+    console.log('Farm created successfully')
+    farmStore.getFarm(farmStore.currentFarm.id)
+  } else {
+    console.log('Farm creation failed')
+    notyf.error({
+      message: 'مزرعه ایجاد نشد، دوباره سعی کنید.',
+      duration: 2000,
+    })
+  }
 })
 </script>
 
 <template>
-  <div class="column is-12">
-    <form class="form-layout" @submit.prevent>
+  <div class="column is-6">
+    <form class="form-layout">
       <div class="form-outer">
         <div class="form-header">
           <div class="form-header-inner">
@@ -31,7 +67,7 @@ const date = ref({
             </div>
             <div class="right">
               <div class="buttons">
-                <VButton color="primary" raised>ثبت</VButton>
+                <VButton color="primary" @click="createPondForm" raised>ثبت</VButton>
               </div>
             </div>
           </div>
@@ -46,17 +82,23 @@ const date = ref({
 
             <div class="columns is-multiline">
               <div class="column is-12">
-                <VField>
-                  <label>عنوان حوضچه</label>
-                  <VControl icon="feather:user">
-                    <input
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="given-name"
-                    />
-                  </VControl>
-                </VField>
+                <Field v-slot="{ field, errorMessage }" name="name">
+                  <VField>
+                    <label>عنوان حوضچه</label>
+                    <VControl :has-error="Boolean(errorMessage)">
+                      <input
+                        v-bind="field"
+                        type="text"
+                        class="input"
+                        placeholder=""
+                        autocomplete="given-name"
+                      />
+                      <p v-if="errorMessage" class="help is-danger">
+                        {{ errorMessage }}
+                      </p>
+                    </VControl>
+                  </VField>
+                </Field>
               </div>
             </div>
           </div>
@@ -68,44 +110,81 @@ const date = ref({
             </div>
 
             <div class="columns is-multiline">
-              <div class="column is-4">
-                <VField>
-                  <label>عرض</label>
-                  <VControl>
-                    <input
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="organization"
-                    />
-                  </VControl>
-                </VField>
+              <div class="column is-3">
+                <Field v-slot="{ field, errorMessage }" name="width">
+                  <VField>
+                    <label>عرض</label>
+                    <VControl :has-error="Boolean(errorMessage)">
+                      <input
+                        v-bind="field"
+                        type="text"
+                        class="input"
+                        placeholder=""
+                        autocomplete="organization"
+                      />
+                      <p v-if="errorMessage" class="help is-danger">
+                        {{ errorMessage }}
+                      </p>
+                    </VControl>
+                  </VField>
+                </Field>
               </div>
-              <div class="column is-4">
-                <VField>
-                  <label>طول</label>
-                  <VControl>
-                    <input
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="organization"
-                    />
-                  </VControl>
-                </VField>
+              <div class="column is-3">
+                <Field v-slot="{ field, errorMessage }" name="length">
+                  <VField>
+                    <label>طول</label>
+                    <VControl :has-error="Boolean(errorMessage)">
+                      <input
+                        v-bind="field"
+                        type="text"
+                        class="input"
+                        placeholder=""
+                        autocomplete="organization"
+                      />
+                      <p v-if="errorMessage" class="help is-danger">
+                        {{ errorMessage }}
+                      </p>
+                    </VControl>
+                  </VField>
+                </Field>
               </div>
-              <div class="column is-4">
-                <VField>
-                  <label>ارتفاع</label>
-                  <VControl>
-                    <input
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="organization"
-                    />
-                  </VControl>
-                </VField>
+              <div class="column is-3">
+                <Field v-slot="{ field, errorMessage }" name="depth">
+                  <VField>
+                    <label>عمق</label>
+                    <VControl :has-error="Boolean(errorMessage)">
+                      <input
+                        v-bind="field"
+                        type="text"
+                        class="input"
+                        placeholder=""
+                        autocomplete="organization"
+                      />
+                      <p v-if="errorMessage" class="help is-danger">
+                        {{ errorMessage }}
+                      </p>
+                    </VControl>
+                  </VField>
+                </Field>
+              </div>
+              <div class="column is-3">
+                <Field v-slot="{ field, errorMessage }" name="waterHeight">
+                  <VField>
+                    <label>ارتفاع سطح آب</label>
+                    <VControl :has-error="Boolean(errorMessage)">
+                      <input
+                        v-bind="field"
+                        type="text"
+                        class="input"
+                        placeholder=""
+                        autocomplete="organization"
+                      />
+                      <p v-if="errorMessage" class="help is-danger">
+                        {{ errorMessage }}
+                      </p>
+                    </VControl>
+                  </VField>
+                </Field>
               </div>
             </div>
           </div>
@@ -117,30 +196,40 @@ const date = ref({
 
             <div class="columns is-multiline">
               <div class="column is-6">
-                <VField>
-                  <label>تاریخ غذادهی</label>
-                  <VControl>
-                    <date-picker
-                      v-model="date.start"
-                      class="control"
-                      auto-submit
-                      format="jYYYY/jMM/jDD"
-                    ></date-picker>
-                  </VControl>
-                </VField>
+                <Field v-slot="{ field, errorMessage }" name="startFarmingDate">
+                  <VField>
+                    <label>تاریخ شروع کشت</label>
+                    <VControl :has-error="Boolean(errorMessage)">
+                      <custom-date-picker
+                        v-bind="field"
+                        type="datetime"
+                        compact-time
+                      ></custom-date-picker>
+                    </VControl>
+                    <p v-if="errorMessage" class="help is-danger">
+                      {{ errorMessage }}
+                    </p>
+                  </VField>
+                </Field>
               </div>
               <div class="column is-6">
-                <VField>
-                  <label>تاریخ نمونه‌برداری</label>
-                  <VControl>
-                    <date-picker
-                      v-model="date.end"
-                      class="control"
-                      auto-submit
-                      format="jYYYY/jMM/jDD"
-                    ></date-picker>
-                  </VControl>
-                </VField>
+                <Field v-slot="{ field, errorMessage }" name="larvaCount">
+                  <VField>
+                    <label>تعداد لاروها</label>
+                    <VControl :has-error="Boolean(errorMessage)">
+                      <input
+                        v-bind="field"
+                        type="text"
+                        class="input"
+                        placeholder=""
+                        autocomplete="organization"
+                      />
+                      <p v-if="errorMessage" class="help is-danger">
+                        {{ errorMessage }}
+                      </p>
+                    </VControl>
+                  </VField>
+                </Field>
               </div>
             </div>
           </div>
@@ -238,6 +327,18 @@ const date = ref({
         }
       }
     }
+  }
+}
+
+.vpd-input-group {
+  input {
+    height: 38px;
+    padding: calc(0.375em - 1px) calc(0.625em - 1px);
+    border-radius: var(--radius) !important;
+    direction: 'ltr';
+  }
+  label {
+    border-radius: var(--radius) !important;
   }
 }
 
