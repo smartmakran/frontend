@@ -240,5 +240,10 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
       }
     }
   }
+
+  .vpd-container {
+    top: 30%;
+    left: 68%;
+  }
 }
 </style>

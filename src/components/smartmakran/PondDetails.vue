@@ -354,7 +354,7 @@ const currentPond = computed<IPond>(() => {
             justify-content: space-between;
 
             .button {
-              width: 48%;
+              width: 85%;
             }
           }
         }

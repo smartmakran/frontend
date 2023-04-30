@@ -52,7 +52,7 @@ const props = defineProps<{
   top: 60px;
   left: 0;
   height: calc(100% - 60px);
-  width: 60px;
+  width: 25%;
   background: var(--white);
   border-top: 1px solid var(--fade-grey);
   border-right: 1px solid var(--fade-grey);
@@ -79,7 +79,7 @@ const props = defineProps<{
     .icon-side-menu,
     .bottom-icon-side-menu {
       li {
-        width: 60px;
+        width: 100%;
         height: 60px;
         display: flex;
         align-items: center;

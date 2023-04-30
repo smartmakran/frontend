@@ -82,27 +82,22 @@ watch(
     >
       <template #links>
         <li>
-          <RouterLink :to="{ name: 'app' }">
-            <i aria-hidden="true" class="iconify" data-icon="feather:home"></i>
-          </RouterLink>
+          <RouterLink :to="{ name: 'app-farm' }"> لیست مزارع </RouterLink>
+        </li>
+        <li>
+          <RouterLink :to="{ name: 'app-pond' }"> لیست حوضچه‌ها </RouterLink>
         </li>
       </template>
 
-      <template #bottom-links>
-        <li>
-          <a href="#">
-            <i aria-hidden="true" class="iconify" data-icon="feather:settings"></i>
-          </a>
-        </li>
-      </template>
+      <template #bottom-links> </template>
     </MobileSidebar>
 
     <!-- Mobile subsidebar links -->
-    <Transition name="slide-x">
+    <!-- <Transition name="slide-x">
       <DashboardsMobileSubsidebar
         v-if="isMobileSidebarOpen && activeMobileSubsidebar === 'dashboard'"
       />
-    </Transition>
+    </Transition> -->
 
     <!--
     <Sidebar :theme="props.theme" :is-open="isDesktopSidebarOpen">
