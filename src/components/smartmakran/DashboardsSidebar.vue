@@ -1,5 +1,15 @@
 <script setup lang="ts">
+import { useRouter } from 'vue-router'
+import { useUserStore } from '/@src/stores/user'
+
 const emit = defineEmits(['close'])
+const router = useRouter()
+const userStore = useUserStore()
+
+function exit() {
+  userStore.logout()
+  router.push({ name: 'auth' })
+}
 </script>
 
 <template>
@@ -23,6 +33,9 @@ const emit = defineEmits(['close'])
 
         <li>
           <RouterLink :to="{ name: 'app-pond' }"> لیست حوضچه‌ها </RouterLink>
+        </li>
+        <li>
+          <a @click="exit()"> خروج </a>
         </li>
       </ul>
     </div>

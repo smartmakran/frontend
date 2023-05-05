@@ -77,16 +77,16 @@ useHead({
     <div class="column login-column is-8 h-hidden-mobile h-hidden-tablet-p hero-banner">
       <div class="hero login-hero is-fullheight is-app-grey">
         <div class="hero-body">
-          <div class="columns">
+          <div class="columns" style="margin: auto">
             <div class="column is-10 is-offset-1">
               <img
                 class="light-image has-light-shadow has-light-border"
-                src="/@src/assets/illustrations/apps/vuero-banking-light.png?format=webp"
+                src="/@src/assets/smartmakran/login.jpg"
                 alt=""
               />
               <img
                 class="dark-image has-light-shadow"
-                src="/@src/assets/illustrations/apps/vuero-banking-dark.png?format=webp"
+                src="/@src/assets/smartmakran/login.jpg"
                 alt=""
               />
             </div>
