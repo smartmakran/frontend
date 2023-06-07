@@ -10,7 +10,7 @@ import { useI18n } from 'vue-i18n'
 import { useViewWrapper } from '../stores/viewWrapper'
 import { useUserStore } from '../stores/user'
 import { useTaskStore } from '../stores/task'
-import { onMounted } from 'vue'
+import { onMounted, watch, ref, watchEffect } from 'vue'
 
 const { t } = useI18n()
 const viewWrapper = useViewWrapper()
@@ -19,6 +19,7 @@ useHead({
   title: `${t('app.title')} | ${t('dashboard.title')}`,
 })
 
+const title = ref('')
 const router = useRouter()
 const route = useRoute()
 
@@ -28,7 +29,6 @@ const userStore = useUserStore()
 // onMounted(() => {
 //   taskStore.getTasksList(userStore.user.id)
 // })
-
 function exit() {
   userStore.logout()
   router.push({ name: 'auth' })

@@ -49,8 +49,10 @@ function extractData(data: any, optimal: any) {
     data = data.slice(data.length - 50, data.length)
   }
 
-  const dates = data.map((d: SensorData) =>
-    moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
+  const dates = data.map(
+    (d: SensorData) =>
+      // moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
+      '12'
   )
 
   const phData: number[] = data.map((d: SensorData) => d.ph)

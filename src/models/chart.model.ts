@@ -4,7 +4,7 @@ import { ChartBaseOption, ChartSeries, ChartTitle, ChartYaxis } from './base-cha
 export class PHChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
     { name: 'ph', data: [] },
-    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه بالا', data: [1, 2, 4, 5] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [

@@ -47,7 +47,6 @@ export abstract class ChartBaseOption {
   legend = {
     horizontalAlign: 'left',
   }
-
   tooltip = {
     x: {
       show: false,

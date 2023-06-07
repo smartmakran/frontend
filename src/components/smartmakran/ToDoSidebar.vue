@@ -759,4 +759,10 @@ const themeClasses = computed(() => {
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .todo-sidebar {
+    display: none !important;
+  }
+}
 </style>

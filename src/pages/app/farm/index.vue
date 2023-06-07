@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import { onMounted } from 'vue'
+onMounted(() => {
+  localStorage.setItem('page-name', 'لیست مزارع')
+})
+</script>
+
 <template>
   <div class="page-content-inner">
     <!-- <TestDashboard /> -->
@@ -5,7 +12,6 @@
       <!--Tile Grid v1-->
       <div class="columns is-multiline tile-grid tile-grid-v2">
         <FarmList />
-        <CreateFarmForm />
       </div>
     </div>
   </div>

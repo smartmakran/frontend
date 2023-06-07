@@ -165,7 +165,7 @@ Responsive styles
     left: 60px !important;
     [dir='rtl'] & {
       left: unset !important;
-      right: 60px !important;
+      // right: 60px !important;
     }
   }
 
@@ -709,4 +709,9 @@ Responsive styles
       }
     }
   }
+}
+
+// new style
+.sidebar-panel {
+  right: 0 !important;
 }
