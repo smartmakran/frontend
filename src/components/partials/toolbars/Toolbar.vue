@@ -52,7 +52,7 @@ const localFlagSrc = computed(() => {
           <i aria-hidden="true" class="iconify" data-icon="feather:bell"></i>
           <span class="new-indicator pulsate"></span>
         </div>
-        <div class="dropdown-menu is-right" role="menu" style="left: 0; right: unset;">
+        <div class="dropdown-menu is-right" role="menu" style="left: 0; right: unset">
           <div class="dropdown-content">
             <div class="heading">
               <div class="heading-left">
@@ -146,14 +146,14 @@ const localFlagSrc = computed(() => {
       </label>
     </div>
 
-    <a
+    <!-- <a
       tabindex="0"
       class="toolbar-link right-panel-trigger"
       @keydown.space.prevent="panels.setActive('languages')"
       @click="panels.setActive('languages')"
     >
       <img :src="localFlagSrc" alt="" />
-    </a>
+    </a> -->
 
     <slot></slot>
   </div>

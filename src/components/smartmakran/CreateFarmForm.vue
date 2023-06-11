@@ -5,12 +5,15 @@ import { ICreateFarm } from '/@src/interfaces/farm.interface'
 import { useUserStore } from '/@src/stores/user'
 import { useFarmStore } from '/@src/stores/farm'
 import { useNotyf } from '/@src/composable/useNotyf'
-
+import { defineProps } from 'vue'
 const notyf = useNotyf()
 
 const userStore = useUserStore()
 const farmStore = useFarmStore()
-
+const props = defineProps<{
+  show: boolean
+  closeForm: any
+}>()
 const schema = yup.object({
   name: yup.string().required('عنوان مزرعه الزامی است'),
   phone: yup.string().required('شماره تماس الزامی است'),
@@ -56,29 +59,11 @@ const createFarmForm = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <div class="column is-6">
-    <form class="form-layout">
-      <div class="form-outer">
-        <div class="form-header">
-          <div class="form-header-inner">
-            <div class="left">
-              <h3>ثبت مزرعه جدید</h3>
-            </div>
-            <div class="right">
-              <div class="buttons">
-                <VButton color="primary" @click="createFarmForm" raised>ثبت</VButton>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="form-body">
-          <!--Fieldset-->
-          <div class="form-fieldset">
-            <div class="fieldset-heading">
-              <h4>اطلاعات کلی</h4>
-              <p>این اطلاعات کلی مزرعه است</p>
-            </div>
-
+  <VModal :open="show" @close="closeForm" title="ثبت مزرعه جدید">
+    <template #content>
+      <div class="">
+        <form>
+          <div>
             <div class="columns is-multiline">
               <div class="column is-6">
                 <Field v-slot="{ field, errorMessage }" name="name">
@@ -88,7 +73,7 @@ const createFarmForm = handleSubmit(async (values) => {
                       <input
                         v-bind="field"
                         type="text"
-                        class="input"
+                        class="input input-icon"
                         placeholder=""
                         autocomplete="given-name"
                       />
@@ -111,7 +96,7 @@ const createFarmForm = handleSubmit(async (values) => {
                       <input
                         v-bind="field"
                         type="text"
-                        class="input"
+                        class="input input-icon"
                         placeholder=""
                         autocomplete="organization"
                       />
@@ -248,10 +233,13 @@ const createFarmForm = handleSubmit(async (values) => {
               </div>
             </div>
           </div>
-        </div>
+        </form>
       </div>
-    </form>
-  </div>
+    </template>
+    <template #action>
+      <VButton color="primary" @click="createFarmForm" raised>ثبت</VButton>
+    </template>
+  </VModal>
 </template>
 
 <style lang="scss">
@@ -344,7 +332,9 @@ const createFarmForm = handleSubmit(async (values) => {
     }
   }
 }
-
+.input-icon {
+  padding-right: 30px !important;
+}
 @media only screen and (max-width: 767px) {
   .form-layout {
     .form-outer {

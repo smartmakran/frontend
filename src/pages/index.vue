@@ -4,6 +4,7 @@ import { useHead } from '@vueuse/head'
 useHead({
   title: import.meta.env.VITE_SITE_TITLE as string,
 })
+localStorage.setItem('page-name', '')
 </script>
 
 <template>
