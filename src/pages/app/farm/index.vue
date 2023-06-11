@@ -1,7 +1,23 @@
 <script setup lang="ts">
+import axios from 'axios'
 import { onMounted } from 'vue'
-onMounted(() => {
-  localStorage.setItem('page-name', 'لیست مزارع')
+onMounted(async () => {
+  try {
+    let res = await axios.get(
+      `https://api.smartmakran.ir/dashboard/${
+        JSON.parse(localStorage.getItem('user')).id
+      }`,
+      {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    )
+    localStorage.setItem('sensorKey', res.data.user.sensorsKey)
+    console.log(res.data)
+  } catch (err) {
+    console.log(err)
+  }
 })
 </script>
 

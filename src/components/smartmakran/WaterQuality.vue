@@ -48,15 +48,18 @@ const waterQualityHandler = handleSubmit(async (values) => {
     nitrite: Math.floor(values.nitrite),
     temperature: Math.floor(values.temperature),
     createdAt: time,
-    pond: props.showPondField === false ? values.pond : route.params.id,
-    sensorsKey: JSON.parse(localStorage.getItem('user')).id,
+    pond: !props.showPondField ? values.pond : route.params.id,
+    sensorsKey: localStorage.getItem('sensorKey'),
   }
 
   const result = await waterQuality.waterQualityHandler(waterQualityBody)
   console.log(result)
-  if (result === 201) {
+  if (result !== 400 || result !== 404 || result !== 500) {
     console.log(result)
     console.log('Farm created successfully')
+    notyf.success({
+      message: 'میزان کیفیت آب باموفقیت ثبت شد',
+    })
     // farmStore.getFarmsList()
   } else {
     console.log(result)

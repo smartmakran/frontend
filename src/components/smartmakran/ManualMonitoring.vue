@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import ApexChart from 'vue3-apexcharts'
 import moment from 'moment-jalaali'
-import { onMounted } from 'vue'
+import { onMounted, watchEffect } from 'vue'
 import { usePondStore } from '/@src/stores/pond'
+import draggable from 'vuedraggable'
 import {
   ChangingWaterChartOption,
   FeedingChartOption,
@@ -24,6 +25,7 @@ const sampling = ref(new SamplingChartOption([], '#000', []))
 const feeding = ref(new FeedingChartOption([], '#000', []))
 const changingWater = ref(new ChangingWaterChartOption([], '#000', []))
 const transparency = ref(new TransparencyChartOption([], '#000', []))
+
 onMounted(async () => {
   const result = await pondStore.manualMonitoring(params.id)
 
@@ -60,7 +62,41 @@ onMounted(async () => {
   )
 })
 
-console.log(sampling)
+const charts = ref([
+  {
+    height: sampling._rawValue.chart.height,
+    type: sampling._rawValue.chart.type,
+    series: sampling._rawValue.series,
+    options: sampling._rawValue,
+  },
+  {
+    height: feeding._rawValue.chart.height,
+    type: feeding._rawValue.chart.type,
+    series: feeding._rawValue.series,
+    options: feeding._rawValue,
+  },
+  {
+    height: changingWater._rawValue.chart.height,
+    type: changingWater._rawValue.chart.type,
+    series: changingWater._rawValue.series,
+    options: changingWater._rawValue,
+  },
+  {
+    height: transparency._rawValue.chart.height,
+    type: transparency._rawValue.chart.type,
+    series: transparency._rawValue.series,
+    options: transparency._rawValue,
+  },
+])
+watchEffect(() => {
+  if (localStorage.getItem('chart_manual') !== null) {
+    charts.value = JSON.parse(localStorage.getItem('chart_manual'))
+  }
+})
+
+const dragChartHandle = () => {
+  localStorage.setItem('chart_manual', JSON.stringify(charts._rawValue))
+}
 </script>
 
 <template>
@@ -74,67 +110,29 @@ console.log(sampling)
     </div>
 
     <!-- Charts -->
-    <div class="columns is-multiline">
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="sampling.chart.height"
-            :type="sampling.chart.type"
-            :series="sampling.series"
-            :options="sampling"
-          >
-          </ApexChart>
-        </div>
-      </div>
 
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="feeding.chart.height"
-            :type="feeding.chart.type"
-            :series="feeding.series"
-            :options="feeding"
-          >
-          </ApexChart>
+    <draggable
+      @change="dragChartHandle"
+      class="columns is-multiline"
+      v-model="charts"
+      group="charts"
+    >
+      <template #item="{ element: chart }">
+        <div class="column is-6">
+          <div class="s-card chart-box">
+            <ApexChart
+              id="apex-chart-5"
+              dir="ltr"
+              :height="chart.height"
+              :type="chart.type"
+              :series="chart.series"
+              :options="chart.options"
+            >
+            </ApexChart>
+          </div>
         </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="changingWater.chart.height"
-            :type="changingWater.chart.type"
-            :series="changingWater.series"
-            :options="changingWater"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="transparency.chart.height"
-            :type="transparency.chart.type"
-            :series="transparency.series"
-            :options="transparency"
-          >
-          </ApexChart>
-        </div>
-      </div>
-    </div>
+      </template>
+    </draggable>
   </div>
 </template>
 
@@ -279,7 +277,10 @@ console.log(sampling)
     }
   }
 }
-
+.chart-box:hover {
+  background: rgb(247, 247, 247);
+  cursor: all-scroll;
+}
 @media only screen and (max-width: 767px) {
   .ecommerce-dashboard-v1 {
     .dashboard-header {

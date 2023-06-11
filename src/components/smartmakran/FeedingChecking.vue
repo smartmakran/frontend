@@ -46,13 +46,16 @@ const feedingCheckingForm = handleSubmit(async (values) => {
     type: type,
   }
   const result = await feedingStore.feedingCheckingHandler(feedingBody)
-  if (result === 201) {
+  if (result !== 400 || result !== 404 || result !== 500) {
     console.log('Farm created successfully')
     // farmStore.getFarmsList()
+    notyf.success({
+      message: 'فرم غذاده با موفیقیت ثبت شد',
+    })
   } else {
     console.log('Farm creation failed')
     notyf.error({
-      message: 'مزرعه ایجاد نشد، دوباره سعی کنید.',
+      message: 'غذا دهی ثبت نشد',
       duration: 2000,
     })
   }

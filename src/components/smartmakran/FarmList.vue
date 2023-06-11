@@ -1,20 +1,24 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watchEffect } from 'vue'
+import axios from 'axios'
 // import { files } from '/@src/data/dashboards/course'
 import { useFarmStore } from '/@src/stores/farm'
 import { onMounted } from 'vue'
 import { IFarm } from '/@src/interfaces/farm.interface'
 import { ref } from 'vue'
-
+import { usePondStore } from '/@src/stores/pond'
 const farmStore = useFarmStore()
 const showCreateFarm = ref(false)
-
+const pondStore = usePondStore()
 onMounted(async () => {
   await farmStore.getFarmsList()
 })
 
 let filteredFarms = computed<IFarm[]>(() => {
   return farmStore.list
+})
+watchEffect(async () => {
+  await pondStore.getPoolsList()
 })
 let closing = () => (showCreateFarm.value = false)
 </script>
@@ -140,6 +144,9 @@ let closing = () => (showCreateFarm.value = false)
 .farm-content-item {
   display: flex;
   align-items: center;
+  .meta-left {
+    margin-top: 0 !important;
+  }
 }
 .search-input {
   padding-right: 30px !important;

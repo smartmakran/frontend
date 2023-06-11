@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ApexChart from 'vue3-apexcharts'
 import moment from 'moment-jalaali'
+import draggable from 'vuedraggable'
 import { dashboard } from '/@src/services/modules/dashboard/dashboard.service'
 import {
   AmmoniaChartOptions,
@@ -13,7 +14,7 @@ import {
   TemperatureChartOptions,
 } from '/@src/models/chart.model'
 import { SocketService } from '/@src/services/modules/socket/socket.service'
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, watchEffect } from 'vue'
 import { useThemeColors } from '../../composable/useThemeColors'
 import { useUserStore } from '/@src/stores/user'
 
@@ -241,6 +242,65 @@ const temperature = reactive<any>({
 })
 
 console.log(ph)
+const charts = ref([
+  {
+    height: ph.chart.height,
+    type: ph.chart.type,
+    series: ph.series,
+    options: ph,
+  },
+  {
+    height: oxygen.chart.height,
+    type: oxygen.chart.type,
+    series: oxygen.series,
+    options: oxygen,
+  },
+  {
+    height: orp.chart.height,
+    type: orp.chart.type,
+    series: orp.series,
+    options: orp,
+  },
+  {
+    height: ec.chart.height,
+    type: ec.chart.type,
+    series: ec.series,
+    options: ec,
+  },
+  {
+    height: ammonia.chart.height,
+    type: ammonia.chart.type,
+    series: ammonia.series,
+    options: ammonia,
+  },
+  {
+    height: nitrate.chart.height,
+    type: nitrate.chart.type,
+    series: nitrate.series,
+    options: nitrate,
+  },
+  {
+    height: nitrite.chart.height,
+    type: nitrite.chart.type,
+    series: nitrite.series,
+    options: nitrite,
+  },
+  {
+    height: temperature.chart.height,
+    type: temperature.chart.type,
+    series: temperature.series,
+    options: temperature,
+  },
+])
+watchEffect(() => {
+  if (localStorage.getItem('chart_automatic_monitoring') !== null) {
+    charts.value = JSON.parse(localStorage.getItem('chart_automatic_monitoring'))
+  }
+})
+
+const dragChartHandle = () => {
+  localStorage.setItem('chart_automatic_monitoring', JSON.stringify(charts._rawValue))
+}
 
 onMounted(async () => {
   // socket.on('message', (data) => {
@@ -369,127 +429,48 @@ onMounted(async () => {
     </div> -->
 
     <!-- Charts -->
-    <div class="columns is-multiline">
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="ph.chart.height"
-            :type="ph.chart.type"
-            :series="ph.series"
-            :options="ph"
-          >
-          </ApexChart>
-        </div>
-      </div>
 
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="oxygen.chart.height"
-            :type="oxygen.chart.type"
-            :series="oxygen.series"
-            :options="oxygen"
-          >
-          </ApexChart>
-        </div>
-      </div>
+    <!-- charts ref -->
 
-      <!--Line Stats Widget-->
-      <div class="column is-6">
+    <!-- <div class="columns is-multiline">
+      <div class="column is-6" v-for="(item, key) in charts" :key="key">
         <div class="s-card">
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="orp.chart.height"
-            :type="orp.chart.type"
-            :series="orp.series"
-            :options="orp"
+            :height="item.height"
+            :type="item.type"
+            :series="item.series"
+            :options="item.options"
           >
           </ApexChart>
         </div>
       </div>
+    </div> -->
 
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="ec.chart.height"
-            :type="ec.chart.type"
-            :series="ec.series"
-            :options="ec"
-          >
-          </ApexChart>
+    <!--  -->
+    <draggable
+      @change="dragChartHandle"
+      class="columns is-multiline"
+      v-model="charts"
+      group="charts"
+    >
+      <template #item="{ element: chart }">
+        <div class="column is-6">
+          <div class="s-card chart-box">
+            <ApexChart
+              id="apex-chart-5"
+              dir="ltr"
+              :height="chart.height"
+              :type="chart.type"
+              :series="chart.series"
+              :options="chart.options"
+            >
+            </ApexChart>
+          </div>
         </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="ammonia.chart.height"
-            :type="ammonia.chart.type"
-            :series="ammonia.series"
-            :options="ammonia"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="nitrite.chart.height"
-            :type="nitrite.chart.type"
-            :series="nitrite.series"
-            :options="nitrite"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="nitrate.chart.height"
-            :type="nitrate.chart.type"
-            :series="nitrate.series"
-            :options="nitrate"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="temperature.chart.height"
-            :type="temperature.chart.type"
-            :series="temperature.series"
-            :options="temperature"
-          >
-          </ApexChart>
-        </div>
-      </div>
-    </div>
+      </template>
+    </draggable>
   </div>
 </template>
 
@@ -634,7 +615,10 @@ onMounted(async () => {
     }
   }
 }
-
+.chart-box:hover {
+  background: rgb(247, 247, 247);
+  cursor: all-scroll;
+}
 @media only screen and (max-width: 767px) {
   .ecommerce-dashboard-v1 {
     .dashboard-header {

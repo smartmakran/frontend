@@ -30,7 +30,7 @@ export class FeedingChartOption extends ChartBaseOption {
   series: ChartSeries[] = [{ name: 'غذادهی', data: [] }]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
+    useThemeColors().danger,
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
@@ -55,7 +55,7 @@ export class ChangingWaterChartOption extends ChartBaseOption {
   series: ChartSeries[] = [{ name: 'تعویض آب', data: [] }]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
+    useThemeColors().danger,
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
@@ -80,7 +80,7 @@ export class TransparencyChartOption extends ChartBaseOption {
   series: ChartSeries[] = [{ name: 'شفافیت', data: [] }]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
+    useThemeColors().danger,
     useThemeColors().lightText,
   ]
   title: ChartTitle = {

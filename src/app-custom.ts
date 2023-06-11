@@ -102,7 +102,7 @@ export function registerRouterNavigationGuards({ router }: VueroAppContext) {
     if (to.meta.requiresAuth) {
       if (userStore.isLoggedIn) {
         const user = userStore.user
-        notyf.success(`خوش آمدید, ${user?.fullName}`)
+        // notyf.success(`خوش آمدید, ${user?.fullName}`)
       } else {
         notyf.error({
           message: 'لطفا ابتدا وارد سیستم شوید',

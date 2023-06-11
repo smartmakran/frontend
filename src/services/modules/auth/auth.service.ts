@@ -14,6 +14,5 @@ export async function login(body: LoginBody): Promise<{ user: IUser; token: stri
     },
   })
   const { data } = await request.post('/auth/login', body)
-
   return data
 }

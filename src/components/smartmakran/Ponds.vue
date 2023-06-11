@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted } from 'vue'
+import { computed, onMounted, watchEffect } from 'vue'
 import { IPond } from '/@src/interfaces/pond.interface'
 import { useFarmStore } from '/@src/stores/farm'
 import { usePondStore } from '/@src/stores/pond'
@@ -14,11 +14,8 @@ const showCreatePond = ref(false)
 let filteredPonds = computed<IPond[]>(() => {
   return farmStore.currentFarm.ponds || []
 })
-onMounted(async () => {
+watchEffect(async () => {
   await pondStore.getPoolsList()
-})
-onMounted(() => {
-  console.log(pondStore.currentPond)
 })
 const ponds = JSON.parse(localStorage.getItem('poolList'))
 let closing = () => (showCreatePond.value = false)

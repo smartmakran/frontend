@@ -9,8 +9,8 @@ export class PHChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'pH',
@@ -46,8 +46,8 @@ export class OxygenChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'Oxygen',
@@ -83,8 +83,8 @@ export class OrpChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'ORP',
@@ -120,8 +120,8 @@ export class ECChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'EC',
@@ -157,8 +157,8 @@ export class AmmoniaChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'Ammonia',
@@ -194,8 +194,8 @@ export class NitriteChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'Nitrite',
@@ -231,8 +231,8 @@ export class NitrateChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'Nitrate',
@@ -268,8 +268,8 @@ export class TemperatureChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'Temperature',

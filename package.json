@@ -113,6 +113,7 @@
     "vue-tippy": "6.0.0-alpha.43",
     "vue3-apexcharts": "1.4.1",
     "vue3-persian-datetime-picker": "^1.0.0",
+    "vuedraggable": "^4.1.0",
     "yup": "0.32.11"
   },
   "devDependencies": {

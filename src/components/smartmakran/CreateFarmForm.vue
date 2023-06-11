@@ -73,7 +73,7 @@ const createFarmForm = handleSubmit(async (values) => {
                       <input
                         v-bind="field"
                         type="text"
-                        class="input"
+                        class="input input-icon"
                         placeholder=""
                         autocomplete="given-name"
                       />
@@ -96,7 +96,7 @@ const createFarmForm = handleSubmit(async (values) => {
                       <input
                         v-bind="field"
                         type="text"
-                        class="input"
+                        class="input input-icon"
                         placeholder=""
                         autocomplete="organization"
                       />
@@ -332,7 +332,9 @@ const createFarmForm = handleSubmit(async (values) => {
     }
   }
 }
-
+.input-icon {
+  padding-right: 30px !important;
+}
 @media only screen and (max-width: 767px) {
   .form-layout {
     .form-outer {

@@ -44,9 +44,14 @@ const feedingCheckingForm = handleSubmit(async (values) => {
     createdAt: time,
   }
   const result = await lossesStore.lossesHandler(lossesBody)
-  if (result === 201) {
+
+  if (result !== 400 || result !== 404 || result !== 500) {
     console.log(result)
     console.log('Farm created successfully')
+    // notyf.green('تلفات با موفقیت ثبت شد')
+    notyf.success({
+      message: 'تلفات با موفقیت ثبت شد',
+    })
     // farmStore.getFarmsList()
   } else {
     console.log(result)
