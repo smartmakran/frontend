@@ -124,7 +124,7 @@ let closing = () => (showCreatePond.value = false)
                 <div class="card-pond-body">
                   <div class="card-pond-attr">
                     <div class="card-pond-attr-icon">
-                      <img src="/@src/assets/smartmakran/icons-box/Do.svg" alt="" />
+                      <img src="/@src/assets/smartmakran/icons-box/do.svg" alt="" />
                     </div>
                     <h4>DO</h4>
                     <p>12</p>
