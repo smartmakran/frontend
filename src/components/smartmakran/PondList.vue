@@ -18,7 +18,7 @@ let closing = () => (showCreatePond.value = false)
 
 <template>
   <!--Grid item-->
-  <CreatePondForm :show-field-farm="false" :show="showCreatePond" :closeForm="closing" />
+  <CreatePondForm :show-field-farm="false" :show="showCreatePond" :close-form="closing" />
   <div class="column">
     <div class="dashboard-title">
       <div class="left">
@@ -115,7 +115,7 @@ let closing = () => (showCreatePond.value = false)
                 <div class="card-pond-body">
                   <div class="card-pond-attr">
                     <div class="card-pond-attr-icon">
-                      <img src="/@src/assets/smartmakran/icons-box/sal.svg" alt="" />
+                      <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
                     </div>
                     <h4>SAL</h4>
                     <p>32</p>
@@ -124,7 +124,7 @@ let closing = () => (showCreatePond.value = false)
                 <div class="card-pond-body">
                   <div class="card-pond-attr">
                     <div class="card-pond-attr-icon">
-                      <img src="/@src/assets/smartmakran/icons-box/do.svg" alt="" />
+                      <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="" />
                     </div>
                     <h4>DO</h4>
                     <p>12</p>

@@ -23,23 +23,23 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
   <div class="page-content-inner">
     <FeedingChecking
       :show="showFeedingCheckingModal"
-      :closeModal="closeFeedingChecking"
-      :showPondField="true"
+      :close-modal="closeFeedingChecking"
+      :show-pond-field="true"
     />
-    <Losses :show="showLossesModal" :closeModal="closeLosses" :showPondField="true" />
+    <Losses :show="showLossesModal" :close-modal="closeLosses" :show-pond-field="true" />
     <WaterQuality
       :show="showWaterQualityModal"
-      :closeModal="closeWaterQualityModal"
-      :showPondField="true"
+      :close-modal="closeWaterQualityModal"
+      :show-pond-field="true"
     />
     <div class="nav-buttons-ponds">
-      <VButton color="success" outlined @click="showLossesModal = true" raised
+      <VButton color="success" outlined raised @click="showLossesModal = true"
         >تلفات</VButton
       >
-      <VButton color="success" outlined @click="showFeedingCheckingModal = true" raised
+      <VButton color="success" outlined raised @click="showFeedingCheckingModal = true"
         >ثبت اطلاعات غذادهی</VButton
       >
-      <VButton color="success" outlined @click="showWaterQualityModal = true" raised
+      <VButton color="success" outlined raised @click="showWaterQualityModal = true"
         >اندازه گیری</VButton
       >
     </div>
@@ -89,7 +89,7 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
                 </div>
                 <div class="cardd">
                   <div class="cardd-icon">
-                    <img src="/@src/assets/smartmakran/icons-box/sal.svg" alt="bio" />
+                    <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="bio" />
                   </div>
                   <div class="cardd-content-attr">
                     <p>Sal</p>
@@ -98,7 +98,7 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
                 </div>
                 <div class="cardd">
                   <div class="cardd-icon">
-                    <img src="/@src/assets/smartmakran/icons-box/do.svg" alt="bio" />
+                    <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="bio" />
                   </div>
                   <div class="cardd-content-attr">
                     <p>Do</p>
