@@ -16,6 +16,6 @@ WORKDIR /app
 
 COPY --from=build /app .
 
-EXPOSE 5000 8080
+EXPOSE 5000
 
 CMD ["yarn", "preview"]

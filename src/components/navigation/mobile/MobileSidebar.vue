@@ -69,6 +69,7 @@ const props = defineProps<{
 
   &.is-active {
     transform: translateX(0);
+    width: 60%;
   }
 
   .inner {
@@ -663,7 +664,12 @@ const props = defineProps<{
     }
   }
 }
-
+.icon-side-menu {
+  li {
+    justify-content: start !important;
+    padding-right: 20px;
+  }
+}
 .is-dark {
   .mobile-subsidebar {
     background: var(--dark-sidebar-light-2);

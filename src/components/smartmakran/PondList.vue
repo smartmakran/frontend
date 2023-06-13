@@ -18,7 +18,7 @@ let closing = () => (showCreatePond.value = false)
 
 <template>
   <!--Grid item-->
-  <CreatePondForm :show-field-farm="false" :show="showCreatePond" :close-form="closing" />
+  <CreatePondForm :show-field-farm="false" :show="showCreatePond" :closeForm="closing" />
   <div class="column">
     <div class="dashboard-title">
       <div class="left">

@@ -4,5 +4,5 @@
       <component :is="Component" />
     </Transition>
   </RouterView>
-  <VReloadPrompt app-name="Vuero" />
+  <!-- <VReloadPrompt app-name="Vuero" /> -->
 </template>
