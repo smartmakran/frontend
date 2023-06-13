@@ -291,7 +291,7 @@ let closing = () => (showCreateFarm.value = false)
 }
 .items-center {
   display: flex;
-  align-items: center;
+  align-items: center !important;
   flex-direction: column;
 }
 .mb-15px {

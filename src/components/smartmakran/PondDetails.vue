@@ -14,6 +14,7 @@ const pondStore = usePondStore()
 const currentPond = computed<IPond>(() => {
   return pondStore.currentPond || {}
 })
+console.log(currentPond)
 let closeFeedingChecking = () => (showFeedingCheckingModal.value = false)
 let closeLosses = () => (showLossesModal.value = false)
 let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
@@ -23,140 +24,143 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
   <div class="page-content-inner">
     <FeedingChecking
       :show="showFeedingCheckingModal"
-      :close-modal="closeFeedingChecking"
-      :show-pond-field="true"
+      :closeModal="closeFeedingChecking"
+      :showPondField="true"
     />
-    <Losses :show="showLossesModal" :close-modal="closeLosses" :show-pond-field="true" />
+    <Losses :show="showLossesModal" :closeModal="closeLosses" :showPondField="true" />
     <WaterQuality
       :show="showWaterQualityModal"
-      :close-modal="closeWaterQualityModal"
-      :show-pond-field="true"
+      :closeModal="closeWaterQualityModal"
+      :showPondField="true"
     />
     <div class="nav-buttons-ponds">
-      <VButton color="success" outlined raised @click="showLossesModal = true"
+      <VButton color="success" outlined @click="showLossesModal = true" raised
         >تلفات</VButton
       >
-      <VButton color="success" outlined raised @click="showFeedingCheckingModal = true"
+      <VButton color="success" outlined @click="showFeedingCheckingModal = true" raised
         >ثبت اطلاعات غذادهی</VButton
       >
-      <VButton color="success" outlined raised @click="showWaterQualityModal = true"
+      <VButton color="success" outlined @click="showWaterQualityModal = true" raised
         >اندازه گیری</VButton
       >
     </div>
     <!--List-->
     <div class="list-view list-view-v2">
       <!--Active Tab-->
-      <div id="active-items-tab" class="tab-content is-active">
-        <div class="list-view-inner">
-          <Transition name="list-complete" tag="div">
+      <!-- start code -->
+      <div class="card-pond">
+        <div class="card-pond-header">
+          <div>
+            <VIconBox color="primary">
+              <i aria-hidden="true" class="fas fa-home"></i>
+            </VIconBox>
             <div>
-              <div class="attrs-pond-details">
-                <div class="cardd">
-                  <div class="cardd-icon">
-                    <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="bio" />
-                  </div>
-                  <div class="cardd-content-attr">
-                    <p>ph</p>
-                    <h2>22</h2>
-                  </div>
-                </div>
-                <div class="cardd">
-                  <div class="cardd-icon">
-                    <img src="/@src/assets/smartmakran/icons-box/bio.svg" alt="bio" />
-                  </div>
-                  <div class="cardd-content-attr">
-                    <p>Bio Mass</p>
-                    <h2>22</h2>
-                  </div>
-                </div>
-                <div class="cardd">
-                  <div class="cardd-icon">
-                    <img src="/@src/assets/smartmakran/icons-box/size.svg" alt="bio" />
-                  </div>
-                  <div class="cardd-content-attr">
-                    <p>Size AvG</p>
-                    <h2>22</h2>
-                  </div>
-                </div>
-                <div class="cardd">
-                  <div class="cardd-icon">
-                    <img src="/@src/assets/smartmakran/icons-box/temp.svg" alt="bio" />
-                  </div>
-                  <div class="cardd-content-attr">
-                    <p>Temp</p>
-                    <h2>22</h2>
-                  </div>
-                </div>
-                <div class="cardd">
-                  <div class="cardd-icon">
-                    <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="bio" />
-                  </div>
-                  <div class="cardd-content-attr">
-                    <p>Sal</p>
-                    <h2>22</h2>
-                  </div>
-                </div>
-                <div class="cardd">
-                  <div class="cardd-icon">
-                    <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="bio" />
-                  </div>
-                  <div class="cardd-content-attr">
-                    <p>Do</p>
-                    <h2>22</h2>
-                  </div>
-                </div>
-              </div>
-              <!-- start code -->
-              <div :key="currentPond.id" class="list-view-item">
-                <!--  -->
-                <!--  -->
-                <div class="view-item-header">
-                  <h3>{{ currentPond.name }}</h3>
-                  <div class="view-item-header-button">
-                    <RouterLink
-                      :to="{
-                        name: 'app-pond-id-manual-monitoring',
-                      }"
-                    >
-                      <VButton color="primary" raised>ثبت اطلاعات اضافه</VButton>
-                    </RouterLink>
-                  </div>
-                </div>
-                <div class="view-item-attrs">
-                  <ul class="view-item-attrs-main">
-                    <li>عرض : 12</li>
-                    <li>ارتفاع : 12</li>
-                    <li>طول : 23</li>
-                    <li>عمق : 34</li>
-                  </ul>
-                  <ul class="view-item-attrs-sprate">
-                    <li>زمان اولین کاشت : 34</li>
-                    <li>تعداد لاروها : 35</li>
-                    <li>تراکم : 43</li>
-                  </ul>
-                </div>
-                <div class="view-item-footer-button">
-                  <RouterLink
-                    :to="{
-                      name: 'app-pond-id-manual-monitoring',
-                    }"
-                  >
-                    <VButton color="primary" raised>ثبت اطلاعات اضافه</VButton>
-                  </RouterLink>
-                </div>
-              </div>
-              <!-- end code copy as notebook -->
+              <h3>{{ currentPond.name }}</h3>
             </div>
-          </Transition>
+          </div>
+          <div class="card-pond-header-detail">
+            <RouterLink
+              :to="{
+                name: 'app-pond-id-manual-monitoring',
+              }"
+            >
+              <VButton color="primary" outlined raised>ثبت اطلاعات اضافه</VButton>
+            </RouterLink>
+          </div>
         </div>
 
-        <!-- <VFlexPagination
-          v-if="currentPond > 5"
-          :item-per-page="10"
-          :total-items="873"
-          :current-page="42"
-          :max-links-displayed="7"
-        /> -->
+        <div class="card-pond-header-attrs card-pond-header-attrs-border">
+          <span class="card-pond-header-attrs-dimensions"
+            >عرض : {{ currentPond?.dimensions?.width }}</span
+          >
+          <span class="card-pond-header-attrs-dimensions">
+            طول : {{ currentPond?.dimensions?.length }}</span
+          >
+          <span class="card-pond-header-attrs-dimensions"
+            >ارتفاع : {{ currentPond?.dimensions?.waterHeight }}</span
+          >
+          <span class="card-pond-header-attrs-dimensions"
+            >عمق : {{ currentPond?.dimensions?.depth }}</span
+          >
+          <span class="card-pond-header-attrs-dimensions"
+            >زمان اولین کاشت :
+            <!-- {{ currentPond?.startFarming }} -->
+            {{ new Date(currentPond?.startFarming).toLocaleDateString('fa') }}
+          </span>
+          <span class="card-pond-header-attrs-dimensions"
+            >تعداد لاروها : {{ currentPond?.larvaCount }}</span
+          >
+          <span class="card-pond-header-attrs-dimensions"
+            >تراکم : {{ currentPond?.density }}</span
+          >
+        </div>
+
+        <div class="card-pond-attrs">
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/bio.svg" alt="" />
+              </div>
+              <h4>BIO MASS</h4>
+              <p>12</p>
+            </div>
+          </div>
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
+              </div>
+              <h4>SAL</h4>
+              <p>32</p>
+            </div>
+          </div>
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="" />
+              </div>
+              <h4>DO</h4>
+              <p>12</p>
+            </div>
+          </div>
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/size.svg" alt="" />
+              </div>
+              <h4>Size Avg</h4>
+              <p>12</p>
+            </div>
+          </div>
+
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="" />
+              </div>
+              <h4>PH</h4>
+              <p>12</p>
+            </div>
+          </div>
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/temp.svg" alt="" />
+              </div>
+              <h4>TEMP</h4>
+              <p>12</p>
+            </div>
+          </div>
+        </div>
+        <div class="card-pond-footer">
+          <RouterLink
+            :to="{
+              name: 'app-pond-id-manual-monitoring',
+            }"
+          >
+            <VButton color="primary" outlined raised> ثبت اطلاعات اضافه </VButton>
+          </RouterLink>
+        </div>
       </div>
     </div>
   </div>
@@ -231,6 +235,21 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
     }
   }
 }
+.card-pond-footer {
+  display: none;
+}
+@media only screen and (max-width: 767px) {
+  .card-pond-header-detail {
+    display: none;
+  }
+  .card-pond-footer {
+    display: block;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
 @media screen and (min-width: 600px) {
   .add-item-top-menu-pond {
     display: grid;
@@ -690,6 +709,18 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
     margin-bottom: 10px;
   }
 }
+.card-pond-header-attrs-border {
+  border: 1px solid rgb(197, 197, 197);
+  padding: 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  display: grid;
+  grid-template-columns: 48% 48%;
+  justify-content: space-between;
+}
+.card-pond-footer {
+  display: none;
+}
 @media screen and (min-width: 600px) {
   .nav-buttons-ponds {
     display: grid;
@@ -698,6 +729,105 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
     .button {
       margin-bottom: 0 !important;
     }
+  }
+}
+@media screen and (min-width: 768px) {
+  .card-pond-header-attrs-border {
+    grid-template-columns: 32.5% 32.5% 32.5%;
+  }
+}
+@media screen and (min-width: 992px) {
+  .card-pond-header-attrs-border {
+    grid-template-columns: 24% 24% 24% 24%;
+  }
+}
+.card-pond-header-attrs-date {
+  padding-right: 15px;
+  border-right: 1px solid rgba(128, 128, 128, 0.374);
+}
+.card-pond-header-attrs-dimensions {
+  padding-left: 15px;
+}
+.card-pond {
+  width: 100%;
+  background: white;
+  border-radius: 5px;
+  border: 1px solid rgb(226, 226, 226);
+  padding: 20px;
+  margin-bottom: 15px;
+}
+.card-pond-header h3 {
+  margin-top: 10px;
+  font-weight: 400;
+}
+.card-pond-body {
+  margin-top: 10px;
+  h4 {
+    margin-top: 5px;
+    font-weight: 500;
+  }
+  p {
+    color: rgb(94, 94, 94);
+    margin-top: -3px;
+  }
+}
+.card-pond-attr {
+  width: 100%;
+  padding: 15px 10px;
+  background: rgb(250, 250, 250);
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-pond-attr-icon {
+  width: 45px;
+  height: 45px;
+  background: rgba(221, 219, 243, 0.377);
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(221, 219, 243);
+  img {
+    height: 27px;
+  }
+}
+.card-pond-header-attrs {
+  color: gray;
+}
+@media only screen and (min-width: 600px) {
+  .card-pond-header {
+    justify-content: space-between;
+  }
+  .card-pond-header,
+  .card-pond-header > div {
+    display: flex;
+    align-items: center;
+    h3 {
+      margin-top: 0;
+      margin-right: 10px;
+    }
+  }
+  .card-pond-header-attrs {
+    margin-right: 10px;
+    font-size: 12px;
+  }
+  .card-pond-attrs {
+    grid-template-columns: 32% 32% 32%;
+  }
+}
+@media only screen and (min-width: 300px) {
+  .card-pond-attrs {
+    display: grid;
+    grid-template-columns: 48% 48%;
+    justify-content: space-between;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .card-pond-attrs {
+    grid-template-columns: 15% 15% 15% 15% 15% 15%;
   }
 }
 </style>
