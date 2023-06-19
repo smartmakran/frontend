@@ -54,7 +54,7 @@ export async function createFeedingData(body: ICreateFeedingData): Promise<numbe
 export async function createChangingWaterData(
   body: ICreateChangingWaterData
 ): Promise<number> {
-  const { status } = await api.post('/manualMonitoring/changing-water', body)
+  const { status } = await api.post('/manualMonitoring/changingWater', body)
   return status
 }
 

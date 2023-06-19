@@ -10,6 +10,11 @@ const route = useRoute()
 const showLossesModal = ref(false)
 const showFeedingCheckingModal = ref(false)
 const showWaterQualityModal = ref(false)
+const showWaterDataModal = ref(false)
+const showFeedingDataModal = ref(false)
+const showSamplingDataModal = ref(false)
+const showTransparencyDataModal = ref(false)
+
 const pondStore = usePondStore()
 const currentPond = computed<IPond>(() => {
   return pondStore.currentPond || {}
@@ -18,6 +23,10 @@ console.log(currentPond)
 let closeFeedingChecking = () => (showFeedingCheckingModal.value = false)
 let closeLosses = () => (showLossesModal.value = false)
 let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
+let closeWaterDataModa = () => (showWaterDataModal.value = false)
+let closeFeedingDataModal = () => (showFeedingDataModal.value = false)
+let closeSamplingDataModal = () => (showSamplingDataModal.value = false)
+let closeTransparencyDataModal = () => (showTransparencyDataModal.value = false)
 </script>
 
 <template>
@@ -33,16 +42,52 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
       :closeModal="closeWaterQualityModal"
       :showPondField="true"
     />
-    <div class="nav-buttons-ponds">
-      <VButton color="success" outlined @click="showLossesModal = true" raised
-        >تلفات</VButton
-      >
-      <VButton color="success" outlined @click="showFeedingCheckingModal = true" raised
-        >ثبت اطلاعات غذادهی</VButton
-      >
-      <VButton color="success" outlined @click="showWaterQualityModal = true" raised
-        >اندازه گیری</VButton
-      >
+    <CreateChangingWaterDataModal
+      :show="showWaterDataModal"
+      :close-modal="closeWaterDataModa"
+      :showPondField="true"
+    />
+    <CreateFeedingDataModal
+      :show="showFeedingDataModal"
+      :close-modal="closeFeedingDataModal"
+      :showPondField="true"
+    />
+    <CreateSamplingDataModal
+      :show="showSamplingDataModal"
+      :close-modal="closeSamplingDataModal"
+      :showPondField="true"
+    />
+    <CreateTransparencyDataModal
+      :show="showTransparencyDataModal"
+      :close-modal="closeTransparencyDataModal"
+      :showPondField="true"
+    />
+    <div class="nav-buttons-ponds-ponds">
+      <div class="row-top">
+        <VButton color="success" outlined @click="showLossesModal = true" raised
+          >تلفات</VButton
+        >
+        <VButton color="success" outlined @click="showFeedingCheckingModal = true" raised
+          >ثبت اطلاعات غذادهی</VButton
+        >
+        <VButton color="success" outlined @click="showWaterQualityModal = true" raised
+          >اندازه گیری</VButton
+        >
+      </div>
+      <div class="row-bottom">
+        <VButton color="success" outlined @click="showSamplingDataModal = true" raised
+          >اطلاعات نمونه برداری</VButton
+        >
+        <VButton color="success" outlined @click="showFeedingDataModal = true" raised
+          >چک غذادهی</VButton
+        >
+        <VButton color="success" outlined @click="showWaterDataModal = true" raised
+          >تعویض آب</VButton
+        >
+        <VButton color="success" outlined @click="showTransparencyDataModal = true" raised
+          >شفافیت</VButton
+        >
+      </div>
     </div>
     <!--List-->
     <div class="list-view list-view-v2">
@@ -101,7 +146,7 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
               <div class="card-pond-attr-icon">
                 <img src="/@src/assets/smartmakran/icons-box/bio.svg" alt="" />
               </div>
-              <h4>BIO MASS</h4>
+              <h4>حجم توده زنده</h4>
               <p>12</p>
             </div>
           </div>
@@ -110,7 +155,7 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
               <div class="card-pond-attr-icon">
                 <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
               </div>
-              <h4>SAL</h4>
+              <h4>میزان شوری</h4>
               <p>32</p>
             </div>
           </div>
@@ -119,7 +164,7 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
               <div class="card-pond-attr-icon">
                 <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="" />
               </div>
-              <h4>DO</h4>
+              <h4>اکسیژن</h4>
               <p>12</p>
             </div>
           </div>
@@ -128,7 +173,7 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
               <div class="card-pond-attr-icon">
                 <img src="/@src/assets/smartmakran/icons-box/size.svg" alt="" />
               </div>
-              <h4>Size Avg</h4>
+              <h4>میانگین سایز</h4>
               <p>12</p>
             </div>
           </div>
@@ -138,7 +183,7 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
               <div class="card-pond-attr-icon">
                 <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="" />
               </div>
-              <h4>PH</h4>
+              <h4>میزان اسیدیته</h4>
               <p>12</p>
             </div>
           </div>
@@ -147,7 +192,7 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
               <div class="card-pond-attr-icon">
                 <img src="/@src/assets/smartmakran/icons-box/temp.svg" alt="" />
               </div>
-              <h4>TEMP</h4>
+              <h4>دما</h4>
               <p>12</p>
             </div>
           </div>
@@ -694,7 +739,8 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
     margin-left: 0;
   }
 }
-.nav-buttons-ponds {
+.nav-buttons-ponds,
+.nav-buttons-ponds-ponds {
   width: 100%;
   // height: 50px;
   background: white;
@@ -721,11 +767,23 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
 .card-pond-footer {
   display: none;
 }
-@media screen and (min-width: 600px) {
-  .nav-buttons-ponds {
-    display: grid;
-    grid-template-columns: 32.5% 32.5% 32.5%;
-    justify-content: space-between;
+@media screen and (min-width: 768px) {
+  .nav-buttons-ponds,
+  .nav-buttons-ponds-ponds {
+    // display: grid !important;
+    // grid-template-columns: 32.5% 32.5% 32.5% !important;
+    // justify-content: space-between !important;
+    .row-top {
+      display: grid !important;
+      grid-template-columns: 32.5% 32.5% 32.5% !important;
+      justify-content: space-between !important;
+    }
+    .row-bottom {
+      display: grid !important;
+      grid-template-columns: 24% 24% 24% 24% !important;
+      justify-content: space-between !important;
+      margin-top: 10px;
+    }
     .button {
       margin-bottom: 0 !important;
     }

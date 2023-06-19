@@ -146,11 +146,11 @@ Responsive styles
     }
   }
 
-  .mobile-main-sidebar,
-  .mobile-overlay,
-  .mobile-subsidebar {
-    display: none !important;
-  }
+  // .mobile-main-sidebar,
+  // .mobile-overlay,
+  // .mobile-subsidebar {
+  //   display: none !important;
+  // }
 
   .sidebar-panel {
     box-shadow: var(--light-box-shadow);
@@ -714,4 +714,10 @@ Responsive styles
 // new style
 .sidebar-panel {
   right: 0 !important;
+}
+
+@media screen and (max-width: 1024px) {
+  .sidebar-panel {
+    display: none !important;
+  }
 }

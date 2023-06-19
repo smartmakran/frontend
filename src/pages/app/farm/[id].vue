@@ -8,6 +8,10 @@ import { ref } from 'vue'
 const showLossesModal = ref(false)
 const showFeedingCheckingModal = ref(false)
 const showWaterQualityModal = ref(false)
+const showWaterDataModal = ref(false)
+const showFeedingDataModal = ref(false)
+const showSamplingDataModal = ref(false)
+const showTransparencyDataModal = ref(false)
 
 const params = defineProps({
   id: {
@@ -28,6 +32,10 @@ onMounted(() => {
 let closeFeedingChecking = () => (showFeedingCheckingModal.value = false)
 let closeLosses = () => (showLossesModal.value = false)
 let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
+let closeWaterDataModa = () => (showWaterDataModal.value = false)
+let closeFeedingDataModal = () => (showFeedingDataModal.value = false)
+let closeSamplingDataModal = () => (showSamplingDataModal.value = false)
+let closeTransparencyDataModal = () => (showTransparencyDataModal.value = false)
 </script>
 
 <template>
@@ -43,16 +51,53 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
       :closeModal="closeWaterQualityModal"
       :showPondField="false"
     />
+    <CreateChangingWaterDataModal
+      :show="showWaterDataModal"
+      :close-modal="closeWaterDataModa"
+      :show-pond-field="false"
+    />
+    <CreateFeedingDataModal
+      :show="showFeedingDataModal"
+      :close-modal="closeFeedingDataModal"
+      :show-pond-field="false"
+    />
+    <CreateSamplingDataModal
+      :show="showSamplingDataModal"
+      :close-modal="closeSamplingDataModal"
+      :show-pond-field="false"
+    />
+    <CreateTransparencyDataModal
+      :show="showTransparencyDataModal"
+      :close-modal="closeTransparencyDataModal"
+      :show-pond-field="false"
+    />
     <div class="nav-buttons-ponds">
-      <VButton color="success" outlined @click="showLossesModal = true" raised
-        >تلفات</VButton
-      >
-      <VButton color="success" outlined @click="showFeedingCheckingModal = true" raised
-        >ثبت اطلاعات غذادهی</VButton
-      >
-      <VButton color="success" outlined @click="showWaterQualityModal = true" raised
-        >اندازه گیری</VButton
-      >
+      <div class="row-top">
+        <VButton color="success" outlined @click="showLossesModal = true" raised
+          >تلفات</VButton
+        >
+        <VButton color="success" outlined @click="showFeedingCheckingModal = true" raised
+          >ثبت اطلاعات غذادهی</VButton
+        >
+        <VButton color="success" outlined @click="showWaterQualityModal = true" raised
+          >اندازه گیری</VButton
+        >
+      </div>
+
+      <div class="row-bottom">
+        <VButton color="success" outlined @click="showSamplingDataModal = true" raised
+          >اطلاعات نمونه برداری</VButton
+        >
+        <VButton color="success" outlined @click="showFeedingDataModal = true" raised
+          >چک غذادهی</VButton
+        >
+        <VButton color="success" outlined @click="showWaterDataModal = true" raised
+          >تعویض آب</VButton
+        >
+        <VButton color="success" outlined @click="showTransparencyDataModal = true" raised
+          >شفافیت</VButton
+        >
+      </div>
     </div>
     <!-- <TestDashboard /> -->
     <div class="business-dashboard course-dashboard">
@@ -83,11 +128,20 @@ let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
 }
 @media screen and (min-width: 600px) {
   .nav-buttons-ponds {
-    display: grid;
-    grid-template-columns: 32.5% 32.5% 32.5%;
-    justify-content: space-between;
+    display: block !important;
     .button {
       margin-bottom: 0 !important;
+    }
+    .row-top {
+      display: grid;
+      grid-template-columns: 32.5% 32.5% 32.5%;
+      justify-content: space-between;
+    }
+    .row-bottom {
+      display: grid;
+      grid-template-columns: 24% 24% 24% 24%;
+      justify-content: space-between;
+      margin-top: 10px;
     }
   }
 }

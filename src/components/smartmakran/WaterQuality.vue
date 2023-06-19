@@ -99,7 +99,7 @@ let filteredPonds = computed<IPond[]>(() => {
         <div class="form-fields-field mb-20px">
           <Field v-slot="{ field, errorMessage }" name="ph">
             <VField>
-              <label>میزان اسیدیته (pH)</label>
+              <label>میزان اسیدیته</label>
               <VControl :has-error="Boolean(errorMessage)">
                 <input
                   v-bind="field"
@@ -175,7 +175,7 @@ let filteredPonds = computed<IPond[]>(() => {
         <div class="form-fields-field mb-20px">
           <Field v-slot="{ field, errorMessage }" name="ammonia">
             <VField>
-              <label>ammonia</label>
+              <label>آمونیاک</label>
               <VControl :has-error="Boolean(errorMessage)">
                 <input
                   v-bind="field"
@@ -194,7 +194,7 @@ let filteredPonds = computed<IPond[]>(() => {
         <div class="form-fields-field mb-20px">
           <Field v-slot="{ field, errorMessage }" name="nitrite">
             <VField>
-              <label>nitrite</label>
+              <label>نیتریته</label>
               <VControl :has-error="Boolean(errorMessage)">
                 <input
                   v-bind="field"
@@ -213,7 +213,7 @@ let filteredPonds = computed<IPond[]>(() => {
         <div class="form-fields-field mb-20px">
           <Field v-slot="{ field, errorMessage }" name="temperature">
             <VField>
-              <label>temperature</label>
+              <label>دما</label>
               <VControl :has-error="Boolean(errorMessage)">
                 <input
                   v-bind="field"
