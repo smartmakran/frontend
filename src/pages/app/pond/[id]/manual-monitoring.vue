@@ -27,6 +27,12 @@ onMounted(async () => {
         <CreateFeedingData />
         <CreateChangingWaterData />
         <CreateTransparencyData />
+
+        <CreateFeedingChecking />
+        <CreateLosses />
+      </div>
+      <div>
+        <CreateWaterQuality />
       </div>
     </div>
   </div>

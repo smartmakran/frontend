@@ -128,7 +128,7 @@ let closing = () => (showCreatePond.value = false)
                     <div class="card-pond-attr-icon">
                       <img src="/@src/assets/smartmakran/icons-box/bio.svg" alt="" />
                     </div>
-                    <h4>BIO MASS</h4>
+                    <h4>حجم توده زنده</h4>
                     <p>12</p>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ let closing = () => (showCreatePond.value = false)
                     <div class="card-pond-attr-icon">
                       <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
                     </div>
-                    <h4>SAL</h4>
+                    <h4>میزان شوری</h4>
                     <p>32</p>
                   </div>
                 </div>
@@ -146,7 +146,7 @@ let closing = () => (showCreatePond.value = false)
                     <div class="card-pond-attr-icon">
                       <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="" />
                     </div>
-                    <h4>DO</h4>
+                    <h4>اکسیژن</h4>
                     <p>12</p>
                   </div>
                 </div>
@@ -155,7 +155,7 @@ let closing = () => (showCreatePond.value = false)
                     <div class="card-pond-attr-icon">
                       <img src="/@src/assets/smartmakran/icons-box/size.svg" alt="" />
                     </div>
-                    <h4>Size Avg</h4>
+                    <h4>میانگین سایز</h4>
                     <p>12</p>
                   </div>
                 </div>
@@ -165,7 +165,7 @@ let closing = () => (showCreatePond.value = false)
                     <div class="card-pond-attr-icon">
                       <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="" />
                     </div>
-                    <h4>PH</h4>
+                    <h4>میزان اسیدیته</h4>
                     <p>12</p>
                   </div>
                 </div>
@@ -174,7 +174,7 @@ let closing = () => (showCreatePond.value = false)
                     <div class="card-pond-attr-icon">
                       <img src="/@src/assets/smartmakran/icons-box/temp.svg" alt="" />
                     </div>
-                    <h4>TEMP</h4>
+                    <h4>دما</h4>
                     <p>12</p>
                   </div>
                 </div>

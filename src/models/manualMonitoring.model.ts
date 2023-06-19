@@ -9,7 +9,7 @@ export class SamplingChartOption extends ChartBaseOption {
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'نمونه‌برداری',
+    text: 'نمونه برداری (g)',
     align: 'left',
   }
   labels: string[]
@@ -34,7 +34,7 @@ export class FeedingChartOption extends ChartBaseOption {
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'غذادهی',
+    text: 'غذادهی (kg)',
     align: 'left',
   }
   labels: string[]
@@ -59,7 +59,7 @@ export class ChangingWaterChartOption extends ChartBaseOption {
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'تعویض آب',
+    text: 'تعویض آب (درصد)',
     align: 'left',
   }
   labels: string[]
@@ -84,7 +84,7 @@ export class TransparencyChartOption extends ChartBaseOption {
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'شفافیت',
+    text: 'شفافیت (cm)',
     align: 'left',
   }
   labels: string[]

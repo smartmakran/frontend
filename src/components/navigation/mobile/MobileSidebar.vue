@@ -721,4 +721,13 @@ const props = defineProps<{
     }
   }
 }
+
+@media screen and (max-width: 1024px) {
+  .mobile-main-sidebar {
+    &.is-active {
+      transform: translateX(0) !important;
+      width: 60% !important;
+    }
+  }
+}
 </style>
