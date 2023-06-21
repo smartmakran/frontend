@@ -48,6 +48,11 @@ const createFarmForm = handleSubmit(async (values) => {
   if (result === 201) {
     console.log('Farm created successfully')
     farmStore.getFarmsList()
+    notyf.success({
+      message: 'مزرعه با موفقیت ایجاد شد',
+      duration: 2000,
+    })
+    props.closeForm()
   } else {
     console.log('Farm creation failed')
     notyf.error({

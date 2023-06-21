@@ -52,6 +52,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
     notyf.success({
       message: 'فرم غذاده با موفیقیت ثبت شد',
     })
+    props.closeModal()
   } else {
     console.log('Farm creation failed')
     notyf.error({

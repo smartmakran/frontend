@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, watchEffect } from 'vue'
 import { usePondStore } from '/@src/stores/pond'
 import { IPond } from '/@src/interfaces/pond.interface'
 import { ref } from 'vue'
@@ -15,11 +15,12 @@ const showFeedingDataModal = ref(false)
 const showSamplingDataModal = ref(false)
 const showTransparencyDataModal = ref(false)
 
+const pondDetail = ref()
 const pondStore = usePondStore()
 const currentPond = computed<IPond>(() => {
   return pondStore.currentPond || {}
 })
-console.log(currentPond)
+
 let closeFeedingChecking = () => (showFeedingCheckingModal.value = false)
 let closeLosses = () => (showLossesModal.value = false)
 let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
@@ -27,6 +28,11 @@ let closeWaterDataModa = () => (showWaterDataModal.value = false)
 let closeFeedingDataModal = () => (showFeedingDataModal.value = false)
 let closeSamplingDataModal = () => (showSamplingDataModal.value = false)
 let closeTransparencyDataModal = () => (showTransparencyDataModal.value = false)
+watchEffect(() => {
+  const sensorData = JSON.parse(localStorage.getItem('sensorData'))
+  let newPons = sensorData.filter((item) => item.pond === route.params.id)
+  pondDetail.value = newPons[0]
+})
 </script>
 
 <template>

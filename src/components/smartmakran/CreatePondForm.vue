@@ -60,6 +60,11 @@ const createPondForm = handleSubmit(async (values) => {
   if (result === 201) {
     console.log('Farm created successfully')
     farmStore.getFarm(props.showFieldFarm ? pond.farm : farmStore.currentFarm.id)
+    notyf.success({
+      message: 'مزرعه با موفیقت اضافه شد',
+      duration: 2000,
+    })
+    props.closeForm()
   } else {
     console.log('Farm creation failed')
     notyf.error({

@@ -17,6 +17,7 @@ import { SocketService } from '/@src/services/modules/socket/socket.service'
 import { ref, onMounted, reactive, watchEffect } from 'vue'
 import { useThemeColors } from '../../composable/useThemeColors'
 import { useUserStore } from '/@src/stores/user'
+import { watch } from 'vue'
 
 type SensorData = {
   ph: number
@@ -51,9 +52,10 @@ function extractData(data: any, optimal: any) {
   }
 
   const dates = data.map(
-    (d: SensorData) =>
-      // moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
-      '12'
+    // (d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
+
+    (d: SensorData) => moment(moment.now()).diff(d.createdAt, 'days')
+    // '12'
   )
 
   const phData: number[] = data.map((d: SensorData) => d.ph)
@@ -292,16 +294,11 @@ const charts = ref([
     options: temperature,
   },
 ])
-watchEffect(() => {
-  if (localStorage.getItem('chart_automatic_monitoring') !== null) {
-    charts.value = JSON.parse(localStorage.getItem('chart_automatic_monitoring'))
-  }
-})
 
 const dragChartHandle = () => {
   localStorage.setItem('chart_automatic_monitoring', JSON.stringify(charts._rawValue))
 }
-
+const activateDraggable = ref(false)
 onMounted(async () => {
   // socket.on('message', (data) => {
   //   const {
@@ -388,7 +385,16 @@ onMounted(async () => {
     <!--Header-->
     <div class="dashboard-header">
       <div class="start">
-        <h3 class="dark-inverted">پایش‌های اتوماتیک</h3>
+        <div class="dashboard-header-chart">
+          <h3 class="dark-inverted">پایش‌های اتوماتیک</h3>
+          <label class="checked-draggable-container" for="activateDraggable">
+            <span>تغیر ترتیب نمودار ها</span>
+            <div class="checked-draggable">
+              <input v-model="activateDraggable" type="checkbox" name="" id="" />
+              <div class="checked-draggable-btn"></div>
+            </div>
+          </label>
+        </div>
         <p>اطلاعاتی که از سنسورها ثبت می‌شود.</p>
       </div>
     </div>
@@ -432,7 +438,7 @@ onMounted(async () => {
 
     <!-- charts ref -->
 
-    <!-- <div class="columns is-multiline">
+    <div class="columns is-multiline" v-if="activateDraggable === false">
       <div class="column is-6" v-for="(item, key) in charts" :key="key">
         <div class="s-card">
           <ApexChart
@@ -446,10 +452,12 @@ onMounted(async () => {
           </ApexChart>
         </div>
       </div>
-    </div> -->
+    </div>
 
     <!--  -->
+
     <draggable
+      v-if="activateDraggable === true"
       @change="dragChartHandle"
       class="columns is-multiline"
       v-model="charts"
@@ -486,6 +494,7 @@ onMounted(async () => {
 
     .start {
       margin-left: 12px;
+      width: 100%;
       [dir='rtl'] & {
         margin-left: unset;
         margin-right: 12px;
@@ -635,6 +644,49 @@ onMounted(async () => {
         [dir='rtl'] & {
           margin: 0;
         }
+      }
+    }
+  }
+}
+
+.dashboard-header-chart {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.checked-draggable-container {
+  display: flex;
+}
+.checked-draggable {
+  width: 40px;
+  height: 25px;
+  border-radius: 50px;
+  background: #283252;
+  position: relative;
+  cursor: pointer;
+  margin-right: 8px;
+  .checked-draggable-btn {
+    width: 21px;
+    height: 21px;
+    background: #d5d8e4;
+    border-radius: 30px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+    cursor: pointer;
+    &:checked {
+      & + .checked-draggable-btn {
+        right: 17px;
       }
     }
   }
