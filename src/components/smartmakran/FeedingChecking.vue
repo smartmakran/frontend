@@ -64,7 +64,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <VModal :open="show" @close="closeModal" title="فرم غذادهی">
+  <VModal :open="show" title="فرم غذادهی" @close="closeModal">
     <template #content>
       <form class="form-fields">
         <div v-if="!showPondField" class="form-fields-field mb-20px">
@@ -143,7 +143,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" @click="feedingCheckingForm" raised>ثبت</VButton>
+      <VButton color="primary" raised @click="feedingCheckingForm">ثبت</VButton>
     </template>
   </VModal>
 </template>

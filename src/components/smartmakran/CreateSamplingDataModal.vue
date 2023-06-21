@@ -59,7 +59,7 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
     <template #content>
       <form class="form-body form-body-responsive">
         <!--Fieldset-->
-        <div class="form-fieldset" v-if="!showPondField">
+        <div v-if="!showPondField" class="form-fieldset">
           <div class="columns is-multiline">
             <div class="column is-12">
               <Field v-slot="{ field, errorMessage }" name="pond">
@@ -133,7 +133,7 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
       </form>
     </template>
     <template #action
-      ><VButton color="primary" @click="createSamplingData" raised>ثبت</VButton></template
+      ><VButton color="primary" raised @click="createSamplingData">ثبت</VButton></template
     >
   </VModal>
 </template>

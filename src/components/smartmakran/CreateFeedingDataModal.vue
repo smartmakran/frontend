@@ -73,7 +73,7 @@ const feedingChecking = handleSubmit(async (values) => {
       <form class="form-body form-body-responsive">
         <!--Fieldset-->
 
-        <div class="form-fieldset" v-if="!showPondField">
+        <div v-if="!showPondField" class="form-fieldset">
           <div class="columns is-multiline">
             <div class="column is-12">
               <Field v-slot="{ field, errorMessage }" name="pond">
@@ -139,7 +139,7 @@ const feedingChecking = handleSubmit(async (values) => {
       </form>
     </template>
     <template #action
-      ><VButton color="primary" @click="feedingChecking" raised>ثبت</VButton></template
+      ><VButton color="primary" raised @click="feedingChecking">ثبت</VButton></template
     >
   </VModal>
 </template>

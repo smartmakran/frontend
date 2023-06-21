@@ -132,7 +132,7 @@ const createTransparencyData = transparencyHandleSubmit(async (values) => {
       </div>
     </template>
     <template #action
-      ><VButton color="primary" @click="createTransparencyData" raised
+      ><VButton color="primary" raised @click="createTransparencyData"
         >ثبت</VButton
       ></template
     >

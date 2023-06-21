@@ -76,7 +76,7 @@ const createPondForm = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <VModal :open="show" @close="closeForm" title="ثبت حوضچه جدید">
+  <VModal :open="show" title="ثبت حوضچه جدید" @close="closeForm">
     <template #content>
       <form class="form-layout">
         <!--Fieldset-->
@@ -264,7 +264,7 @@ const createPondForm = handleSubmit(async (values) => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" @click="createPondForm" raised>ثبت</VButton>
+      <VButton color="primary" raised @click="createPondForm">ثبت</VButton>
     </template>
   </VModal>
 </template>

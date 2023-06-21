@@ -66,28 +66,28 @@ onMounted(async () => {
 const activateDraggable = ref(false)
 const charts = ref([
   {
-    height: sampling._rawValue.chart.height,
-    type: sampling._rawValue.chart.type,
-    series: sampling._rawValue.series,
-    options: sampling._rawValue,
+    height: sampling.value._rawValue.chart.height,
+    type: sampling.value._rawValue.chart.type,
+    series: sampling.value._rawValue.series,
+    options: sampling.value._rawValue,
   },
   {
-    height: feeding._rawValue.chart.height,
-    type: feeding._rawValue.chart.type,
-    series: feeding._rawValue.series,
-    options: feeding._rawValue,
+    height: feeding.value._rawValue.chart.height,
+    type: feeding.value._rawValue.chart.type,
+    series: feeding.value._rawValue.series,
+    options: feeding.value._rawValue,
   },
   {
-    height: changingWater._rawValue.chart.height,
-    type: changingWater._rawValue.chart.type,
-    series: changingWater._rawValue.series,
-    options: changingWater._rawValue,
+    height: changingWater.value._rawValue.chart.height,
+    type: changingWater.value._rawValue.chart.type,
+    series: changingWater.value._rawValue.series,
+    options: changingWater.value._rawValue,
   },
   {
-    height: transparency._rawValue.chart.height,
-    type: transparency._rawValue.chart.type,
-    series: transparency._rawValue.series,
-    options: transparency._rawValue,
+    height: transparency.value._rawValue.chart.height,
+    type: transparency.value._rawValue.chart.type,
+    series: transparency.value._rawValue.series,
+    options: transparency.value._rawValue,
   },
 ])
 watchEffect(() => {
@@ -97,7 +97,7 @@ watchEffect(() => {
 })
 
 const dragChartHandle = () => {
-  localStorage.setItem('chart_manual', JSON.stringify(charts._rawValue))
+  localStorage.setItem('chart_manual', JSON.stringify(charts.value._rawValue))
 }
 </script>
 
@@ -111,7 +111,7 @@ const dragChartHandle = () => {
           <label class="checked-draggable-container" for="activateDraggable">
             <span>تغیر ترتیب نمودار ها</span>
             <div class="checked-draggable">
-              <input v-model="activateDraggable" type="checkbox" name="" id="" />
+              <input id="" v-model="activateDraggable" type="checkbox" name="" />
               <div class="checked-draggable-btn"></div>
             </div>
           </label>
@@ -121,8 +121,8 @@ const dragChartHandle = () => {
       </div>
     </div>
 
-    <div class="columns is-multiline" v-if="activateDraggable === false">
-      <div class="column is-6" v-for="(item, key) in charts" :key="key">
+    <div v-if="activateDraggable === false" class="columns is-multiline">
+      <div v-for="(item, key) in charts" :key="key" class="column is-6">
         <div class="s-card">
           <ApexChart
             id="apex-chart-5"
@@ -139,11 +139,11 @@ const dragChartHandle = () => {
     <!-- Charts -->
 
     <draggable
-      @change="dragChartHandle"
-      class="columns is-multiline"
       v-if="activateDraggable === true"
       v-model="charts"
+      class="columns is-multiline"
       group="charts"
+      @change="dragChartHandle"
     >
       <template #item="{ element: chart }">
         <div class="column is-6">

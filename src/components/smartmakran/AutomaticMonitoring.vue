@@ -296,7 +296,10 @@ const charts = ref([
 ])
 
 const dragChartHandle = () => {
-  localStorage.setItem('chart_automatic_monitoring', JSON.stringify(charts._rawValue))
+  localStorage.setItem(
+    'chart_automatic_monitoring',
+    JSON.stringify(charts.value._rawValue)
+  )
 }
 const activateDraggable = ref(false)
 onMounted(async () => {
@@ -390,7 +393,7 @@ onMounted(async () => {
           <label class="checked-draggable-container" for="activateDraggable">
             <span>تغیر ترتیب نمودار ها</span>
             <div class="checked-draggable">
-              <input v-model="activateDraggable" type="checkbox" name="" id="" />
+              <input id="" v-model="activateDraggable" type="checkbox" name="" />
               <div class="checked-draggable-btn"></div>
             </div>
           </label>
@@ -438,8 +441,8 @@ onMounted(async () => {
 
     <!-- charts ref -->
 
-    <div class="columns is-multiline" v-if="activateDraggable === false">
-      <div class="column is-6" v-for="(item, key) in charts" :key="key">
+    <div v-if="activateDraggable === false" class="columns is-multiline">
+      <div v-for="(item, key) in charts" :key="key" class="column is-6">
         <div class="s-card">
           <ApexChart
             id="apex-chart-5"
@@ -458,10 +461,10 @@ onMounted(async () => {
 
     <draggable
       v-if="activateDraggable === true"
-      @change="dragChartHandle"
-      class="columns is-multiline"
       v-model="charts"
+      class="columns is-multiline"
       group="charts"
+      @change="dragChartHandle"
     >
       <template #item="{ element: chart }">
         <div class="column is-6">

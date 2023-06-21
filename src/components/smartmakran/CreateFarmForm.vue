@@ -64,7 +64,7 @@ const createFarmForm = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <VModal :open="show" @close="closeForm" title="ثبت مزرعه جدید">
+  <VModal :open="show" title="ثبت مزرعه جدید" @close="closeForm">
     <template #content>
       <div class="">
         <form>
@@ -242,7 +242,7 @@ const createFarmForm = handleSubmit(async (values) => {
       </div>
     </template>
     <template #action>
-      <VButton color="primary" @click="createFarmForm" raised>ثبت</VButton>
+      <VButton color="primary" raised @click="createFarmForm">ثبت</VButton>
     </template>
   </VModal>
 </template>

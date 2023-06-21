@@ -39,58 +39,58 @@ watchEffect(() => {
   <div class="page-content-inner">
     <FeedingChecking
       :show="showFeedingCheckingModal"
-      :closeModal="closeFeedingChecking"
-      :showPondField="true"
+      :close-modal="closeFeedingChecking"
+      :show-pond-field="true"
     />
-    <Losses :show="showLossesModal" :closeModal="closeLosses" :showPondField="true" />
+    <Losses :show="showLossesModal" :close-modal="closeLosses" :show-pond-field="true" />
     <WaterQuality
       :show="showWaterQualityModal"
-      :closeModal="closeWaterQualityModal"
-      :showPondField="true"
+      :close-modal="closeWaterQualityModal"
+      :show-pond-field="true"
     />
     <CreateChangingWaterDataModal
       :show="showWaterDataModal"
       :close-modal="closeWaterDataModa"
-      :showPondField="true"
+      :show-pond-field="true"
     />
     <CreateFeedingDataModal
       :show="showFeedingDataModal"
       :close-modal="closeFeedingDataModal"
-      :showPondField="true"
+      :show-pond-field="true"
     />
     <CreateSamplingDataModal
       :show="showSamplingDataModal"
       :close-modal="closeSamplingDataModal"
-      :showPondField="true"
+      :show-pond-field="true"
     />
     <CreateTransparencyDataModal
       :show="showTransparencyDataModal"
       :close-modal="closeTransparencyDataModal"
-      :showPondField="true"
+      :show-pond-field="true"
     />
     <div class="nav-buttons-ponds-ponds">
       <div class="row-top">
-        <VButton color="success" outlined @click="showLossesModal = true" raised
+        <VButton color="success" outlined raised @click="showLossesModal = true"
           >تلفات</VButton
         >
-        <VButton color="success" outlined @click="showFeedingCheckingModal = true" raised
+        <VButton color="success" outlined raised @click="showFeedingCheckingModal = true"
           >ثبت اطلاعات غذادهی</VButton
         >
-        <VButton color="success" outlined @click="showWaterQualityModal = true" raised
+        <VButton color="success" outlined raised @click="showWaterQualityModal = true"
           >اندازه گیری</VButton
         >
       </div>
       <div class="row-bottom">
-        <VButton color="success" outlined @click="showSamplingDataModal = true" raised
+        <VButton color="success" outlined raised @click="showSamplingDataModal = true"
           >اطلاعات نمونه برداری</VButton
         >
-        <VButton color="success" outlined @click="showFeedingDataModal = true" raised
+        <VButton color="success" outlined raised @click="showFeedingDataModal = true"
           >چک غذادهی</VButton
         >
-        <VButton color="success" outlined @click="showWaterDataModal = true" raised
+        <VButton color="success" outlined raised @click="showWaterDataModal = true"
           >تعویض آب</VButton
         >
-        <VButton color="success" outlined @click="showTransparencyDataModal = true" raised
+        <VButton color="success" outlined raised @click="showTransparencyDataModal = true"
           >شفافیت</VButton
         >
       </div>
