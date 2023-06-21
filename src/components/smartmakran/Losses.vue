@@ -52,6 +52,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
     notyf.success({
       message: 'تلفات با موفقیت ثبت شد',
     })
+    props.closeModal()
     // farmStore.getFarmsList()
   } else {
     console.log(result)
@@ -65,7 +66,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <VModal :open="show" @close="closeModal" title="ثبت تلفات">
+  <VModal :open="show" title="ثبت تلفات" @close="closeModal">
     <template #content>
       <form>
         <div class="form-fields">
@@ -126,7 +127,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" @click="feedingCheckingForm" raised>ثبت</VButton>
+      <VButton color="primary" raised @click="feedingCheckingForm">ثبت</VButton>
     </template>
   </VModal>
 </template>

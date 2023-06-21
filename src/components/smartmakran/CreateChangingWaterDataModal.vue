@@ -44,6 +44,7 @@ const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
       message: 'اطلاعات ثبت شد.',
       duration: 2000,
     })
+    props.closeModal()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',
@@ -58,30 +59,7 @@ const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
     <template #content>
       <form class="form-body form-body-responsive">
         <!--Fieldset-->
-        <div class="form-fieldset">
-          <div class="columns is-multiline">
-            <div class="column is-12">
-              <Field v-slot="{ field, errorMessage }" name="changingWaterAmount">
-                <VField>
-                  <label>میزان تعویض آب</label>
-                  <VControl :has-error="Boolean(errorMessage)">
-                    <input
-                      v-bind="field"
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="given-name"
-                    />
-                    <p v-if="errorMessage" class="help is-danger">
-                      {{ errorMessage }}
-                    </p>
-                  </VControl>
-                </VField>
-              </Field>
-            </div>
-          </div>
-        </div>
-        <div class="form-fieldset">
+        <div v-if="!showPondField" class="form-fieldset">
           <div class="columns is-multiline">
             <div class="column is-12">
               <Field v-slot="{ field, errorMessage }" name="pond">
@@ -97,6 +75,29 @@ const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
                         {{ pond.name }}
                       </option>
                     </select>
+                    <p v-if="errorMessage" class="help is-danger">
+                      {{ errorMessage }}
+                    </p>
+                  </VControl>
+                </VField>
+              </Field>
+            </div>
+          </div>
+        </div>
+        <div class="form-fieldset">
+          <div class="columns is-multiline">
+            <div class="column is-12">
+              <Field v-slot="{ field, errorMessage }" name="changingWaterAmount">
+                <VField>
+                  <label>میزان تعویض آب</label>
+                  <VControl :has-error="Boolean(errorMessage)">
+                    <input
+                      v-bind="field"
+                      type="text"
+                      class="input"
+                      placeholder=""
+                      autocomplete="given-name"
+                    />
                     <p v-if="errorMessage" class="help is-danger">
                       {{ errorMessage }}
                     </p>
@@ -131,7 +132,7 @@ const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" @click="createChangingWaterData" raised>ثبت</VButton>
+      <VButton color="primary" raised @click="createChangingWaterData">ثبت</VButton>
     </template>
   </VModal>
 </template>

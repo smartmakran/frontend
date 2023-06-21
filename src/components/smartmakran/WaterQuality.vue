@@ -60,6 +60,7 @@ const waterQualityHandler = handleSubmit(async (values) => {
     notyf.success({
       message: 'میزان کیفیت آب باموفقیت ثبت شد',
     })
+    props.closeModal()
     // farmStore.getFarmsList()
   } else {
     console.log(result)
@@ -76,7 +77,7 @@ let filteredPonds = computed<IPond[]>(() => {
 </script>
 
 <template>
-  <VModal :open="show" @close="closeModal" title="کیفیت آب">
+  <VModal :open="show" title="کیفیت آب" @close="closeModal">
     <template #content>
       <form class="form-fields">
         <div v-if="!showPondField" class="form-fields-field mb-20px">
@@ -194,7 +195,7 @@ let filteredPonds = computed<IPond[]>(() => {
         <div class="form-fields-field mb-20px">
           <Field v-slot="{ field, errorMessage }" name="nitrite">
             <VField>
-              <label>نیتریته</label>
+              <label>نیتریت</label>
               <VControl :has-error="Boolean(errorMessage)">
                 <input
                   v-bind="field"
@@ -268,7 +269,7 @@ let filteredPonds = computed<IPond[]>(() => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" @click="waterQualityHandler" raised>ثبت</VButton>
+      <VButton color="primary" raised @click="waterQualityHandler">ثبت</VButton>
     </template>
   </VModal>
 </template>

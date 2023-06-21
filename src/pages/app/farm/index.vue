@@ -14,7 +14,13 @@ onMounted(async () => {
       }
     )
     localStorage.setItem('sensorKey', res.data.user.sensorsKey)
-    console.log(res.data)
+    localStorage.setItem(
+      'sensorData',
+
+      JSON.stringify(res.data.sensorData)
+    )
+    console.log(res)
+    console.log(JSON.parse(localStorage.getItem('sensorData')))
   } catch (err) {
     console.log(err)
   }

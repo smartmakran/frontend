@@ -44,6 +44,7 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
       message: 'اطلاعات ثبت شد.',
       duration: 2000,
     })
+    props.closeModal()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',
@@ -58,31 +59,7 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
     <template #content>
       <form class="form-body form-body-responsive">
         <!--Fieldset-->
-        <div class="form-fieldset">
-          <div class="columns is-multiline">
-            <div class="column is-12">
-              <Field v-slot="{ field, errorMessage }" name="samplingAverageSize">
-                <VField>
-                  <label>سایز میانگین</label>
-                  <VControl :has-error="Boolean(errorMessage)">
-                    <input
-                      v-bind="field"
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="given-name"
-                    />
-                    <p v-if="errorMessage" class="help is-danger">
-                      {{ errorMessage }}
-                    </p>
-                  </VControl>
-                </VField>
-              </Field>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-fieldset">
+        <div v-if="!showPondField" class="form-fieldset">
           <div class="columns is-multiline">
             <div class="column is-12">
               <Field v-slot="{ field, errorMessage }" name="pond">
@@ -98,6 +75,29 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
                         {{ pond.name }}
                       </option>
                     </select>
+                    <p v-if="errorMessage" class="help is-danger">
+                      {{ errorMessage }}
+                    </p>
+                  </VControl>
+                </VField>
+              </Field>
+            </div>
+          </div>
+        </div>
+        <div class="form-fieldset">
+          <div class="columns is-multiline">
+            <div class="column is-12">
+              <Field v-slot="{ field, errorMessage }" name="samplingAverageSize">
+                <VField>
+                  <label>سایز میانگین</label>
+                  <VControl :has-error="Boolean(errorMessage)">
+                    <input
+                      v-bind="field"
+                      type="text"
+                      class="input"
+                      placeholder=""
+                      autocomplete="given-name"
+                    />
                     <p v-if="errorMessage" class="help is-danger">
                       {{ errorMessage }}
                     </p>
@@ -133,7 +133,7 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
       </form>
     </template>
     <template #action
-      ><VButton color="primary" @click="createSamplingData" raised>ثبت</VButton></template
+      ><VButton color="primary" raised @click="createSamplingData">ثبت</VButton></template
     >
   </VModal>
 </template>

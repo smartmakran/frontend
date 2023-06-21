@@ -13,12 +13,14 @@ let filteredPonds = computed<IPond[]>(() => {
   return farmStore.currentFarm.ponds || []
 })
 
+let sensorData = JSON.parse(localStorage.getItem('sensorData'))
+sensorData.sort((a, b) => a.createdAt - b.createdAt)
 let closing = () => (showCreatePond.value = false)
 </script>
 
 <template>
   <!--Grid item-->
-  <CreatePondForm :show-field-farm="false" :show="showCreatePond" :closeForm="closing" />
+  <CreatePondForm :show-field-farm="false" :show="showCreatePond" :close-form="closing" />
   <div class="column">
     <div class="dashboard-title">
       <div class="left">
@@ -118,7 +120,11 @@ let closing = () => (showCreatePond.value = false)
                       <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
                     </div>
                     <h4>میزان شوری</h4>
-                    <p>32</p>
+                    <p>13</p>
+                    <!-- <p v-for="pondDetail in sensorData" :key="pondDetail._id">
+                      <span v-if="pond.id !== pondDetail.pond">-</span>
+                      <span v-if="pond.id === pondDetail.pond">{{ pondDetail.ec }}</span>
+                    </p> -->
                   </div>
                 </div>
                 <div class="card-pond-body">

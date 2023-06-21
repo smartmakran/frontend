@@ -9,6 +9,7 @@ import {
   FeedingChartOption,
   SamplingChartOption,
   TransparencyChartOption,
+  LossessChartOption,
 } from '/@src/models/manualMonitoring.model'
 import { ref } from 'vue'
 
@@ -22,6 +23,7 @@ const params = defineProps({
 const pondStore = usePondStore()
 
 const sampling = ref(new SamplingChartOption([], '#000', []))
+const lossess = ref(new LossessChartOption([], '#000', []))
 const feeding = ref(new FeedingChartOption([], '#000', []))
 const changingWater = ref(new ChangingWaterChartOption([], '#000', []))
 const transparency = ref(new TransparencyChartOption([], '#000', []))
@@ -61,31 +63,31 @@ onMounted(async () => {
     )
   )
 })
-
+const activateDraggable = ref(false)
 const charts = ref([
   {
-    height: sampling._rawValue.chart.height,
-    type: sampling._rawValue.chart.type,
-    series: sampling._rawValue.series,
-    options: sampling._rawValue,
+    height: sampling.value._rawValue.chart.height,
+    type: sampling.value._rawValue.chart.type,
+    series: sampling.value._rawValue.series,
+    options: sampling.value._rawValue,
   },
   {
-    height: feeding._rawValue.chart.height,
-    type: feeding._rawValue.chart.type,
-    series: feeding._rawValue.series,
-    options: feeding._rawValue,
+    height: feeding.value._rawValue.chart.height,
+    type: feeding.value._rawValue.chart.type,
+    series: feeding.value._rawValue.series,
+    options: feeding.value._rawValue,
   },
   {
-    height: changingWater._rawValue.chart.height,
-    type: changingWater._rawValue.chart.type,
-    series: changingWater._rawValue.series,
-    options: changingWater._rawValue,
+    height: changingWater.value._rawValue.chart.height,
+    type: changingWater.value._rawValue.chart.type,
+    series: changingWater.value._rawValue.series,
+    options: changingWater.value._rawValue,
   },
   {
-    height: transparency._rawValue.chart.height,
-    type: transparency._rawValue.chart.type,
-    series: transparency._rawValue.series,
-    options: transparency._rawValue,
+    height: transparency.value._rawValue.chart.height,
+    type: transparency.value._rawValue.chart.type,
+    series: transparency.value._rawValue.series,
+    options: transparency.value._rawValue,
   },
 ])
 watchEffect(() => {
@@ -95,7 +97,7 @@ watchEffect(() => {
 })
 
 const dragChartHandle = () => {
-  localStorage.setItem('chart_manual', JSON.stringify(charts._rawValue))
+  localStorage.setItem('chart_manual', JSON.stringify(charts.value._rawValue))
 }
 </script>
 
@@ -104,18 +106,44 @@ const dragChartHandle = () => {
     <!--Header-->
     <div class="dashboard-header">
       <div class="start">
-        <h3 class="dark-inverted">پایش‌های دستی</h3>
+        <div class="dashboard-header-chart">
+          <h3 class="dark-inverted">پایش‌های دستی</h3>
+          <label class="checked-draggable-container" for="activateDraggable">
+            <span>تغیر ترتیب نمودار ها</span>
+            <div class="checked-draggable">
+              <input id="" v-model="activateDraggable" type="checkbox" name="" />
+              <div class="checked-draggable-btn"></div>
+            </div>
+          </label>
+        </div>
+
         <p>اطلاعاتی که از کارشناس ثبت می‌کند.</p>
       </div>
     </div>
 
+    <div v-if="activateDraggable === false" class="columns is-multiline">
+      <div v-for="(item, key) in charts" :key="key" class="column is-6">
+        <div class="s-card">
+          <ApexChart
+            id="apex-chart-5"
+            dir="ltr"
+            :height="item.height"
+            :type="item.type"
+            :series="item.series"
+            :options="item.options"
+          >
+          </ApexChart>
+        </div>
+      </div>
+    </div>
     <!-- Charts -->
 
     <draggable
-      @change="dragChartHandle"
-      class="columns is-multiline"
+      v-if="activateDraggable === true"
       v-model="charts"
+      class="columns is-multiline"
       group="charts"
+      @change="dragChartHandle"
     >
       <template #item="{ element: chart }">
         <div class="column is-6">
@@ -297,6 +325,42 @@ const dragChartHandle = () => {
         [dir='rtl'] & {
           margin: 0;
         }
+      }
+    }
+  }
+}
+.checked-draggable-container {
+  display: flex;
+}
+.checked-draggable {
+  width: 40px;
+  height: 25px;
+  border-radius: 50px;
+  background: #283252;
+  position: relative;
+  cursor: pointer;
+  margin-right: 8px;
+  .checked-draggable-btn {
+    width: 21px;
+    height: 21px;
+    background: #d5d8e4;
+    border-radius: 30px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+    cursor: pointer;
+    &:checked {
+      & + .checked-draggable-btn {
+        right: 17px;
       }
     }
   }

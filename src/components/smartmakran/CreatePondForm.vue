@@ -60,6 +60,11 @@ const createPondForm = handleSubmit(async (values) => {
   if (result === 201) {
     console.log('Farm created successfully')
     farmStore.getFarm(props.showFieldFarm ? pond.farm : farmStore.currentFarm.id)
+    notyf.success({
+      message: 'مزرعه با موفیقت اضافه شد',
+      duration: 2000,
+    })
+    props.closeForm()
   } else {
     console.log('Farm creation failed')
     notyf.error({
@@ -71,7 +76,7 @@ const createPondForm = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <VModal :open="show" @close="closeForm" title="ثبت حوضچه جدید">
+  <VModal :open="show" title="ثبت حوضچه جدید" @close="closeForm">
     <template #content>
       <form class="form-layout">
         <!--Fieldset-->
@@ -259,7 +264,7 @@ const createPondForm = handleSubmit(async (values) => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" @click="createPondForm" raised>ثبت</VButton>
+      <VButton color="primary" raised @click="createPondForm">ثبت</VButton>
     </template>
   </VModal>
 </template>

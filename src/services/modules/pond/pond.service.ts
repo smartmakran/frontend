@@ -38,6 +38,7 @@ export async function createPond(pond: ICreatePond): Promise<number> {
 
 export async function manualMonitoring(pondId: string): Promise<any> {
   const { data } = await api.get(`/manualMonitoring/${pondId}`)
+  console.log(data)
   return data
 }
 

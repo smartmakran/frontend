@@ -2,7 +2,12 @@ export type ChartSeries = {
   name: string
   data: number[]
 }
-
+export type ChartXaxis = {
+  type: string
+  labels: any
+  tooltip: any
+  title: any
+}
 export type ChartTitle = {
   text: string
   align: string
@@ -19,7 +24,7 @@ export abstract class ChartBaseOption {
   abstract title: ChartTitle
   abstract labels: string[]
   abstract yaxis: ChartYaxis
-
+  abstract xaxis: ChartXaxis
   chart = {
     type: 'area',
     height: 400,
@@ -34,15 +39,15 @@ export abstract class ChartBaseOption {
     curve: 'straight',
   }
 
-  xaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  }
+  // xaxis = {
+  //   type: 'date',
+  //   labels: {
+  //     datetimeUTC: false,
+  //   },
+  //   tooltip: {
+  //     enabled: false,
+  //   },
+  // }
 
   legend = {
     horizontalAlign: 'left',
