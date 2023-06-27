@@ -77,7 +77,7 @@ let filteredPonds = computed<IPond[]>(() => {
 </script>
 
 <template>
-  <VModal :open="show" title="کیفیت آب" @close="closeModal">
+  <VModal :open="show" @close="closeModal" title="کیفیت آب">
     <template #content>
       <form class="form-fields">
         <div v-if="!showPondField" class="form-fields-field mb-20px">
@@ -100,7 +100,7 @@ let filteredPonds = computed<IPond[]>(() => {
         <div class="form-fields-field mb-20px">
           <Field v-slot="{ field, errorMessage }" name="ph">
             <VField>
-              <label>میزان اسیدیته</label>
+              <label>pH</label>
               <VControl :has-error="Boolean(errorMessage)">
                 <input
                   v-bind="field"
@@ -157,7 +157,7 @@ let filteredPonds = computed<IPond[]>(() => {
         <div class="form-fields-field mb-20px">
           <Field v-slot="{ field, errorMessage }" name="orp">
             <VField>
-              <label>orp</label>
+              <label>ORP</label>
               <VControl :has-error="Boolean(errorMessage)">
                 <input
                   v-bind="field"
@@ -269,7 +269,7 @@ let filteredPonds = computed<IPond[]>(() => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" raised @click="waterQualityHandler">ثبت</VButton>
+      <VButton color="primary" @click="waterQualityHandler" raised>ثبت</VButton>
     </template>
   </VModal>
 </template>

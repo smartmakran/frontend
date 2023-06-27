@@ -11,7 +11,7 @@ const notyf = useNotyf()
 const pondStore = usePondStore()
 const waterQuality = useWaterQualityStore()
 const schema = yup.object({
-  ph: yup.number().required('وارد کردن میزان اسیدیته الزامی است'),
+  ph: yup.number().required('وارد کردن pH الزامی است'),
   oxygen: yup.number().required('وارد کردن اکسیژن الزامی است'),
   orp: yup.number().required('وارد کردن orp الزامی است'),
   ec: yup.number().required('وارد کردن میزان شوری الزامی است'),
@@ -81,7 +81,7 @@ const waterQualityHandler = handleSubmit(async (values) => {
               <div class="column is-4">
                 <Field v-slot="{ field, errorMessage }" name="ph">
                   <VField>
-                    <label>میزان اسیدیته</label>
+                    <label>pH</label>
                     <VControl :has-error="Boolean(errorMessage)">
                       <input
                         v-bind="field"
@@ -142,7 +142,7 @@ const waterQualityHandler = handleSubmit(async (values) => {
               <div class="column is-4">
                 <Field v-slot="{ field, errorMessage }" name="orp">
                   <VField>
-                    <label>orp</label>
+                    <label>ORP</label>
                     <VControl :has-error="Boolean(errorMessage)">
                       <input
                         v-bind="field"

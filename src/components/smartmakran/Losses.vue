@@ -66,7 +66,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <VModal :open="show" title="ثبت تلفات" @close="closeModal">
+  <VModal :open="show" @close="closeModal" title="ثبت تلفات">
     <template #content>
       <form>
         <div class="form-fields">
@@ -127,7 +127,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" raised @click="feedingCheckingForm">ثبت</VButton>
+      <VButton color="primary" @click="feedingCheckingForm" raised>ثبت</VButton>
     </template>
   </VModal>
 </template>

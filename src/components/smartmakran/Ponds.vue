@@ -165,7 +165,7 @@ let closing = () => (showCreatePond.value = false)
                     <div class="card-pond-attr-icon">
                       <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="" />
                     </div>
-                    <h4>میزان اسیدیته</h4>
+                    <h4>pH</h4>
                     <p>12</p>
                   </div>
                 </div>
@@ -188,13 +188,13 @@ let closing = () => (showCreatePond.value = false)
           </TransitionGroup>
         </div>
 
-        <VFlexPagination
+        <!-- <VFlexPagination
           v-if="filteredPonds.length > 5"
           :item-per-page="10"
           :total-items="873"
           :current-page="42"
           :max-links-displayed="7"
-        />
+        /> -->
       </div>
     </div>
   </div>

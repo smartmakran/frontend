@@ -46,7 +46,7 @@ const props = defineProps<{
   position: fixed;
   top: 0;
   left: 0;
-  display: none;
+  // display: none;
   width: 100%;
   z-index: 100;
   box-shadow: 0 0 8px 0 rgb(0 0 0 / 12%);
@@ -664,6 +664,21 @@ const props = defineProps<{
 @media (max-width: 767px) {
   .mobile-navbar {
     display: flex;
+  }
+}
+
+// new style
+@media screen and (max-width: 1024px) {
+  .navbar-brand {
+    justify-content: space-between;
+  }
+  .mobile-navbar {
+    display: flex !important;
+  }
+}
+@media screen and (min-width: 1024px) {
+  .mobile-navbar {
+    display: none;
   }
 }
 </style>

@@ -8,6 +8,7 @@ export interface IFarm {
   owner: string
   phones: number[]
   ponds: IPond[]
+  sensorData: any
   createdAt: Date
   updatedAt: Date
 }

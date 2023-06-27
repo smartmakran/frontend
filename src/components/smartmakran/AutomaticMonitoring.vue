@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import ApexChart from 'vue3-apexcharts'
 import moment from 'moment-jalaali'
+import draggable from 'vuedraggable'
 import { dashboard } from '/@src/services/modules/dashboard/dashboard.service'
 import {
   AmmoniaChartOptions,
@@ -13,9 +14,10 @@ import {
   TemperatureChartOptions,
 } from '/@src/models/chart.model'
 import { SocketService } from '/@src/services/modules/socket/socket.service'
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, watchEffect } from 'vue'
 import { useThemeColors } from '../../composable/useThemeColors'
 import { useUserStore } from '/@src/stores/user'
+import { watch } from 'vue'
 
 type SensorData = {
   ph: number
@@ -49,8 +51,11 @@ function extractData(data: any, optimal: any) {
     data = data.slice(data.length - 50, data.length)
   }
 
-  const dates = data.map((d: SensorData) =>
-    moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
+  const dates = data.map(
+    // (d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
+
+    (d: SensorData) => moment(moment.now()).diff(d.createdAt, 'days')
+    // '12'
   )
 
   const phData: number[] = data.map((d: SensorData) => d.ph)
@@ -239,7 +244,61 @@ const temperature = reactive<any>({
 })
 
 console.log(ph)
+const charts = ref([
+  {
+    height: ph.chart.height,
+    type: ph.chart.type,
+    series: ph.series,
+    options: ph,
+  },
+  {
+    height: oxygen.chart.height,
+    type: oxygen.chart.type,
+    series: oxygen.series,
+    options: oxygen,
+  },
+  {
+    height: orp.chart.height,
+    type: orp.chart.type,
+    series: orp.series,
+    options: orp,
+  },
+  {
+    height: ec.chart.height,
+    type: ec.chart.type,
+    series: ec.series,
+    options: ec,
+  },
+  {
+    height: ammonia.chart.height,
+    type: ammonia.chart.type,
+    series: ammonia.series,
+    options: ammonia,
+  },
+  {
+    height: nitrate.chart.height,
+    type: nitrate.chart.type,
+    series: nitrate.series,
+    options: nitrate,
+  },
+  {
+    height: nitrite.chart.height,
+    type: nitrite.chart.type,
+    series: nitrite.series,
+    options: nitrite,
+  },
+  {
+    height: temperature.chart.height,
+    type: temperature.chart.type,
+    series: temperature.series,
+    options: temperature,
+  },
+])
 
+const dragChartHandle = () => {
+  localStorage.setItem('chart_automatic_monitoring', JSON.stringify(charts._rawValue))
+}
+const activateDraggable = ref(false)
 onMounted(async () => {
   // socket.on('message', (data) => {
   //   const {
@@ -326,7 +385,16 @@ onMounted(async () => {
     <!--Header-->
     <div class="dashboard-header">
       <div class="start">
-        <h3 class="dark-inverted">پایش‌های اتوماتیک</h3>
+        <div class="dashboard-header-chart">
+          <h3 class="dark-inverted">پایش‌های اتوماتیک</h3>
+          <label class="checked-draggable-container" for="activateDraggable">
+            <span>تغیر ترتیب نمودار ها</span>
+            <div class="checked-draggable">
+              <input v-model="activateDraggable" type="checkbox" name="" id="" />
+              <div class="checked-draggable-btn"></div>
+            </div>
+          </label>
+        </div>
         <p>اطلاعاتی که از سنسورها ثبت می‌شود.</p>
       </div>
     </div>
@@ -367,127 +435,50 @@ onMounted(async () => {
     </div> -->
 
     <!-- Charts -->
-    <div class="columns is-multiline">
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="ph.chart.height"
-            :type="ph.chart.type"
-            :series="ph.series"
-            :options="ph"
-          >
-          </ApexChart>
-        </div>
-      </div>
 
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="oxygen.chart.height"
-            :type="oxygen.chart.type"
-            :series="oxygen.series"
-            :options="oxygen"
-          >
-          </ApexChart>
-        </div>
-      </div>
+    <!-- charts ref -->
 
-      <!--Line Stats Widget-->
-      <div class="column is-6">
+    <div class="columns is-multiline" v-if="activateDraggable === false">
+      <div class="column is-6" v-for="(item, key) in charts" :key="key">
         <div class="s-card">
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="orp.chart.height"
-            :type="orp.chart.type"
-            :series="orp.series"
-            :options="orp"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="ec.chart.height"
-            :type="ec.chart.type"
-            :series="ec.series"
-            :options="ec"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="ammonia.chart.height"
-            :type="ammonia.chart.type"
-            :series="ammonia.series"
-            :options="ammonia"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="nitrite.chart.height"
-            :type="nitrite.chart.type"
-            :series="nitrite.series"
-            :options="nitrite"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="nitrate.chart.height"
-            :type="nitrate.chart.type"
-            :series="nitrate.series"
-            :options="nitrate"
-          >
-          </ApexChart>
-        </div>
-      </div>
-
-      <!--Line Stats Widget-->
-      <div class="column is-6">
-        <div class="s-card">
-          <ApexChart
-            id="apex-chart-5"
-            dir="ltr"
-            :height="temperature.chart.height"
-            :type="temperature.chart.type"
-            :series="temperature.series"
-            :options="temperature"
+            :height="item.height"
+            :type="item.type"
+            :series="item.series"
+            :options="item.options"
           >
           </ApexChart>
         </div>
       </div>
     </div>
+
+    <!--  -->
+
+    <draggable
+      v-if="activateDraggable === true"
+      @change="dragChartHandle"
+      class="columns is-multiline"
+      v-model="charts"
+      group="charts"
+    >
+      <template #item="{ element: chart }">
+        <div class="column is-6">
+          <div class="s-card chart-box">
+            <ApexChart
+              id="apex-chart-5"
+              dir="ltr"
+              :height="chart.height"
+              :type="chart.type"
+              :series="chart.series"
+              :options="chart.options"
+            >
+            </ApexChart>
+          </div>
+        </div>
+      </template>
+    </draggable>
   </div>
 </template>
 
@@ -503,6 +494,7 @@ onMounted(async () => {
 
     .start {
       margin-left: 12px;
+      width: 100%;
       [dir='rtl'] & {
         margin-left: unset;
         margin-right: 12px;
@@ -632,7 +624,10 @@ onMounted(async () => {
     }
   }
 }
-
+.chart-box:hover {
+  background: rgb(247, 247, 247);
+  cursor: all-scroll;
+}
 @media only screen and (max-width: 767px) {
   .ecommerce-dashboard-v1 {
     .dashboard-header {
@@ -649,6 +644,49 @@ onMounted(async () => {
         [dir='rtl'] & {
           margin: 0;
         }
+      }
+    }
+  }
+}
+
+.dashboard-header-chart {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.checked-draggable-container {
+  display: flex;
+}
+.checked-draggable {
+  width: 40px;
+  height: 25px;
+  border-radius: 50px;
+  background: #283252;
+  position: relative;
+  cursor: pointer;
+  margin-right: 8px;
+  .checked-draggable-btn {
+    width: 21px;
+    height: 21px;
+    background: #d5d8e4;
+    border-radius: 30px;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+  }
+  input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 10;
+    opacity: 0;
+    cursor: pointer;
+    &:checked {
+      & + .checked-draggable-btn {
+        right: 17px;
       }
     }
   }
