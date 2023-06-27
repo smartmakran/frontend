@@ -1,16 +1,22 @@
 import { useThemeColors } from '../composable/useThemeColors'
-import { ChartBaseOption, ChartSeries, ChartTitle, ChartYaxis } from './base-chart.model'
+import {
+  ChartBaseOption,
+  ChartSeries,
+  ChartTitle,
+  ChartXaxis,
+  ChartYaxis,
+} from './base-chart.model'
 
 export class PHChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'ph', data: [] },
-    { name: 'بهینه بالا', data: [] },
+    { name: 'pH', data: [] },
+    { name: 'بهینه بالا', data: [1, 2, 4, 5] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
     text: 'pH',
@@ -21,7 +27,18 @@ export class PHChartOptions extends ChartBaseOption {
     min: 2,
     max: 8,
   }
-
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    title: {
+      text: 'روز گذشته از زمان کشت',
+    },
+  }
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -40,17 +57,17 @@ export class PHChartOptions extends ChartBaseOption {
 
 export class OxygenChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'oxygen', data: [] },
+    { name: 'اکسیژن', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().primary,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
-    text: 'Oxygen',
+    text: 'اکسیژن (mg/L)',
     align: 'left',
   }
   labels: string[]
@@ -58,7 +75,18 @@ export class OxygenChartOptions extends ChartBaseOption {
     min: 5,
     max: 10,
   }
-
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    title: {
+      text: 'روز گذشته از زمان کشت',
+    },
+  }
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -77,17 +105,17 @@ export class OxygenChartOptions extends ChartBaseOption {
 
 export class OrpChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'orp', data: [] },
+    { name: 'ORP', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
-    text: 'ORP',
+    text: 'ORP(mV)',
     align: 'left',
   }
   labels: string[]
@@ -95,7 +123,18 @@ export class OrpChartOptions extends ChartBaseOption {
     min: 300,
     max: 400,
   }
-
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    title: {
+      text: 'روز گذشته از زمان کشت',
+    },
+  }
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -114,17 +153,17 @@ export class OrpChartOptions extends ChartBaseOption {
 
 export class ECChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'ec', data: [] },
+    { name: 'میزان شوری', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
-    text: 'EC',
+    text: 'میزان شوری (ppt)',
     align: 'left',
   }
   labels: string[]
@@ -132,7 +171,18 @@ export class ECChartOptions extends ChartBaseOption {
     min: 17,
     max: 27,
   }
-
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    title: {
+      text: 'روز گذشته از زمان کشت',
+    },
+  }
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -151,17 +201,17 @@ export class ECChartOptions extends ChartBaseOption {
 
 export class AmmoniaChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'ammonia', data: [] },
+    { name: 'آمونیاک', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
-    text: 'Ammonia',
+    text: 'آمونیاک (ppm)',
     align: 'left',
   }
   labels: string[]
@@ -169,7 +219,18 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     min: 0.3,
     max: 0.6,
   }
-
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    title: {
+      text: 'روز گذشته از زمان کشت',
+    },
+  }
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -188,17 +249,17 @@ export class AmmoniaChartOptions extends ChartBaseOption {
 
 export class NitriteChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'nitrite', data: [] },
+    { name: 'نیتریت', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
-    text: 'Nitrite',
+    text: 'نیتریت (ppm)',
     align: 'left',
   }
   labels: string[]
@@ -206,7 +267,18 @@ export class NitriteChartOptions extends ChartBaseOption {
     min: 0,
     max: 2,
   }
-
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    title: {
+      text: 'روز گذشته از زمان کشت',
+    },
+  }
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -225,17 +297,17 @@ export class NitriteChartOptions extends ChartBaseOption {
 
 export class NitrateChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'nitrate', data: [] },
+    { name: 'نیترات', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
-    text: 'Nitrate',
+    text: 'نیترات (ppm)',
     align: 'left',
   }
   labels: string[]
@@ -243,7 +315,18 @@ export class NitrateChartOptions extends ChartBaseOption {
     min: 0,
     max: 2,
   }
-
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    title: {
+      text: 'روز گذشته از زمان کشت',
+    },
+  }
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -262,17 +345,17 @@ export class NitrateChartOptions extends ChartBaseOption {
 
 export class TemperatureChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'temperature', data: [] },
+    { name: 'دما', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().lightText,
-    useThemeColors().lightText,
+    useThemeColors().danger,
+    useThemeColors().warning,
   ]
   title: ChartTitle = {
-    text: 'Temperature',
+    text: 'دما (C)',
     align: 'left',
   }
   labels: string[]
@@ -280,7 +363,18 @@ export class TemperatureChartOptions extends ChartBaseOption {
     min: 15,
     max: 40,
   }
-
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    title: {
+      text: 'روز گذشته از زمان کشت',
+    },
+  }
   constructor(
     data: number[],
     optimizeUp: number[],

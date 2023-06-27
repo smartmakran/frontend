@@ -222,6 +222,7 @@ const ec = reactive<any>({ ...new ECChartOptions(ecData, ecUp, ecDown, ecColor, 
 const ammonia = reactive<any>({
   ...new AmmoniaChartOptions(ammoniaData, ammoniaUp, ammoniaDown, ammoniaColor, dates),
 })
+
 const nitrite = reactive<any>({
   ...new NitriteChartOptions(nitriteData, nitriteUp, nitriteDown, nitriteColor, dates),
 })
@@ -237,8 +238,6 @@ const temperature = reactive<any>({
     dates
   ),
 })
-
-console.log(ph)
 
 onMounted(async () => {
   // socket.on('message', (data) => {
@@ -277,49 +276,41 @@ onMounted(async () => {
   //     temperatureDown,
   //     temperatureColor,
   //   } = extractData(data, optimalData)
-
   //   ph.series[0].data = phData
   //   ph.series[1].data = phUp
   //   ph.series[2].data = phDown
   //   ph.colors[0] = phColor
   //   ph.labels = dates
-
   //   oxygen.series[0].data = oxygenData
   //   oxygen.series[1].data = oxygenUp
   //   oxygen.series[2].data = oxygenDown
   //   oxygen.colors[0] = oxygenColor
   //   oxygen.labels = dates
-
   //   orp.series[0].data = orpData
   //   orp.series[1].data = orpUp
   //   orp.series[2].data = orpDown
   //   orp.colors[0] = orpColor
   //   orp.labels = dates
-
   //   ec.series[0].data = ecData
   //   ec.series[1].data = ecUp
   //   ec.series[2].data = ecDown
   //   ec.colors[0] = ecColor
   //   ec.labels = dates
-
   //   ammonia.series[0].data = ammoniaData
   //   ammonia.series[1].data = ammoniaUp
   //   ammonia.series[2].data = ammoniaDown
   //   ammonia.colors[0] = ammoniaColor
   //   ammonia.labels = dates
-
   //   nitrite.series[0].data = nitriteData
   //   nitrite.series[1].data = nitriteUp
   //   nitrite.series[2].data = nitriteDown
   //   nitrite.colors[0] = nitriteColor
   //   nitrite.labels = dates
-
   //   nitrate.series[0].data = nitrateData
   //   nitrate.series[1].data = nitrateUp
   //   nitrate.series[2].data = nitrateDown
   //   nitrate.colors[0] = nitrateColor
   //   nitrate.labels = dates
-
   //   temperature.series[0].data = temperatureData
   //   temperature.series[1].data = temperatureUp
   //   temperature.series[2].data = temperatureDown

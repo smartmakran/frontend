@@ -1,3 +1,32 @@
+<script setup lang="ts">
+import axios from 'axios'
+import { onMounted } from 'vue'
+onMounted(async () => {
+  try {
+    let res = await axios.get(
+      `https://api.smartmakran.ir/dashboard/${
+        JSON.parse(localStorage.getItem('user')).id
+      }`,
+      {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+        },
+      }
+    )
+    localStorage.setItem('sensorKey', res.data.user.sensorsKey)
+    localStorage.setItem(
+      'sensorData',
+
+      JSON.stringify(res.data.sensorData)
+    )
+    console.log(res)
+    console.log(JSON.parse(localStorage.getItem('sensorData')))
+  } catch (err) {
+    console.log(err)
+  }
+})
+</script>
+
 <template>
   <div class="page-content-inner">
     <!-- <TestDashboard /> -->
@@ -5,7 +34,6 @@
       <!--Tile Grid v1-->
       <div class="columns is-multiline tile-grid tile-grid-v2">
         <FarmList />
-        <CreateFarmForm />
       </div>
     </div>
   </div>

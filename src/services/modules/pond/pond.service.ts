@@ -10,14 +10,24 @@ const api = useApi()
 export async function getPondList() {
   try {
     const { data } = await api.get('/pond')
+    localStorage.setItem('poolList', JSON.stringify(data.data))
     return data
   } catch (err: any) {
     throw err
   }
 }
+// export async function getAllPond() {
+//   try {
+//     const { data } = await api.get('/pond')
+//     return data
+//   } catch (err: any) {
+//     throw err
+//   }
+// }
 
 export async function getPondDetails(id: string): Promise<IPond> {
   const { data } = await api.get(`/pond/${id}`)
+  console.log(data)
   return data
 }
 
@@ -28,6 +38,7 @@ export async function createPond(pond: ICreatePond): Promise<number> {
 
 export async function manualMonitoring(pondId: string): Promise<any> {
   const { data } = await api.get(`/manualMonitoring/${pondId}`)
+  console.log(data)
   return data
 }
 
@@ -44,7 +55,7 @@ export async function createFeedingData(body: ICreateFeedingData): Promise<numbe
 export async function createChangingWaterData(
   body: ICreateChangingWaterData
 ): Promise<number> {
-  const { status } = await api.post('/manualMonitoring/changing-water', body)
+  const { status } = await api.post('/manualMonitoring/changingWater', body)
   return status
 }
 

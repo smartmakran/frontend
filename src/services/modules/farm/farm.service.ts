@@ -5,11 +5,13 @@ const api = useApi()
 
 export async function getFarmsList(): Promise<IFarm[]> {
   const { data } = await api.get('/farm')
+  console.log(data)
   return data.data
 }
 
 export async function getFarmDetails(id: string): Promise<IFarm> {
   const { data } = await api.get(`/farm/${id}`)
+  console.log(data)
   return data
 }
 
