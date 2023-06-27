@@ -199,9 +199,4 @@ const props = defineProps<VViewWrapperProps>()
     margin-top: 60px !important;
   }
 }
-@media screen and (max-width: 1024px) {
-  .view-wrapper {
-    margin-right: 0 !important;
-  }
-}
 </style>

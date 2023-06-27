@@ -1,11 +1,5 @@
 import { useThemeColors } from '../composable/useThemeColors'
-import {
-  ChartBaseOption,
-  ChartSeries,
-  ChartTitle,
-  ChartYaxis,
-  ChartXaxis,
-} from './base-chart.model'
+import { ChartBaseOption, ChartSeries, ChartTitle, ChartYaxis } from './base-chart.model'
 
 export class SamplingChartOption extends ChartBaseOption {
   series: ChartSeries[] = [{ name: 'نمونه‌برداری', data: [] }]
@@ -15,7 +9,7 @@ export class SamplingChartOption extends ChartBaseOption {
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'نمونه برداری (g)',
+    text: 'نمونه‌برداری',
     align: 'left',
   }
   labels: string[]
@@ -23,15 +17,7 @@ export class SamplingChartOption extends ChartBaseOption {
     min: 0,
     max: 100,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  }
+
   constructor(data: number[], color: string, labels: string[]) {
     super()
     this.series[0].data = data
@@ -44,11 +30,11 @@ export class FeedingChartOption extends ChartBaseOption {
   series: ChartSeries[] = [{ name: 'غذادهی', data: [] }]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
+    useThemeColors().lightText,
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'غذادهی (kg)',
+    text: 'غذادهی',
     align: 'left',
   }
   labels: string[]
@@ -56,15 +42,7 @@ export class FeedingChartOption extends ChartBaseOption {
     min: 0,
     max: 100,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  }
+
   constructor(data: number[], color: string, labels: string[]) {
     super()
     this.series[0].data = data
@@ -77,11 +55,11 @@ export class ChangingWaterChartOption extends ChartBaseOption {
   series: ChartSeries[] = [{ name: 'تعویض آب', data: [] }]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
+    useThemeColors().lightText,
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'تعویض آب (درصد)',
+    text: 'تعویض آب',
     align: 'left',
   }
   labels: string[]
@@ -89,15 +67,7 @@ export class ChangingWaterChartOption extends ChartBaseOption {
     min: 0,
     max: 100,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  }
+
   constructor(data: number[], color: string, labels: string[]) {
     super()
     this.series[0].data = data
@@ -110,44 +80,11 @@ export class TransparencyChartOption extends ChartBaseOption {
   series: ChartSeries[] = [{ name: 'شفافیت', data: [] }]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
+    useThemeColors().lightText,
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'شفافیت (cm)',
-    align: 'left',
-  }
-  labels: string[]
-  yaxis: ChartYaxis = {
-    min: 0,
-    max: 100,
-  }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-  }
-  constructor(data: number[], color: string, labels: string[]) {
-    super()
-    this.series[0].data = data
-    this.colors[0] = color
-    this.labels = labels
-  }
-}
-
-export class LossessChartOption extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'تلفات', data: [] }]
-  colors: string[] = [
-    useThemeColors().primary,
-    useThemeColors().danger,
-    useThemeColors().lightText,
-  ]
-  title: ChartTitle = {
-    text: 'تلفات',
+    text: 'شفافیت',
     align: 'left',
   }
   labels: string[]

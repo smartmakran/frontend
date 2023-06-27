@@ -129,7 +129,7 @@ useHead({
                           >
                             <input
                               v-bind="field"
-                              class="input input-style"
+                              class="input"
                               type="text"
                               :placeholder="t('auth.placeholder.fullname')"
                               autocomplete="name"
@@ -150,7 +150,7 @@ useHead({
                           >
                             <input
                               v-bind="field"
-                              class="input input-style"
+                              class="input"
                               type="text"
                               :placeholder="t('auth.placeholder.phone')"
                               autocomplete="phone"
@@ -171,7 +171,7 @@ useHead({
                           >
                             <input
                               v-bind="field"
-                              class="input input-style"
+                              class="input"
                               type="password"
                               :placeholder="t('auth.placeholder.password')"
                               autocomplete="new-password"
@@ -192,7 +192,7 @@ useHead({
                           >
                             <input
                               v-bind="field"
-                              class="input input-style"
+                              class="input"
                               type="password"
                               :placeholder="t('auth.placeholder.passwordCheck')"
                             />
@@ -250,8 +250,3 @@ useHead({
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-.input-style {
-  padding-right: 35px;
-}
-</style>

@@ -1,362 +1,107 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
+import { computed } from 'vue'
 import { usePondStore } from '/@src/stores/pond'
 import { IPond } from '/@src/interfaces/pond.interface'
-import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-const route = useRoute()
-// define props for using in the component
-// Access params with `params.id`
-const showLossesModal = ref(false)
-const showFeedingCheckingModal = ref(false)
-const showWaterQualityModal = ref(false)
-const showWaterDataModal = ref(false)
-const showFeedingDataModal = ref(false)
-const showSamplingDataModal = ref(false)
-const showTransparencyDataModal = ref(false)
 
-const pondDetail = ref()
 const pondStore = usePondStore()
+
 const currentPond = computed<IPond>(() => {
   return pondStore.currentPond || {}
-})
-
-let closeFeedingChecking = () => (showFeedingCheckingModal.value = false)
-let closeLosses = () => (showLossesModal.value = false)
-let closeWaterQualityModal = () => (showWaterQualityModal.value = false)
-let closeWaterDataModa = () => (showWaterDataModal.value = false)
-let closeFeedingDataModal = () => (showFeedingDataModal.value = false)
-let closeSamplingDataModal = () => (showSamplingDataModal.value = false)
-let closeTransparencyDataModal = () => (showTransparencyDataModal.value = false)
-watchEffect(() => {
-  const sensorData = JSON.parse(localStorage.getItem('sensorData'))
-  let newPons = sensorData.filter((item) => item.pond === route.params.id)
-  pondDetail.value = newPons[0]
 })
 </script>
 
 <template>
   <div class="page-content-inner">
-    <FeedingChecking
-      :show="showFeedingCheckingModal"
-      :close-modal="closeFeedingChecking"
-      :show-pond-field="true"
-    />
-    <Losses :show="showLossesModal" :close-modal="closeLosses" :show-pond-field="true" />
-    <WaterQuality
-      :show="showWaterQualityModal"
-      :close-modal="closeWaterQualityModal"
-      :show-pond-field="true"
-    />
-    <CreateChangingWaterDataModal
-      :show="showWaterDataModal"
-      :close-modal="closeWaterDataModa"
-      :show-pond-field="true"
-    />
-    <CreateFeedingDataModal
-      :show="showFeedingDataModal"
-      :close-modal="closeFeedingDataModal"
-      :show-pond-field="true"
-    />
-    <CreateSamplingDataModal
-      :show="showSamplingDataModal"
-      :close-modal="closeSamplingDataModal"
-      :show-pond-field="true"
-    />
-    <CreateTransparencyDataModal
-      :show="showTransparencyDataModal"
-      :close-modal="closeTransparencyDataModal"
-      :show-pond-field="true"
-    />
-    <div class="nav-buttons-ponds-ponds">
-      <div class="row-top">
-        <VButton color="success" outlined raised @click="showLossesModal = true"
-          >تلفات</VButton
-        >
-        <VButton color="success" outlined raised @click="showFeedingCheckingModal = true"
-          >ثبت اطلاعات غذادهی</VButton
-        >
-        <VButton color="success" outlined raised @click="showWaterQualityModal = true"
-          >اندازه گیری</VButton
-        >
-      </div>
-      <div class="row-bottom">
-        <VButton color="success" outlined raised @click="showSamplingDataModal = true"
-          >اطلاعات نمونه برداری</VButton
-        >
-        <VButton color="success" outlined raised @click="showFeedingDataModal = true"
-          >چک غذادهی</VButton
-        >
-        <VButton color="success" outlined raised @click="showWaterDataModal = true"
-          >تعویض آب</VButton
-        >
-        <VButton color="success" outlined raised @click="showTransparencyDataModal = true"
-          >شفافیت</VButton
-        >
-      </div>
-    </div>
     <!--List-->
     <div class="list-view list-view-v2">
       <!--Active Tab-->
-      <!-- start code -->
-      <div class="card-pond">
-        <div class="card-pond-header">
-          <div>
-            <VIconBox color="primary">
-              <i aria-hidden="true" class="fas fa-home"></i>
-            </VIconBox>
-            <div>
-              <h3>{{ currentPond.name }}</h3>
+      <div id="active-items-tab" class="tab-content is-active">
+        <div class="list-view-inner">
+          <Transition name="list-complete" tag="div">
+            <div :key="currentPond.id" class="list-view-item">
+              <div class="list-view-item-inner">
+                <div class="meta-left">
+                  <h3>
+                    <span>{{ currentPond.name }}</span>
+                  </h3>
+                  <!-- <p>
+                    <i aria-hidden="true" class="iconify" data-icon="feather:map-pin"></i>
+                    <span>{{ currentPond.dimensions }}</span>
+                  </p> -->
+                  <span>
+                    <span
+                      >عرض:
+                      {{ currentPond.dimensions?.width }}
+                      متر
+                    </span>
+                    <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
+                    <span
+                      >طول:
+                      {{ currentPond.dimensions?.length }}
+                      متر
+                    </span>
+                    <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
+                    <span>
+                      عمق:
+                      {{ currentPond.dimensions?.depth }}
+                      متر
+                    </span>
+                    <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
+                    <span>
+                      ارتفاع آب:
+                      {{ currentPond.dimensions?.waterHeight }}
+                      متر
+                    </span>
+                  </span>
+
+                  <div class="icon-list">
+                    <h4>
+                      <span>
+                        <span
+                          >زمان اولین کشت:
+                          <b>
+                            {{ new Date(currentPond.startFarming).toLocaleString('fa') }}
+                          </b>
+                        </span>
+                        <br />
+                        <span>
+                          تعداد لاورها: <b>{{ currentPond.larvaCount }}</b>
+                        </span>
+                        <br />
+                        <span>
+                          تراکم: <b>{{ currentPond.density }}</b>
+                        </span>
+                      </span>
+                    </h4>
+                  </div>
+                </div>
+                <div class="meta-right">
+                  <div class="buttons">
+                    <RouterLink
+                      :to="{
+                        name: 'app-pond-id-manual-monitoring',
+                      }"
+                    >
+                      <VButton color="primary" raised>ثبت اطلاعات اضافه</VButton>
+                    </RouterLink>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="card-pond-header-detail">
-            <RouterLink
-              :to="{
-                name: 'app-pond-id-manual-monitoring',
-              }"
-            >
-              <VButton color="primary" outlined raised>ثبت اطلاعات اضافه</VButton>
-            </RouterLink>
-          </div>
+          </Transition>
         </div>
 
-        <div class="card-pond-header-attrs card-pond-header-attrs-border">
-          <span class="card-pond-header-attrs-dimensions"
-            >عرض : {{ currentPond?.dimensions?.width }}</span
-          >
-          <span class="card-pond-header-attrs-dimensions">
-            طول : {{ currentPond?.dimensions?.length }}</span
-          >
-          <span class="card-pond-header-attrs-dimensions"
-            >ارتفاع : {{ currentPond?.dimensions?.waterHeight }}</span
-          >
-          <span class="card-pond-header-attrs-dimensions"
-            >عمق : {{ currentPond?.dimensions?.depth }}</span
-          >
-          <span class="card-pond-header-attrs-dimensions"
-            >زمان اولین کاشت :
-            <!-- {{ currentPond?.startFarming }} -->
-            {{ new Date(currentPond?.startFarming).toLocaleDateString('fa') }}
-          </span>
-          <span class="card-pond-header-attrs-dimensions"
-            >تعداد لاروها : {{ currentPond?.larvaCount }}</span
-          >
-          <span class="card-pond-header-attrs-dimensions"
-            >تراکم : {{ currentPond?.density }}</span
-          >
-        </div>
-
-        <div class="card-pond-attrs">
-          <div class="card-pond-body">
-            <div class="card-pond-attr">
-              <div class="card-pond-attr-icon">
-                <img src="/@src/assets/smartmakran/icons-box/bio.svg" alt="" />
-              </div>
-              <h4>حجم توده زنده</h4>
-              <p>12</p>
-            </div>
-          </div>
-          <div class="card-pond-body">
-            <div class="card-pond-attr">
-              <div class="card-pond-attr-icon">
-                <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
-              </div>
-              <h4>میزان شوری</h4>
-              <p>32</p>
-            </div>
-          </div>
-          <div class="card-pond-body">
-            <div class="card-pond-attr">
-              <div class="card-pond-attr-icon">
-                <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="" />
-              </div>
-              <h4>اکسیژن</h4>
-              <p>12</p>
-            </div>
-          </div>
-          <div class="card-pond-body">
-            <div class="card-pond-attr">
-              <div class="card-pond-attr-icon">
-                <img src="/@src/assets/smartmakran/icons-box/size.svg" alt="" />
-              </div>
-              <h4>میانگین سایز</h4>
-              <p>12</p>
-            </div>
-          </div>
-
-          <div class="card-pond-body">
-            <div class="card-pond-attr">
-              <div class="card-pond-attr-icon">
-                <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="" />
-              </div>
-              <h4>میزان اسیدیته</h4>
-              <p>12</p>
-            </div>
-          </div>
-          <div class="card-pond-body">
-            <div class="card-pond-attr">
-              <div class="card-pond-attr-icon">
-                <img src="/@src/assets/smartmakran/icons-box/temp.svg" alt="" />
-              </div>
-              <h4>دما</h4>
-              <p>12</p>
-            </div>
-          </div>
-        </div>
-        <div class="card-pond-footer">
-          <RouterLink
-            :to="{
-              name: 'app-pond-id-manual-monitoring',
-            }"
-          >
-            <VButton color="primary" outlined raised> ثبت اطلاعات اضافه </VButton>
-          </RouterLink>
-        </div>
+        <!-- <VFlexPagination
+          v-if="currentPond > 5"
+          :item-per-page="10"
+          :total-items="873"
+          :current-page="42"
+          :max-links-displayed="7"
+        /> -->
       </div>
     </div>
   </div>
 </template>
-
-<style scoped lang="scss">
-.page-content-inner {
-  width: 100%;
-}
-.add-item-top-menu-pond {
-  width: 100% !important;
-}
-.add-item-top-menu-pond_box {
-  width: 100%;
-  background: white;
-  border-radius: 7px;
-  box-shadow: 0 0 15px #00000010;
-  padding: 15px 15px 5px 15px;
-  margin-bottom: 10px;
-}
-.add-item-top-menu-pond_box-value {
-  color: #45425b;
-  font-size: 40px;
-  font-weight: bold;
-}
-.view-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  h3 {
-    font-weight: 700;
-    font-size: 18px;
-  }
-}
-.add-item-top-menu-pond_box-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 7px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: #41b98365;
-  img {
-    width: 18px;
-  }
-}
-.view-item-header {
-  border-bottom: 1px solid rgb(232, 232, 232);
-  padding-bottom: 10px;
-}
-.add-item-top-menu-pond_box-title {
-  font-size: 12px;
-  font-weight: 500;
-  margin-top: 5px;
-}
-.view-item-attrs {
-  margin-top: 10px;
-  li {
-    position: relative;
-    display: flex;
-    align-items: center;
-    padding-right: 10px;
-    margin-bottom: 5px;
-    &::before {
-      content: '';
-      width: 5px;
-      height: 5px;
-      background: rgb(0, 196, 88);
-      border-radius: 15px;
-      position: absolute;
-      right: 0;
-    }
-  }
-}
-.card-pond-footer {
-  display: none;
-}
-@media only screen and (max-width: 767px) {
-  .card-pond-header-detail {
-    display: none;
-  }
-  .card-pond-footer {
-    display: block;
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-  }
-}
-
-@media screen and (min-width: 600px) {
-  .add-item-top-menu-pond {
-    display: grid;
-    grid-template-columns: 49% 49%;
-    justify-content: space-between;
-    // grid-column: 49% 49%;
-    // justify-content: space-between;
-  }
-  .attrs-pond-details {
-    display: grid;
-    grid-template-columns: 49% 49%;
-    justify-content: space-between;
-  }
-}
-@media screen and (min-width: 768px) {
-  .view-item-attrs {
-    display: grid;
-    grid-template-columns: 40% 40%;
-  }
-}
-.view-item-footer-button {
-  display: none;
-}
-@media screen and (max-width: 768px) {
-  .view-item-footer-button {
-    display: block;
-  }
-}
-@media screen and (min-width: 992px) {
-  .attrs-pond-details {
-    grid-template-columns: 32% 32% 32%;
-  }
-}
-@media screen and (min-width: 1024px) {
-  .add-item-top-menu-pond {
-    display: grid;
-    grid-template-columns: 32.5% 32.5% 32.5% !important;
-    justify-content: space-between;
-    // grid-column: 49% 49%;
-    // justify-content: space-between;
-  }
-  .attrs-pond-details {
-    grid-template-columns: 15% 15% 15% 15% 15% 15%;
-  }
-}
-@media screen and (min-width: 768px) {
-  .view-item-header {
-    padding-bottom: 10px;
-  }
-}
-@media screen and (max-width: 768px) {
-  .view-item-header-button {
-    display: none;
-  }
-}
-</style>
 
 <style lang="scss">
 @import '../../scss/abstracts/mixins';
@@ -625,7 +370,7 @@ watchEffect(() => {
       flex-wrap: wrap;
 
       .list-view-item {
-        // padding: 20px;
+        padding: 20px;
         margin: 10px;
         width: calc(50% - 20px);
 
@@ -689,209 +434,6 @@ watchEffect(() => {
         }
       }
     }
-  }
-}
-
-.cardd {
-  width: 100%;
-  padding: 15px;
-  background: white;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  margin-bottom: 15px;
-}
-.cardd-icon {
-  width: 45px;
-  height: 45px;
-  background: rgba(221, 219, 243, 0.377);
-  border-radius: 7px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgba(221, 219, 243);
-  margin-left: 10px;
-  img {
-    height: 27px;
-  }
-}
-.cardd-content-attr {
-  p {
-    color: rgb(162, 162, 162);
-    font-size: 12px;
-  }
-  h2 {
-    font-weight: 600;
-    font-size: 20px;
-    margin-top: -5px;
-  }
-}
-@media screen and (min-width: 600px) {
-  .cardd {
-    flex-direction: column;
-  }
-  .cardd-content-attr {
-    display: flex;
-    flex-direction: column;
-    margin-top: 5px;
-    width: 100%;
-    align-items: center;
-    h2 {
-      margin-top: -3px;
-    }
-  }
-  .cardd-icon {
-    margin-left: 0;
-  }
-}
-.nav-buttons-ponds,
-.nav-buttons-ponds-ponds {
-  width: 100%;
-  // height: 50px;
-  background: white;
-  // border: 1px solid rgb(228, 228, 228);
-  border-radius: 5px;
-  margin-bottom: 15px;
-  padding: 10px;
-  .button {
-    width: 100% !important;
-  }
-  .button:not(:last-child) {
-    margin-bottom: 10px;
-  }
-}
-.card-pond-header-attrs-border {
-  border: 1px solid rgb(197, 197, 197);
-  padding: 10px;
-  border-radius: 5px;
-  margin: 10px 0;
-  display: grid;
-  grid-template-columns: 48% 48%;
-  justify-content: space-between;
-}
-.card-pond-footer {
-  display: none;
-}
-@media screen and (min-width: 768px) {
-  .nav-buttons-ponds,
-  .nav-buttons-ponds-ponds {
-    // display: grid !important;
-    // grid-template-columns: 32.5% 32.5% 32.5% !important;
-    // justify-content: space-between !important;
-    .row-top {
-      display: grid !important;
-      grid-template-columns: 32.5% 32.5% 32.5% !important;
-      justify-content: space-between !important;
-    }
-    .row-bottom {
-      display: grid !important;
-      grid-template-columns: 24% 24% 24% 24% !important;
-      justify-content: space-between !important;
-      margin-top: 10px;
-    }
-    .button {
-      margin-bottom: 0 !important;
-    }
-  }
-}
-@media screen and (min-width: 768px) {
-  .card-pond-header-attrs-border {
-    grid-template-columns: 32.5% 32.5% 32.5%;
-  }
-}
-@media screen and (min-width: 992px) {
-  .card-pond-header-attrs-border {
-    grid-template-columns: 24% 24% 24% 24%;
-  }
-}
-.card-pond-header-attrs-date {
-  padding-right: 15px;
-  border-right: 1px solid rgba(128, 128, 128, 0.374);
-}
-.card-pond-header-attrs-dimensions {
-  padding-left: 15px;
-}
-.card-pond {
-  width: 100%;
-  background: white;
-  border-radius: 5px;
-  border: 1px solid rgb(226, 226, 226);
-  padding: 20px;
-  margin-bottom: 15px;
-}
-.card-pond-header h3 {
-  margin-top: 10px;
-  font-weight: 400;
-}
-.card-pond-body {
-  margin-top: 10px;
-  h4 {
-    margin-top: 5px;
-    font-weight: 500;
-  }
-  p {
-    color: rgb(94, 94, 94);
-    margin-top: -3px;
-  }
-}
-.card-pond-attr {
-  width: 100%;
-  padding: 15px 10px;
-  background: rgb(250, 250, 250);
-  border-radius: 7px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.card-pond-attr-icon {
-  width: 45px;
-  height: 45px;
-  background: rgba(221, 219, 243, 0.377);
-  border-radius: 7px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid rgba(221, 219, 243);
-  img {
-    height: 27px;
-  }
-}
-.card-pond-header-attrs {
-  color: gray;
-}
-@media only screen and (min-width: 600px) {
-  .card-pond-header {
-    justify-content: space-between;
-  }
-  .card-pond-header,
-  .card-pond-header > div {
-    display: flex;
-    align-items: center;
-    h3 {
-      margin-top: 0;
-      margin-right: 10px;
-    }
-  }
-  .card-pond-header-attrs {
-    margin-right: 10px;
-    font-size: 12px;
-  }
-  .card-pond-attrs {
-    grid-template-columns: 32% 32% 32%;
-  }
-}
-@media only screen and (min-width: 300px) {
-  .card-pond-attrs {
-    display: grid;
-    grid-template-columns: 48% 48%;
-    justify-content: space-between;
-  }
-}
-@media only screen and (min-width: 992px) {
-  .card-pond-attrs {
-    grid-template-columns: 15% 15% 15% 15% 15% 15%;
   }
 }
 </style>

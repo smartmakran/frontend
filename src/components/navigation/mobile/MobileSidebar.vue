@@ -69,7 +69,6 @@ const props = defineProps<{
 
   &.is-active {
     transform: translateX(0);
-    width: 60%;
   }
 
   .inner {
@@ -664,12 +663,7 @@ const props = defineProps<{
     }
   }
 }
-.icon-side-menu {
-  li {
-    justify-content: start !important;
-    padding-right: 20px;
-  }
-}
+
 .is-dark {
   .mobile-subsidebar {
     background: var(--dark-sidebar-light-2);
@@ -718,15 +712,6 @@ const props = defineProps<{
           }
         }
       }
-    }
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .mobile-main-sidebar {
-    &.is-active {
-      transform: translateX(0) !important;
-      width: 60% !important;
     }
   }
 }
