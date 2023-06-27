@@ -146,11 +146,11 @@ Responsive styles
     }
   }
 
-  // .mobile-main-sidebar,
-  // .mobile-overlay,
-  // .mobile-subsidebar {
-  //   display: none !important;
-  // }
+  .mobile-main-sidebar,
+  .mobile-overlay,
+  .mobile-subsidebar {
+    display: none !important;
+  }
 
   .sidebar-panel {
     box-shadow: var(--light-box-shadow);
@@ -165,7 +165,7 @@ Responsive styles
     left: 60px !important;
     [dir='rtl'] & {
       left: unset !important;
-      // right: 60px !important;
+      right: 60px !important;
     }
   }
 
@@ -708,16 +708,5 @@ Responsive styles
         display: flex !important;
       }
     }
-  }
-}
-
-// new style
-.sidebar-panel {
-  right: 0 !important;
-}
-
-@media screen and (max-width: 1024px) {
-  .sidebar-panel {
-    display: none !important;
   }
 }

@@ -19,7 +19,6 @@ export const useFarmStore = defineStore({
       try {
         this.loading = true
         this.list = await getFarmsList()
-        console.log(this.list)
       } catch (e) {
         this.error = e as Error
       } finally {

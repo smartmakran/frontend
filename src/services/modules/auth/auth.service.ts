@@ -4,8 +4,7 @@ import axios from 'axios'
 
 export async function login(body: LoginBody): Promise<{ user: IUser; token: string }> {
   const request = axios.create({
-    // baseURL: import.meta.env.VITE_API_BASE_URL,
-    baseURL: 'https://api.smartmakran.ir/',
+    baseURL: import.meta.env.VITE_API_BASE_URL,
     headers: {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
@@ -14,5 +13,6 @@ export async function login(body: LoginBody): Promise<{ user: IUser; token: stri
     },
   })
   const { data } = await request.post('/auth/login', body)
+
   return data
 }

@@ -9,17 +9,13 @@ import { useI18n } from 'vue-i18n'
 import { useDarkmode } from '/@src/stores/darkmode'
 import { useNotyf } from '/@src/composable/useNotyf'
 import { useUserStore } from '/@src/stores/user'
-import { useApi } from '/@src/composable/useApi'
-import axios from 'axios'
 
 const isLoading = ref(false)
 const darkmode = useDarkmode()
 const router = useRouter()
 const route = useRoute()
 const notyf = useNotyf()
-const api = useApi()
 const redirect = route.query.redirect as string
-
 const { t } = useI18n()
 
 const schema = yup.object({
@@ -69,6 +65,7 @@ const onLogin = handleSubmit(async (values) => {
     }
   }
 })
+
 useHead({
   title: `${t('app.title')} | ${t('auth.login.title')}`,
 })
@@ -143,7 +140,7 @@ useHead({
                           >
                             <input
                               v-bind="field"
-                              class="input input-style"
+                              class="input"
                               type="text"
                               :placeholder="t('auth.placeholder.phone')"
                               autocomplete="phone"
@@ -164,7 +161,7 @@ useHead({
                           >
                             <input
                               v-bind="field"
-                              class="input input-style"
+                              class="input"
                               type="password"
                               :placeholder="t('auth.placeholder.password')"
                               autocomplete="new-password"
@@ -198,8 +195,3 @@ useHead({
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-.input-style {
-  padding-right: 35px;
-}
-</style>

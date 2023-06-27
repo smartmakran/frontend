@@ -1,20 +1,11 @@
-<script setup lang="ts">
-import { onMounted } from 'vue'
-onMounted(() => {
-  localStorage.setItem('page-name', 'لیست حوضچه ها')
-})
-</script>
-
 <template>
   <div class="page-content-inner">
     <!-- <TestDashboard /> -->
     <div class="business-dashboard course-dashboard">
       <!--Tile Grid v1-->
       <div class="columns is-multiline tile-grid tile-grid-v2">
-        <Ponds />
-        <!-- <PondList /> -->
-        <!-- <FarmList />
-        <CreateFarmForm /> -->
+        <FarmList />
+        <CreateFarmForm />
       </div>
     </div>
   </div>

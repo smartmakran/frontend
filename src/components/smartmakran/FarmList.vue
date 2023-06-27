@@ -1,15 +1,12 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
-import axios from 'axios'
+import { computed } from 'vue'
 // import { files } from '/@src/data/dashboards/course'
 import { useFarmStore } from '/@src/stores/farm'
 import { onMounted } from 'vue'
 import { IFarm } from '/@src/interfaces/farm.interface'
-import { ref } from 'vue'
-import { usePondStore } from '/@src/stores/pond'
+
 const farmStore = useFarmStore()
-const showCreateFarm = ref(false)
-const pondStore = usePondStore()
+
 onMounted(async () => {
   await farmStore.getFarmsList()
 })
@@ -17,37 +14,28 @@ onMounted(async () => {
 let filteredFarms = computed<IFarm[]>(() => {
   return farmStore.list
 })
-watchEffect(async () => {
-  await pondStore.getPoolsList()
-})
-let closing = () => (showCreateFarm.value = false)
 </script>
 
 <template>
   <!--Grid item-->
-  <div class="column">
-    <CreateFarmForm :show="showCreateFarm" :closeForm="closing" />
-
+  <div class="column is-6">
     <div class="dashboard-title">
       <div class="left">
         <h2 class="dark-inverted">مزرعه‌ها</h2>
         <p class="h-hidden-mobile">جزئیاتی از مزرعه‌های شما</p>
       </div>
       <div class="right">
-        <div class="field items-center">
-          <div class="control has-icon mb-15px">
+        <div class="field">
+          <div class="control has-icon">
             <input
               type="text"
-              class="input is-rounded search-input"
+              class="input is-rounded"
               placeholder="جستجوی مزرعه‌ها..."
             />
             <div class="form-icon">
               <i aria-hidden="true" class="iconify" data-icon="feather:search"></i>
             </div>
           </div>
-          <VButton raised color="primary" @click="showCreateFarm = true">
-            ثبت مزرعه جدید
-          </VButton>
         </div>
       </div>
     </div>
@@ -80,25 +68,21 @@ let closing = () => (showCreateFarm.value = false)
         <div class="list-view-inner">
           <TransitionGroup name="list-complete" tag="div">
             <!--Farm List-->
-            <div
-              v-for="farm in filteredFarms"
-              :key="farm.id"
-              class="list-view-item farm-list farm-content-item"
-            >
+            <div v-for="farm in filteredFarms" :key="farm.id" class="list-view-item">
               <div class="list-view-item-inner">
                 <VIconBox color="primary">
-                  <i aria-hidden="true" class="fas fa-home"></i>
+                  <i aria-hidden="true" class="lnil lnil-home"></i>
                 </VIconBox>
                 <div class="meta-left">
-                  <h3 class="farm-content-item-title">
+                  <h3>
                     {{ farm.name }}
                   </h3>
-                  <span class="farm-content-item-info">
+                  <span>
                     <i aria-hidden="true" class="iconify" data-icon="feather:map-pin"></i>
-                    <span class="parameter">مکان: {{ farm.address?.city }}</span>
-                    <span class="margin-x"></span>
+                    <span>مکان: {{ farm.address?.city }}</span>
+                    <i aria-hidden="true" class="fas fa-circle icon-separator"></i>
                     <i aria-hidden="true" class="iconify" data-icon="feather:clock"></i>
-                    <span class="parameter"
+                    <span
                       >تاریخ ثبت:
                       {{ new Date(farm.createdAt).toLocaleDateString('fa') }}</span
                     >
@@ -131,36 +115,6 @@ let closing = () => (showCreateFarm.value = false)
 <style lang="scss">
 @import '../../scss/abstracts/mixins';
 
-// .search-add-box {
-//   display: flex;
-//   background: red;
-//   width: fit-content;
-// }
-
-.farm-content-item-info {
-  display: flex;
-  align-items: center;
-}
-.farm-content-item {
-  display: flex;
-  align-items: center;
-  .meta-left {
-    margin-top: 0 !important;
-  }
-}
-.search-input {
-  padding-right: 30px !important;
-}
-.farm-content-item-title {
-  margin-bottom: 5px;
-  // margin-top: 10px;
-}
-.margin-x {
-  margin: 0 15px;
-  width: 1px;
-  height: 10px;
-  background: #c8d0e7;
-}
 .list-view-v3 {
   .list-view-item {
     @include vuero-r-card;
@@ -289,19 +243,7 @@ let closing = () => (showCreateFarm.value = false)
     }
   }
 }
-.items-center {
-  display: flex;
-  align-items: center !important;
-  flex-direction: column;
-}
-.mb-15px {
-  margin-bottom: 15px;
-}
-.parameter {
-  color: #727b97 !important;
-}
-@media only screen and (min-width: 600px) {
-}
+
 @media only screen and (max-width: 767px) {
   .list-view-v3 {
     .list-view-item {
@@ -378,33 +320,6 @@ let closing = () => (showCreateFarm.value = false)
         }
       }
     }
-  }
-}
-@media screen and (min-width: 600px) {
-  .items-center {
-    flex-direction: row;
-  }
-}
-@media screen and (min-width: 767px) {
-  .items-center {
-    // display: flex;
-    // align-items: center;
-    // flex-direction: row;
-  }
-  .mb-15px {
-    margin-bottom: 0;
-    margin-left: 15px;
-  }
-}
-.buttons {
-  a {
-    display: flex;
-    justify-content: center;
-  }
-  a,
-  button,
-  .button {
-    width: 100% !important;
   }
 }
 </style>

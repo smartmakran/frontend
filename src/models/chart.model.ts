@@ -1,25 +1,19 @@
 import { useThemeColors } from '../composable/useThemeColors'
-import {
-  ChartBaseOption,
-  ChartSeries,
-  ChartTitle,
-  ChartXaxis,
-  ChartYaxis,
-} from './base-chart.model'
+import { ChartBaseOption, ChartSeries, ChartTitle, ChartYaxis } from './base-chart.model'
 
 export class PHChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'میزان اسیدیته', data: [] },
-    { name: 'بهینه بالا', data: [1, 2, 4, 5] },
+    { name: 'ph', data: [] },
+    { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().primary,
-    useThemeColors().warning,
+    useThemeColors().lightText,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'میزان اسیدیته',
+    text: 'pH',
     align: 'left',
   }
   labels: string[]
@@ -27,18 +21,7 @@ export class PHChartOptions extends ChartBaseOption {
     min: 2,
     max: 8,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
-  }
+
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -57,17 +40,17 @@ export class PHChartOptions extends ChartBaseOption {
 
 export class OxygenChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'اکسیژن', data: [] },
+    { name: 'oxygen', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().primary,
-    useThemeColors().warning,
+    useThemeColors().lightText,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'اکسیژن (ml/l)',
+    text: 'Oxygen',
     align: 'left',
   }
   labels: string[]
@@ -75,18 +58,7 @@ export class OxygenChartOptions extends ChartBaseOption {
     min: 5,
     max: 10,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
-  }
+
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -111,11 +83,11 @@ export class OrpChartOptions extends ChartBaseOption {
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
-    useThemeColors().warning,
+    useThemeColors().lightText,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'ORP(NV)',
+    text: 'ORP',
     align: 'left',
   }
   labels: string[]
@@ -123,18 +95,7 @@ export class OrpChartOptions extends ChartBaseOption {
     min: 300,
     max: 400,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
-  }
+
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -153,17 +114,17 @@ export class OrpChartOptions extends ChartBaseOption {
 
 export class ECChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'میزان شوری', data: [] },
+    { name: 'ec', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
-    useThemeColors().warning,
+    useThemeColors().lightText,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'میزان شوری (ppt)',
+    text: 'EC',
     align: 'left',
   }
   labels: string[]
@@ -171,18 +132,7 @@ export class ECChartOptions extends ChartBaseOption {
     min: 17,
     max: 27,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
-  }
+
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -201,17 +151,17 @@ export class ECChartOptions extends ChartBaseOption {
 
 export class AmmoniaChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'آمونیاک', data: [] },
+    { name: 'ammonia', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
-    useThemeColors().warning,
+    useThemeColors().lightText,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'آمونیاک (ppm)',
+    text: 'Ammonia',
     align: 'left',
   }
   labels: string[]
@@ -219,18 +169,7 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     min: 0.3,
     max: 0.6,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
-  }
+
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -249,17 +188,17 @@ export class AmmoniaChartOptions extends ChartBaseOption {
 
 export class NitriteChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'نیتریت', data: [] },
+    { name: 'nitrite', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
-    useThemeColors().warning,
+    useThemeColors().lightText,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'نیتریت (ppm)',
+    text: 'Nitrite',
     align: 'left',
   }
   labels: string[]
@@ -267,18 +206,7 @@ export class NitriteChartOptions extends ChartBaseOption {
     min: 0,
     max: 2,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
-  }
+
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -297,17 +225,17 @@ export class NitriteChartOptions extends ChartBaseOption {
 
 export class NitrateChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'نیترات', data: [] },
+    { name: 'nitrate', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
-    useThemeColors().warning,
+    useThemeColors().lightText,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'نیترات (ppm)',
+    text: 'Nitrate',
     align: 'left',
   }
   labels: string[]
@@ -315,18 +243,7 @@ export class NitrateChartOptions extends ChartBaseOption {
     min: 0,
     max: 2,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
-  }
+
   constructor(
     data: number[],
     optimizeUp: number[],
@@ -345,17 +262,17 @@ export class NitrateChartOptions extends ChartBaseOption {
 
 export class TemperatureChartOptions extends ChartBaseOption {
   series: ChartSeries[] = [
-    { name: 'دما', data: [] },
+    { name: 'temperature', data: [] },
     { name: 'بهینه بالا', data: [] },
     { name: 'بهینه پایین', data: [] },
   ]
   colors: string[] = [
     useThemeColors().primary,
-    useThemeColors().danger,
-    useThemeColors().warning,
+    useThemeColors().lightText,
+    useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'دما (C)',
+    text: 'Temperature',
     align: 'left',
   }
   labels: string[]
@@ -363,18 +280,7 @@ export class TemperatureChartOptions extends ChartBaseOption {
     min: 15,
     max: 40,
   }
-  xaxis: ChartXaxis = {
-    type: 'date',
-    labels: {
-      datetimeUTC: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
-  }
+
   constructor(
     data: number[],
     optimizeUp: number[],

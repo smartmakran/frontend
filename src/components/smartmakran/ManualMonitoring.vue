@@ -1,15 +1,13 @@
 <script setup lang="ts">
 import ApexChart from 'vue3-apexcharts'
 import moment from 'moment-jalaali'
-import { onMounted, watchEffect } from 'vue'
+import { onMounted } from 'vue'
 import { usePondStore } from '/@src/stores/pond'
-import draggable from 'vuedraggable'
 import {
   ChangingWaterChartOption,
   FeedingChartOption,
   SamplingChartOption,
   TransparencyChartOption,
-  LossessChartOption,
 } from '/@src/models/manualMonitoring.model'
 import { ref } from 'vue'
 
@@ -23,11 +21,9 @@ const params = defineProps({
 const pondStore = usePondStore()
 
 const sampling = ref(new SamplingChartOption([], '#000', []))
-const lossess = ref(new LossessChartOption([], '#000', []))
 const feeding = ref(new FeedingChartOption([], '#000', []))
 const changingWater = ref(new ChangingWaterChartOption([], '#000', []))
 const transparency = ref(new TransparencyChartOption([], '#000', []))
-
 onMounted(async () => {
   const result = await pondStore.manualMonitoring(params.id)
 
@@ -63,42 +59,8 @@ onMounted(async () => {
     )
   )
 })
-const activateDraggable = ref(false)
-const charts = ref([
-  {
-    height: sampling.value._rawValue.chart.height,
-    type: sampling.value._rawValue.chart.type,
-    series: sampling.value._rawValue.series,
-    options: sampling.value._rawValue,
-  },
-  {
-    height: feeding.value._rawValue.chart.height,
-    type: feeding.value._rawValue.chart.type,
-    series: feeding.value._rawValue.series,
-    options: feeding.value._rawValue,
-  },
-  {
-    height: changingWater.value._rawValue.chart.height,
-    type: changingWater.value._rawValue.chart.type,
-    series: changingWater.value._rawValue.series,
-    options: changingWater.value._rawValue,
-  },
-  {
-    height: transparency.value._rawValue.chart.height,
-    type: transparency.value._rawValue.chart.type,
-    series: transparency.value._rawValue.series,
-    options: transparency.value._rawValue,
-  },
-])
-watchEffect(() => {
-  if (localStorage.getItem('chart_manual') !== null) {
-    charts.value = JSON.parse(localStorage.getItem('chart_manual'))
-  }
-})
 
-const dragChartHandle = () => {
-  localStorage.setItem('chart_manual', JSON.stringify(charts.value._rawValue))
-}
+console.log(sampling)
 </script>
 
 <template>
@@ -106,61 +68,73 @@ const dragChartHandle = () => {
     <!--Header-->
     <div class="dashboard-header">
       <div class="start">
-        <div class="dashboard-header-chart">
-          <h3 class="dark-inverted">پایش‌های دستی</h3>
-          <label class="checked-draggable-container" for="activateDraggable">
-            <span>تغیر ترتیب نمودار ها</span>
-            <div class="checked-draggable">
-              <input id="" v-model="activateDraggable" type="checkbox" name="" />
-              <div class="checked-draggable-btn"></div>
-            </div>
-          </label>
-        </div>
-
+        <h3 class="dark-inverted">پایش‌های دستی</h3>
         <p>اطلاعاتی که از کارشناس ثبت می‌کند.</p>
       </div>
     </div>
 
-    <div v-if="activateDraggable === false" class="columns is-multiline">
-      <div v-for="(item, key) in charts" :key="key" class="column is-6">
+    <!-- Charts -->
+    <div class="columns is-multiline">
+      <!--Line Stats Widget-->
+      <div class="column is-6">
         <div class="s-card">
           <ApexChart
             id="apex-chart-5"
             dir="ltr"
-            :height="item.height"
-            :type="item.type"
-            :series="item.series"
-            :options="item.options"
+            :height="sampling.chart.height"
+            :type="sampling.chart.type"
+            :series="sampling.series"
+            :options="sampling"
+          >
+          </ApexChart>
+        </div>
+      </div>
+
+      <!--Line Stats Widget-->
+      <div class="column is-6">
+        <div class="s-card">
+          <ApexChart
+            id="apex-chart-5"
+            dir="ltr"
+            :height="feeding.chart.height"
+            :type="feeding.chart.type"
+            :series="feeding.series"
+            :options="feeding"
+          >
+          </ApexChart>
+        </div>
+      </div>
+
+      <!--Line Stats Widget-->
+      <div class="column is-6">
+        <div class="s-card">
+          <ApexChart
+            id="apex-chart-5"
+            dir="ltr"
+            :height="changingWater.chart.height"
+            :type="changingWater.chart.type"
+            :series="changingWater.series"
+            :options="changingWater"
+          >
+          </ApexChart>
+        </div>
+      </div>
+
+      <!--Line Stats Widget-->
+      <div class="column is-6">
+        <div class="s-card">
+          <ApexChart
+            id="apex-chart-5"
+            dir="ltr"
+            :height="transparency.chart.height"
+            :type="transparency.chart.type"
+            :series="transparency.series"
+            :options="transparency"
           >
           </ApexChart>
         </div>
       </div>
     </div>
-    <!-- Charts -->
-
-    <draggable
-      v-if="activateDraggable === true"
-      v-model="charts"
-      class="columns is-multiline"
-      group="charts"
-      @change="dragChartHandle"
-    >
-      <template #item="{ element: chart }">
-        <div class="column is-6">
-          <div class="s-card chart-box">
-            <ApexChart
-              id="apex-chart-5"
-              dir="ltr"
-              :height="chart.height"
-              :type="chart.type"
-              :series="chart.series"
-              :options="chart.options"
-            >
-            </ApexChart>
-          </div>
-        </div>
-      </template>
-    </draggable>
   </div>
 </template>
 
@@ -305,10 +279,7 @@ const dragChartHandle = () => {
     }
   }
 }
-.chart-box:hover {
-  background: rgb(247, 247, 247);
-  cursor: all-scroll;
-}
+
 @media only screen and (max-width: 767px) {
   .ecommerce-dashboard-v1 {
     .dashboard-header {
@@ -325,42 +296,6 @@ const dragChartHandle = () => {
         [dir='rtl'] & {
           margin: 0;
         }
-      }
-    }
-  }
-}
-.checked-draggable-container {
-  display: flex;
-}
-.checked-draggable {
-  width: 40px;
-  height: 25px;
-  border-radius: 50px;
-  background: #283252;
-  position: relative;
-  cursor: pointer;
-  margin-right: 8px;
-  .checked-draggable-btn {
-    width: 21px;
-    height: 21px;
-    background: #d5d8e4;
-    border-radius: 30px;
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-  }
-  input {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: 10;
-    opacity: 0;
-    cursor: pointer;
-    &:checked {
-      & + .checked-draggable-btn {
-        right: 17px;
       }
     }
   }

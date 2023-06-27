@@ -5,7 +5,6 @@ const api = useApi()
 
 export async function getFarmsList(): Promise<IFarm[]> {
   const { data } = await api.get('/farm')
-  console.log(data)
   return data.data
 }
 
