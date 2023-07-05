@@ -687,6 +687,7 @@ onMounted(async () => {
     &:checked {
       & + .checked-draggable-btn {
         right: 17px;
+        background: rgb(62, 139, 255);
       }
     }
   }

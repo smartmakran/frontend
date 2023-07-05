@@ -19,7 +19,7 @@ let closing = () => (showCreatePond.value = false)
 
 const getBiomass = (size, larv) => {
   // console.log(array)
-  if (size) {
+  if (size && larv) {
     let sum = size.reduce((accumulator, currentValue) => {
       return accumulator + currentValue
     }, 0)
@@ -27,7 +27,6 @@ const getBiomass = (size, larv) => {
     let length = size.length
     let avarage = sum / length
     let getKiloGram = avarage / 1000
-
     return getKiloGram * larv
   } else {
     return 0
@@ -182,10 +181,9 @@ const getDencity = (pond) => {
                       <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
                     </div>
                     <h4>میزان شوری</h4>
-                    <p v-if="pond?.sensorData.length">
-                      {{ pond?.sensorData[0].ec }}
+                    <p>
+                      {{ pond?.sensorData[0]?.ec ? pond?.sensorData[0].ec : 0 }}
                     </p>
-                    <p v-else>0</p>
                     <!-- <p v-for="pondDetail in sensorData" :key="pondDetail._id">
                       <span v-if="pond.id !== pondDetail.pond">-</span>
                       <span v-if="pond.id === pondDetail.pond">{{ pondDetail.ec }}</span>
@@ -198,10 +196,9 @@ const getDencity = (pond) => {
                       <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="" />
                     </div>
                     <h4>اکسیژن</h4>
-                    <p v-if="pond?.sensorData.length">
-                      {{ pond?.sensorData[0].oxygen }}
+                    <p>
+                      {{ pond?.sensorData[0]?.oxygen ? pond?.sensorData[0]?.oxygen : 0 }}
                     </p>
-                    <p v-else>0</p>
                   </div>
                 </div>
                 <div class="card-pond-body">
@@ -226,10 +223,9 @@ const getDencity = (pond) => {
                       <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="" />
                     </div>
                     <h4>pH</h4>
-                    <p v-if="pond?.sensorData.length">
-                      {{ pond?.sensorData[0].ph }}
+                    <p>
+                      {{ pond?.sensorData[0]?.ph ? pond?.sensorData[0]?.ph : 0 }}
                     </p>
-                    <p v-else>0</p>
                   </div>
                 </div>
                 <div class="card-pond-body">
@@ -238,31 +234,30 @@ const getDencity = (pond) => {
                       <img src="/@src/assets/smartmakran/icons-box/temp.svg" alt="" />
                     </div>
                     <h4>دما</h4>
-                    <p v-if="pond?.sensorData.length">
-                      {{ pond?.sensorData[0].temperature }}
+                    <p>
+                      {{
+                        pond?.sensorData[0]?.temperature
+                          ? pond?.sensorData[0]?.temperature
+                          : 0
+                      }}
                     </p>
-                    <p v-else>0</p>
                   </div>
                 </div>
               </div>
-              <div class="card-pond-footer" v-if="pond?.sensorData.length">
-                <RouterLink
-                  :to="{ name: 'app-pond-id', params: { id: pond?.sensorData[0].pond } }"
-                >
-                  <VButton color="primary" outlined raised> جزئیات </VButton>
-                </RouterLink>
-              </div>
+              <RouterLink :to="{ name: 'app-pond-id', params: { id: pond.id } }">
+                <VButton color="primary" outlined raised> جزئیات </VButton>
+              </RouterLink>
             </div>
           </TransitionGroup>
         </div>
 
-        <VFlexPagination
+        <!-- <VFlexPagination
           v-if="filteredPonds.length > 5"
           :item-per-page="10"
           :total-items="873"
           :current-page="42"
           :max-links-displayed="7"
-        />
+        /> -->
       </div>
     </div>
   </div>

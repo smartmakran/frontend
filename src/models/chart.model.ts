@@ -20,7 +20,7 @@ export class PHChartOptions extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'pH',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -68,7 +68,7 @@ export class OxygenChartOptions extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'اکسیژن (mg/L)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -116,7 +116,7 @@ export class OrpChartOptions extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'ORP(mV)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -164,7 +164,7 @@ export class ECChartOptions extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'میزان شوری (ppt)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -212,7 +212,7 @@ export class AmmoniaChartOptions extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'آمونیاک (ppm)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -260,7 +260,7 @@ export class NitriteChartOptions extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'نیتریت (ppm)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -308,7 +308,7 @@ export class NitrateChartOptions extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'نیترات (ppm)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -356,7 +356,7 @@ export class TemperatureChartOptions extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'دما (C)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
