@@ -7,6 +7,17 @@ export interface IPond {
     depth: number
     waterHeight: number
   }
+  sensorData: [
+    {
+      ammonia: number
+      ec: number
+      nitrate: number
+      nitrite: number
+      orp: number
+      ph: number
+      temperature: number
+    }
+  ]
   startFarming: Date
   larvaCount: number
   density: number

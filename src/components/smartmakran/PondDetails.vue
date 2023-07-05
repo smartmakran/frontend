@@ -20,7 +20,6 @@ const pondStore = usePondStore()
 const currentPond = computed<IPond>(() => {
   return pondStore.currentPond || {}
 })
-console.log(currentPond)
 
 let closeFeedingChecking = () => (showFeedingCheckingModal.value = false)
 let closeLosses = () => (showLossesModal.value = false)
@@ -29,11 +28,68 @@ let closeWaterDataModa = () => (showWaterDataModal.value = false)
 let closeFeedingDataModal = () => (showFeedingDataModal.value = false)
 let closeSamplingDataModal = () => (showSamplingDataModal.value = false)
 let closeTransparencyDataModal = () => (showTransparencyDataModal.value = false)
+
+const pondE = JSON.parse(localStorage.getItem('pond'))
+console.log(pondE)
+
 watchEffect(() => {
   const sensorData = JSON.parse(localStorage.getItem('sensorData'))
   let newPons = sensorData.filter((item) => item.pond === route.params.id)
   pondDetail.value = newPons[0]
+
+  // console.log(currentPond.diagramConfig)
+  // console.log(currentPond._value)
+  // console.log(currentPond.name)
+  // console.log(currentPond.larvaCount)
 })
+const currentPondStorage = localStorage.getItem('pond')
+
+const getBiomass = (size, larv) => {
+  // console.log(array)
+  if (size.length && larv) {
+    let sum = size.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue
+    }, 0)
+    console.log(size)
+    let length = size.length
+    let avarage = sum / length
+    let getKiloGram = avarage / 1000
+    console.log(getKiloGram)
+    console.log(larv)
+    return getKiloGram * larv
+  } else {
+    return 0
+  }
+}
+const getAverageSize = (size) => {
+  if (size) {
+    let sum = size.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue
+    }, 0)
+
+    let length = size.length
+    let avarage = sum / length
+    let getKiloGram = avarage / 1000
+    return getKiloGram
+  } else {
+    return 0
+  }
+}
+const getFCR = (pond) => {
+  if (pond.samplingData.length) {
+    let res = pond.feedingData.map((obj) => obj.amount)
+    let sum = res.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue
+    }, 0)
+    let biomass = getBiomass(pond.samplingData[0].size, pond.larvaCount)
+    return sum / biomass
+  }
+}
+const getDencity = (pond) => {
+  let area = pond.dimensions.width * pond.dimensions.length
+  let dencity = pond.larvaCount / area
+  return dencity
+}
 </script>
 
 <template>
@@ -107,7 +163,7 @@ watchEffect(() => {
               <i aria-hidden="true" class="fas fa-home"></i>
             </VIconBox>
             <div>
-              <h3>{{ currentPond.name }}</h3>
+              <h3>{{ currentPondStorage.name }}</h3>
             </div>
           </div>
           <div class="card-pond-header-detail">
@@ -147,7 +203,7 @@ watchEffect(() => {
           >
         </div>
 
-        <div class="card-pond-attrs">
+        <!-- <div class="card-pond-attrs">
           <div class="card-pond-body">
             <div class="card-pond-attr">
               <div class="card-pond-attr-icon">
@@ -201,6 +257,111 @@ watchEffect(() => {
               </div>
               <h4>دما</h4>
               <p>12</p>
+            </div>
+          </div>
+        </div> -->
+        <div class="card-pond-attrs">
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/bio.svg" alt="" />
+              </div>
+              <h4>حجم توده زنده</h4>
+              <p>
+                {{
+                  getBiomass(
+                    pondE?.samplingData?.length && pondE?.samplingData[0]?.size,
+                    pondE?.larvaCount
+                  )
+                }}
+                <!-- {{
+                  getBiomass(
+                    currentPond?.samplingData?.length &&
+                      currentPond?.samplingData[0]?.size,
+                    currentPond?.larvaCount
+                  )
+                }} -->
+              </p>
+            </div>
+          </div>
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
+              </div>
+              <h4>میزان شوری</h4>
+              <p>{{ pondE?.sensorData[0]?.ec }}</p>
+              <!-- <h4>میزان شوری</h4>
+              <p v-if="currentPond?.sensorData.length">
+                <span v-if="currentPond?.sensorData[0]?.ec">
+                  {{ currentPond?.sensorData[0]?.ec }}
+                </span>
+              </p>
+              <p v-else>0</p> -->
+            </div>
+          </div>
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="" />
+              </div>
+              <h4>اکسیژن</h4>
+              <p v-if="pondE?.sensorData[0]?.oxygen">
+                {{ pondE?.sensorData[0]?.oxygen }}
+              </p>
+              <p v-else>0</p>
+              <!-- <p v-if="currentPond?.sensorData[0]?.oxygen">
+                {{ currentPond?.sensorData[0]?.oxygen }}
+              </p>
+              <p v-else>0</p> -->
+            </div>
+          </div>
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/size.svg" alt="" />
+              </div>
+              <h4>میانگین سایز</h4>
+              <p v-if="pondE?.samplingData[0].size.length">
+                {{ pondE?.samplingData[0].size }}
+              </p>
+
+              <p v-else>
+                0
+                <!-- {{
+                  getAverageSize(
+                    currentPond?.samplingData.length && currentPond?.samplingData[0].size
+                  )
+                }} -->
+              </p>
+            </div>
+          </div>
+
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="" />
+              </div>
+              <h4>pH</h4>
+              <p>{{ pondE?.sensorData[0]?.ph }}</p>
+              <!-- <p v-if="currentPond?.sensorData[0]?.ph">
+                {{ currentPond?.sensorData[0]?.ph }}
+              </p>
+              <p v-else>0</p> -->
+            </div>
+          </div>
+          <div class="card-pond-body">
+            <div class="card-pond-attr">
+              <div class="card-pond-attr-icon">
+                <img src="/@src/assets/smartmakran/icons-box/temp.svg" alt="" />
+              </div>
+              <h4>دما</h4>
+              <p>
+                {{ pondE.sensorData[0].temperature }}
+              </p>
+              <!-- <p v-if="currentPondStorage.sensorData.length">
+                {{ currentPond.sensorData[0].temperature }}
+              </p> -->
             </div>
           </div>
         </div>

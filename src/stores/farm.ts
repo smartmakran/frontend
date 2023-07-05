@@ -5,7 +5,8 @@ import {
   getFarmsList,
 } from '../services/modules/farm/farm.service'
 import { IFarm, ICreateFarm } from '../interfaces/farm.interface'
-
+import { useNotyf } from '../composable/useNotyf'
+import { useRouter } from 'vue-router'
 export const useFarmStore = defineStore({
   id: 'farm',
   state: () => ({
@@ -16,12 +17,16 @@ export const useFarmStore = defineStore({
   }),
   actions: {
     async getFarmsList() {
+      const router = useRouter()
+
       try {
         this.loading = true
         this.list = await getFarmsList()
         console.log(this.list)
       } catch (e) {
         this.error = e as Error
+        localStorage.removeItem('token')
+        router.push({ name: 'auth' })
       } finally {
         this.loading = false
       }

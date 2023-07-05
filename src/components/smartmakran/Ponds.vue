@@ -117,9 +117,9 @@ let closing = () => (showCreatePond.value = false)
                   </div>
                 </div>
                 <div class="card-pond-header-detail">
-                  <RouterLink :to="{ name: 'app-pond-id', params: { id: pond._id } }">
+                  <!-- <RouterLink :to="{ name: 'app-pond-id', params: { id: pond._id } }">
                     <VButton color="primary" outlined raised> جزئیات </VButton>
-                  </RouterLink>
+                  </RouterLink> -->
                 </div>
               </div>
               <div class="card-pond-attrs">
@@ -180,9 +180,9 @@ let closing = () => (showCreatePond.value = false)
                 </div>
               </div>
               <div class="card-pond-footer">
-                <RouterLink :to="{ name: 'app-pond-id', params: { id: pond._id } }">
+                <!-- <RouterLink :to="{ name: 'app-pond-id', params: { id: pond._id } }">
                   <VButton color="primary" outlined raised> جزئیات </VButton>
-                </RouterLink>
+                </RouterLink> -->
               </div>
             </div>
           </TransitionGroup>

@@ -27,7 +27,7 @@ export async function getPondList() {
 
 export async function getPondDetails(id: string): Promise<IPond> {
   const { data } = await api.get(`/pond/${id}`)
-  console.log(data)
+  localStorage.setItem('pond', JSON.stringify(data))
   return data
 }
 

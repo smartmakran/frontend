@@ -16,7 +16,7 @@ export class SamplingChartOption extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'نمونه برداری (g)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -49,7 +49,7 @@ export class FeedingChartOption extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'غذادهی (kg)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -82,7 +82,7 @@ export class ChangingWaterChartOption extends ChartBaseOption {
   ]
   title: ChartTitle = {
     text: 'تعویض آب (درصد)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
@@ -113,9 +113,10 @@ export class TransparencyChartOption extends ChartBaseOption {
     useThemeColors().danger,
     useThemeColors().lightText,
   ]
+
   title: ChartTitle = {
     text: 'شفافیت (cm)',
-    align: 'left',
+    align: 'right',
   }
   labels: string[]
   yaxis: ChartYaxis = {
