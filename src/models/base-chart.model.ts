@@ -7,6 +7,7 @@ export type ChartXaxis = {
   labels: any
   tooltip: any
   title: any
+  tickAmount: number
 }
 export type ChartTitle = {
   text: string
