@@ -132,7 +132,7 @@ const getDencity = (pond) => {
                   pond.larvaCount
                 )
               }} -->
-              <div class="card-pond-header">
+              <div class="card-pond-header card-pond-list">
                 <div>
                   <VIconBox color="primary">
                     <i aria-hidden="true" class="fas fa-home"></i>
@@ -152,11 +152,9 @@ const getDencity = (pond) => {
                     </div>
                   </div>
                 </div>
-                <div class="card-pond-header-detail">
-                  <!-- <RouterLink :to="{ name: 'app-pond-id', params: { id: pond.id } }">
-                    <VButton color="primary" outlined raised> جزئیات </VButton>
-                  </RouterLink> -->
-                </div>
+                <RouterLink :to="{ name: 'app-pond-id', params: { id: pond.id } }">
+                  <VButton color="primary" outlined raised> جزئیات </VButton>
+                </RouterLink>
               </div>
               <div class="card-pond-attrs">
                 <div class="card-pond-body">
@@ -244,9 +242,6 @@ const getDencity = (pond) => {
                   </div>
                 </div>
               </div>
-              <RouterLink :to="{ name: 'app-pond-id', params: { id: pond.id } }">
-                <VButton color="primary" outlined raised> جزئیات </VButton>
-              </RouterLink>
             </div>
           </TransitionGroup>
         </div>

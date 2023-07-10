@@ -89,11 +89,18 @@ const charts = ref([
     series: transparency._rawValue.series,
     options: transparency._rawValue,
   },
+  {
+    height: lossess._rawValue.chart.height,
+    type: lossess._rawValue.chart.type,
+    series: lossess._rawValue.series,
+    options: lossess._rawValue,
+  },
 ])
 watchEffect(() => {
   if (localStorage.getItem('chart_manual') !== null) {
     charts.value = JSON.parse(localStorage.getItem('chart_manual'))
   }
+  console.log(lossess)
 })
 
 const dragChartHandle = () => {

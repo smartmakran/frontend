@@ -372,4 +372,11 @@ zh-CN:
     }
   }
 }
+.v-modal .modal-card-body {
+  height: 55vh !important;
+}
+.modal-content {
+  width: 100vh !important;
+  height: 100vh !important;
+}
 </style>

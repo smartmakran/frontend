@@ -38,7 +38,7 @@ export class PHChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -87,7 +87,7 @@ export class OxygenChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -136,7 +136,7 @@ export class OrpChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -185,7 +185,7 @@ export class ECChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -234,7 +234,7 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -283,7 +283,7 @@ export class NitriteChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -332,7 +332,7 @@ export class NitrateChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -381,7 +381,7 @@ export class TemperatureChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(
     data: number[],

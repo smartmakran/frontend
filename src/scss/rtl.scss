@@ -29,3 +29,11 @@ input[type='url'] {
   right: auto !important;
   left: 3px !important;
 }
+
+@media only screen and (min-width: 600px) {
+  .card-pond-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+}

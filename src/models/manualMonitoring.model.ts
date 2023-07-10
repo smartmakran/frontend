@@ -144,27 +144,37 @@ export class TransparencyChartOption extends ChartBaseOption {
   }
 }
 
-// export class LossessChartOption extends ChartBaseOption {
-//   series: ChartSeries[] = [{ name: 'تلفات', data: [] }]
-//   colors: string[] = [
-//     useThemeColors().primary,
-//     useThemeColors().danger,
-//     useThemeColors().lightText,
-//   ]
-//   title: ChartTitle = {
-//     text: 'تلفات',
-//     align: 'left',
-//   }
-//   labels: string[]
-//   yaxis: ChartYaxis = {
-//     min: 0,
-//     max: 100,
-//   }
+export class LossessChartOption extends ChartBaseOption {
+  series: ChartSeries[] = [{ name: 'تلفات', data: [] }]
+  colors: string[] = [
+    useThemeColors().primary,
+    useThemeColors().danger,
+    useThemeColors().lightText,
+  ]
 
-//   constructor(data: number[], color: string, labels: string[]) {
-//     super()
-//     this.series[0].data = data
-//     this.colors[0] = color
-//     this.labels = labels
-//   }
-// }
+  title: ChartTitle = {
+    text: 'تلفات',
+    align: 'right',
+  }
+  labels: string[]
+  yaxis: ChartYaxis = {
+    min: 0,
+    max: 100,
+  }
+  xaxis: ChartXaxis = {
+    type: 'date',
+    labels: {
+      datetimeUTC: false,
+    },
+    tooltip: {
+      enabled: false,
+    },
+    tickAmount: 10,
+  }
+  constructor(data: number[], color: string, labels: string[]) {
+    super()
+    this.series[0].data = data
+    this.colors[0] = color
+    this.labels = labels
+  }
+}
