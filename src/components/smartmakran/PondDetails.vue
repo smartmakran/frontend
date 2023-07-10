@@ -30,7 +30,7 @@ let closeSamplingDataModal = () => (showSamplingDataModal.value = false)
 let closeTransparencyDataModal = () => (showTransparencyDataModal.value = false)
 
 const pondE = JSON.parse(localStorage.getItem('pond'))
-console.log(pondE)
+console.log(currentPond)
 
 watchEffect(() => {
   const sensorData = JSON.parse(localStorage.getItem('sensorData'))
@@ -42,7 +42,7 @@ watchEffect(() => {
   // console.log(currentPond.name)
   // console.log(currentPond.larvaCount)
 })
-const currentPondStorage = localStorage.getItem('pond')
+const currentPondStorage = JSON.parse(localStorage.getItem('pond'))
 
 const getBiomass = (size, larv) => {
   // console.log(array)
@@ -153,6 +153,7 @@ const getDencity = (pond) => {
       </div>
     </div>
     <!--List-->
+
     <div class="list-view list-view-v2">
       <!--Active Tab-->
       <!-- start code -->
@@ -163,7 +164,7 @@ const getDencity = (pond) => {
               <i aria-hidden="true" class="fas fa-home"></i>
             </VIconBox>
             <div>
-              <h3>{{ currentPondStorage.name }}</h3>
+              <h3>{{ currentPondStorage?.name }}</h3>
             </div>
           </div>
           <div class="card-pond-header-detail">
