@@ -19,6 +19,7 @@ watchEffect(async () => {
 })
 const ponds = JSON.parse(localStorage.getItem('poolList'))
 let closing = () => (showCreatePond.value = false)
+console.log(ponds)
 </script>
 
 <template>
@@ -117,9 +118,9 @@ let closing = () => (showCreatePond.value = false)
                   </div>
                 </div>
                 <div class="card-pond-header-detail">
-                  <!-- <RouterLink :to="{ name: 'app-pond-id', params: { id: pond._id } }">
+                  <RouterLink :to="{ name: 'app-pond-id', params: { id: pond.id } }">
                     <VButton color="primary" outlined raised> جزئیات </VButton>
-                  </RouterLink> -->
+                  </RouterLink>
                 </div>
               </div>
               <div class="card-pond-attrs">

@@ -32,6 +32,7 @@ const getBiomass = (size, larv) => {
     return 0
   }
 }
+
 const getAverageSize = (size) => {
   if (size) {
     let sum = size.reduce((accumulator, currentValue) => {
@@ -46,6 +47,7 @@ const getAverageSize = (size) => {
     return 0
   }
 }
+
 const getFCR = (pond) => {
   if (pond.samplingData.length) {
     let res = pond.feedingData.map((obj) => obj.amount)
@@ -56,6 +58,7 @@ const getFCR = (pond) => {
     return sum / biomass
   }
 }
+
 const getDencity = (pond) => {
   let area = pond.dimensions.width * pond.dimensions.length
   let dencity = pond.larvaCount / area

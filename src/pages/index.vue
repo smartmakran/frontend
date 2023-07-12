@@ -10,17 +10,23 @@ localStorage.setItem('page-name', '')
 onMounted(() => {
   if (!localStorage.getItem('token')) {
     router.push({ name: 'auth' })
+    location.reload()
   }
 })
 watchEffect(() => {
   if (!localStorage.getItem('token')) {
     router.push({ name: 'auth' })
+    location.reload()
   } else {
     router.push({
       name: 'app',
     })
   }
 })
+if (!localStorage.getItem('token')) {
+  router.push({ name: 'auth' })
+  location.reload()
+}
 </script>
 
 <template>

@@ -29,47 +29,76 @@ const changingWater = ref(new ChangingWaterChartOption([], '#000', []))
 const transparency = ref(new TransparencyChartOption([], '#000', []))
 
 onMounted(async () => {
-  const result = await pondStore.manualMonitoring(params.id)
+  // const result = await pondStore.manualMonitoring(params.id)
+  const result = JSON.parse(localStorage.getItem('pond'))
+  console.log(result)
+  const samplingAmount = result.samplingData.map((s) => s.amount)
+  const feedingAmount = result.feedingData.map((s) => s.amount)
+  const changingWaterAmount = result.changingWaterData.map((s) => s.amount)
+  const transparencyAmount = result.transparencyData.map((s) => s.amount)
+  const lossesAmount = result.fatalityData.map((s) => s.amount)
+
+  const samplingCreatedAt = result.samplingData.map((s) => s.createdAt)
+  const feedingCreatedAt = result.feedingData.map((s) => s.createdAt)
+  const changingWaterCreatedAt = result.changingWaterData.map((s) => s.createdAt)
+  const transparencyCreatedAt = result.transparencyData.map((s) => s.createdAt)
+  const lossesCreatedAt = result.fatalityData.map((s) => s.createdAt)
 
   // update sampling diagram
   sampling.value = new SamplingChartOption(
-    result.sampling.map((s: any) => s.averageSize as number),
+    result.samplingData.map((s: any) => s.averageSize as number),
     '#000',
-    result.sampling.map((s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss'))
+    result.samplingData.map((s: any) =>
+      moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+    )
   )
 
   // update feeding diagram
   feeding.value = new FeedingChartOption(
-    result.feeding.map((s: any) => s.amount as number),
+    result.feedingData.map((s: any) => s.amount as number),
     '#000',
-    result.feeding.map((s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss'))
+    result.feedingData.map((s: any) =>
+      moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+    )
   )
 
   // update changing water diagram
   changingWater.value = new ChangingWaterChartOption(
-    result.changingWater.map((s: any) => s.amount as number),
+    result.changingWaterData.map((s: any) => s.amount as number),
     '#000',
-    result.changingWater.map((s: any) =>
+    result.changingWaterData.map((s: any) =>
       moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
     )
   )
 
   // update transparency diagram
   transparency.value = new TransparencyChartOption(
-    result.transparency.map((s: any) => s.amount as number),
+    result.transparencyData.map((s: any) => s.amount as number),
     '#000',
-    result.transparency.map((s: any) =>
+    result.transparencyData.map((s: any) =>
+      moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+    )
+  )
+
+  lossess.value = new LossessChartOption(
+    result.fatalityData.map((s: any) => s.amount as number),
+    '#000',
+    result.fatalityData.map((s: any) =>
       moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
     )
   )
 })
+
 const activateDraggable = ref(false)
+console.log('object')
+console.log(sampling)
+console.log(sampling.value)
 const charts = ref([
   {
-    height: sampling._rawValue.chart.height,
-    type: sampling._rawValue.chart.type,
-    series: sampling._rawValue.series,
-    options: sampling._rawValue,
+    height: sampling.value.chart.height,
+    type: sampling.value.chart.type,
+    series: sampling.value.series,
+    options: sampling.value,
   },
   {
     height: feeding._rawValue.chart.height,
@@ -100,7 +129,6 @@ watchEffect(() => {
   if (localStorage.getItem('chart_manual') !== null) {
     charts.value = JSON.parse(localStorage.getItem('chart_manual'))
   }
-  console.log(lossess)
 })
 
 const dragChartHandle = () => {
@@ -162,6 +190,7 @@ const dragChartHandle = () => {
               :type="chart.type"
               :series="chart.series"
               :options="chart.options"
+              labels="[1,23,4]"
             >
             </ApexChart>
           </div>

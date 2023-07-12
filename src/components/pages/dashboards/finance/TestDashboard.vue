@@ -14,7 +14,7 @@ import {
   TemperatureChartOptions,
 } from '/@src/models/chart.model'
 import { SocketService } from '/@src/services/modules/socket/socket.service'
-import { ref, onMounted, reactive } from 'vue'
+import { ref, onMounted, reactive, watchEffect } from 'vue'
 import { useThemeColors } from '../../../../composable/useThemeColors'
 
 type SensorData = {
@@ -238,8 +238,6 @@ const temperature = reactive<any>({
   ),
 })
 
-console.log(ph)
-
 onMounted(async () => {
   socket.on('message', (data) => {
     const {
@@ -325,10 +323,10 @@ onMounted(async () => {
     temperature.series[2].data = temperatureDown
     temperature.colors[0] = temperatureColor
     temperature.labels = dates
-
-    console.log('sssssssssss', ph)
   })
 })
+
+console.log('hello')
 </script>
 
 <template>
