@@ -26,6 +26,7 @@ export abstract class ChartBaseOption {
   abstract labels: string[]
   abstract yaxis: ChartYaxis
   abstract xaxis: ChartXaxis
+
   chart = {
     type: 'area',
     height: 400,

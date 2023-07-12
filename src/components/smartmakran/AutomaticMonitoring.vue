@@ -2,6 +2,7 @@
 import ApexChart from 'vue3-apexcharts'
 import moment from 'moment-jalaali'
 import draggable from 'vuedraggable'
+import { useRoute } from 'vue-router'
 import { dashboard } from '/@src/services/modules/dashboard/dashboard.service'
 import {
   AmmoniaChartOptions,
@@ -31,6 +32,8 @@ type SensorData = {
   createdAt: Date
 }
 
+const router = useRoute()
+
 const props = withDefaults(
   defineProps<{
     activeTab?: string
@@ -43,9 +46,19 @@ const { socket } = new SocketService()
 const userStore = useUserStore()
 const user = userStore.user
 const tab = ref(props.activeTab)
+const filteringSensor = ref([])
+const filteringoptimal = ref([])
 
 const { sensorData, optimalData, ponds } = await dashboard(`/dashboard/${user.id}`)
 
+function getPond() {
+  console.log('hello')
+  let Sensorf = sensorData.filter((item) => item.pond === router.params.id)
+  let optimalf = sensorData.filter((item) => item.pond === router.params.id)
+  filteringSensor.value = Sensorf
+  filteringoptimal.value = optimalf
+}
+getPond()
 function extractData(data: any, optimal: any) {
   if (data.length > 55) {
     data = data.slice(data.length - 50, data.length)
@@ -212,7 +225,9 @@ const {
   temperatureUp,
   temperatureDown,
   temperatureColor,
-} = extractData(sensorData, optimalData)
+} = extractData(filteringSensor.value, filteringoptimal.value)
+
+console.log(sensorData)
 
 const ph = reactive<any>({
   ...new PHChartOptions(phData, phUp, phDown, phColor, dates),
@@ -243,7 +258,6 @@ const temperature = reactive<any>({
   ),
 })
 
-console.log(ph)
 const charts = ref([
   {
     height: ph.chart.height,
@@ -378,6 +392,7 @@ onMounted(async () => {
   //   temperature.labels = dates
   // })
 })
+console.log(temperature)
 </script>
 
 <template>
