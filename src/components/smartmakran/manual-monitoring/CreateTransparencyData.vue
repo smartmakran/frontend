@@ -16,7 +16,7 @@ const transparencySchema = yup.object({
 const { handleSubmit: transparencyHandleSubmit } = useForm({
   validationSchema: transparencySchema,
 })
-const createTransparencyData = transparencyHandleSubmit(async (values) => {
+const createTransparencyData = transparencyHandleSubmit(async (values, action) => {
   const { transparencyValue: amount, transparencyDate: createdAt } = values
 
   const result = await pondStore.createTransparencyData({
@@ -29,6 +29,7 @@ const createTransparencyData = transparencyHandleSubmit(async (values) => {
       message: 'اطلاعات ثبت شد.',
       duration: 2000,
     })
+    action.resetForm()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',

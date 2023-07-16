@@ -31,7 +31,7 @@ const props = defineProps<{
 let filteredPonds = computed<IPond[]>(() => {
   return farmStore.currentFarm.ponds || []
 })
-const createSamplingData = samplingHandleSubmit(async (values) => {
+const createSamplingData = samplingHandleSubmit(async (values, action) => {
   const { samplingAverageSize: averageSize, samplingDate: createdAt, pond } = values
   console.log(values)
   const result = await pondStore.createSamplingData({
@@ -45,6 +45,7 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
       duration: 2000,
     })
     props.closeModal()
+    action.resetForm()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',

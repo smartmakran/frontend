@@ -52,7 +52,6 @@ const filteringoptimal = ref([])
 const { sensorData, optimalData, ponds } = await dashboard(`/dashboard/${user.id}`)
 
 function getPond() {
-  console.log('hello')
   let Sensorf = sensorData.filter((item) => item.pond === router.params.id)
   let optimalf = sensorData.filter((item) => item.pond === router.params.id)
   filteringSensor.value = Sensorf
@@ -227,8 +226,6 @@ const {
   temperatureColor,
 } = extractData(filteringSensor.value, filteringoptimal.value)
 
-console.log(sensorData)
-
 const ph = reactive<any>({
   ...new PHChartOptions(phData, phUp, phDown, phColor, dates),
 })
@@ -308,7 +305,7 @@ const charts = ref([
     options: temperature,
   },
 ])
-
+console.log(temperature)
 const dragChartHandle = () => {
   localStorage.setItem('chart_automatic_monitoring', JSON.stringify(charts._rawValue))
 }
@@ -392,7 +389,6 @@ onMounted(async () => {
   //   temperature.labels = dates
   // })
 })
-console.log(temperature)
 </script>
 
 <template>

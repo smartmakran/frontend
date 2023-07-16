@@ -21,7 +21,7 @@ export class SamplingChartOption extends ChartBaseOption {
   labels: string[]
   yaxis: ChartYaxis = {
     min: 0,
-    max: 100,
+    max: 20,
   }
   xaxis: ChartXaxis = {
     type: 'date',
@@ -31,7 +31,7 @@ export class SamplingChartOption extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(data: number[], color: string, labels: string[]) {
     super()
@@ -55,7 +55,7 @@ export class FeedingChartOption extends ChartBaseOption {
   labels: string[]
   yaxis: ChartYaxis = {
     min: 0,
-    max: 100,
+    max: 30,
   }
   xaxis: ChartXaxis = {
     type: 'date',
@@ -65,7 +65,7 @@ export class FeedingChartOption extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(data: number[], color: string, labels: string[]) {
     super()
@@ -99,7 +99,7 @@ export class ChangingWaterChartOption extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(data: number[], color: string, labels: string[]) {
     super()
@@ -134,7 +134,7 @@ export class TransparencyChartOption extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(data: number[], color: string, labels: string[]) {
     super()
@@ -159,7 +159,7 @@ export class LossessChartOption extends ChartBaseOption {
   labels: string[]
   yaxis: ChartYaxis = {
     min: 0,
-    max: 100,
+    max: 50,
   }
   xaxis: ChartXaxis = {
     type: 'date',
@@ -169,7 +169,7 @@ export class LossessChartOption extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    tickAmount: 10,
+    tickAmount: 5,
   }
   constructor(data: number[], color: string, labels: string[]) {
     super()

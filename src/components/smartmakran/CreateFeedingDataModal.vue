@@ -36,7 +36,7 @@ const { handleSubmit: handleSubmit } = useForm({
   validationSchema: schema,
 })
 
-const feedingChecking = handleSubmit(async (values) => {
+const feedingChecking = handleSubmit(async (values, action) => {
   const { status, pond, createdAt } = values
   console.log(values)
   const time = moment.utc(createdAt).format('YYYY-MM-DD HH:mm:ss')
@@ -56,6 +56,7 @@ const feedingChecking = handleSubmit(async (values) => {
     })
     props.closeModal()
     // farmStore.getFarmsList()
+    action.resetForm()
   } else {
     console.log(result)
     console.log('Farm creation failed')

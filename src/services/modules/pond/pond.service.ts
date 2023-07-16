@@ -56,6 +56,7 @@ export async function createChangingWaterData(
   body: ICreateChangingWaterData
 ): Promise<number> {
   const { status } = await api.post('/manualMonitoring/changingWater', body)
+  console.log(status)
   return status
 }
 

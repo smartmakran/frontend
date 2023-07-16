@@ -25,12 +25,11 @@ let filteredPonds = computed<IPond[]>(() => {
 const transparencySchema = yup.object({
   transparencyValue: yup.number().required('میزان شفافیت الزامی است'),
   transparencyDate: yup.date().required('تاریخ اندازه‌گیری شفافیت الزامی است'),
-  pond: yup.string().required('انتخاب استخر الزامی است'),
 })
 const { handleSubmit: transparencyHandleSubmit } = useForm({
   validationSchema: transparencySchema,
 })
-const createTransparencyData = transparencyHandleSubmit(async (values) => {
+const createTransparencyData = transparencyHandleSubmit(async (values, action) => {
   const { transparencyValue: amount, transparencyDate: createdAt, pond } = values
 
   const result = await pondStore.createTransparencyData({
@@ -44,6 +43,7 @@ const createTransparencyData = transparencyHandleSubmit(async (values) => {
       duration: 2000,
     })
     props.closeModal()
+    action.resetForm()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',

@@ -16,7 +16,8 @@ const changingWaterSchema = yup.object({
 const { handleSubmit: changingWaterHandleSubmit } = useForm({
   validationSchema: changingWaterSchema,
 })
-const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
+const createChangingWaterData = changingWaterHandleSubmit(async (values, action) => {
+  console.log(values)
   const { changingWaterAmount: amount, changingWaterDate: createdAt } = values
 
   const result = await pondStore.createChangingWaterData({
@@ -29,6 +30,7 @@ const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
       message: 'اطلاعات ثبت شد.',
       duration: 2000,
     })
+    action.resetForm()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',

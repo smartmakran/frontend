@@ -38,7 +38,7 @@ const { handleSubmit } = useForm({
 let filteredFarms = computed<IFarm[]>(() => {
   return farmStore.list
 })
-const createPondForm = handleSubmit(async (values) => {
+const createPondForm = handleSubmit(async (values, action) => {
   const { name, width, length, depth, waterHeight, startFarmingDate, farm, larvaCount } =
     values
   const startFarming = moment.utc(startFarmingDate).format('YYYY-MM-DD HH:mm:ss')
@@ -64,7 +64,9 @@ const createPondForm = handleSubmit(async (values) => {
       message: 'مزرعه با موفیقت اضافه شد',
       duration: 2000,
     })
+
     props.closeForm()
+    action.resetForm()
   } else {
     console.log('Farm creation failed')
     notyf.error({

@@ -23,7 +23,7 @@ const schema = yup.object({
 const { handleSubmit } = useForm({
   validationSchema: schema,
 })
-const waterQualityHandler = handleSubmit(async (values) => {
+const waterQualityHandler = handleSubmit(async (values, action) => {
   const { createdAt } = values
   const time = moment.utc(createdAt).format('YYYY-MM-DD HH:mm:ss')
   const waterQualityBody: IWaterQuality = {
@@ -48,6 +48,7 @@ const waterQualityHandler = handleSubmit(async (values) => {
       message: 'میزان کیفیت آب باموفقیت ثبت شد',
     })
     // farmStore.getFarmsList()
+    action.resetForm()
   } else {
     console.log(result)
     console.log('Farm creation failed')

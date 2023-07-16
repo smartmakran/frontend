@@ -21,7 +21,7 @@ const schema = yup.object({
 const { handleSubmit } = useForm({
   validationSchema: schema,
 })
-const feedingCheckingForm = handleSubmit(async (values) => {
+const feedingCheckingForm = handleSubmit(async (values, action) => {
   const { amount, type, createdAt } = values
   const time = moment.utc(createdAt).format('YYYY-MM-DD HH:mm:ss')
   const feedingBody: IFeedingChecking = {
@@ -37,6 +37,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
     notyf.success({
       message: 'فرم غذادهی با موفیقیت ثبت شد',
     })
+    action.resetForm()
   } else {
     console.log('Farm creation failed')
     notyf.error({

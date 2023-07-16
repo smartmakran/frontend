@@ -17,7 +17,7 @@ const schema = yup.object({
 const { handleSubmit } = useForm({
   validationSchema: schema,
 })
-const createLossess = handleSubmit(async (values) => {
+const createLossess = handleSubmit(async (values, action) => {
   const { amount, createdAt } = values
   const time = moment.utc(createdAt).format('YYYY-MM-DD HH:mm:ss')
   const lossesBody: ILosses = {
@@ -35,6 +35,7 @@ const createLossess = handleSubmit(async (values) => {
       message: 'تلفات با موفقیت ثبت شد',
     })
     // farmStore.getFarmsList()
+    action.resetForm()
   } else {
     console.log(result)
     console.log('Farm creation failed')
