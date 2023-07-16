@@ -36,7 +36,7 @@ const props = defineProps<{
   closeModal: any
   showPondField: boolean
 }>()
-const feedingCheckingForm = handleSubmit(async (values) => {
+const feedingCheckingForm = handleSubmit(async (values, action) => {
   const { amount, type, createdAt, pond } = values
   const time = moment.utc(createdAt).format('YYYY-MM-DD HH:mm:ss')
   const feedingBody: IFeedingChecking = {
@@ -53,6 +53,7 @@ const feedingCheckingForm = handleSubmit(async (values) => {
       message: 'فرم غذاده با موفیقیت ثبت شد',
     })
     props.closeModal()
+    action.resetForm()
   } else {
     console.log('Farm creation failed')
     notyf.error({

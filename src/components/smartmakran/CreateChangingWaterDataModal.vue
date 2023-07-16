@@ -23,15 +23,18 @@ const props = defineProps<{
 const changingWaterSchema = yup.object({
   changingWaterAmount: yup.number().required('مقدار تعویض آب الزامی است'),
   changingWaterDate: yup.date().required('تاریخ تعویض آب الزامی است'),
-  pond: yup.string().required('انتخاب استخر الزامی است'),
+  // pond: yup.string().required('انتخاب استخر الزامی است'),
 })
 let filteredPonds = computed<IPond[]>(() => {
   return farmStore.currentFarm.ponds || []
 })
-const { handleSubmit: changingWaterHandleSubmit } = useForm({
+const { handleSubmit: handleSubmit } = useForm({
   validationSchema: changingWaterSchema,
 })
-const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
+
+const createChangingWaterDataHandler = handleSubmit(async (values, action) => {
+  console.log(values)
+  console.log('object')
   const { changingWaterAmount: amount, changingWaterDate: createdAt, pond } = values
 
   const result = await pondStore.createChangingWaterData({
@@ -39,12 +42,14 @@ const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
     createdAt: moment(createdAt).utc(),
     pond: !props.showPondField ? pond : route.params.id,
   })
+  console.log(Number(amount))
   if (result === 201) {
     notyf.success({
       message: 'اطلاعات ثبت شد.',
       duration: 2000,
     })
     props.closeModal()
+    action.resetForm()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',
@@ -132,7 +137,9 @@ const createChangingWaterData = changingWaterHandleSubmit(async (values) => {
       </form>
     </template>
     <template #action>
-      <VButton color="primary" @click="createChangingWaterData" raised>ثبت</VButton>
+      <VButton color="primary" @click="createChangingWaterDataHandler" raised
+        >ثبت</VButton
+      >
     </template>
   </VModal>
 </template>

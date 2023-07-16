@@ -29,7 +29,7 @@ const { handleSubmit } = useForm({
   validationSchema: schema,
 })
 
-const createFarmForm = handleSubmit(async (values) => {
+const createFarmForm = handleSubmit(async (values, action) => {
   const { name, phone, country, province, city, address, lat, lng } = values
   const createFarmBody: ICreateFarm = {
     owner: userStore.user.id,
@@ -53,6 +53,7 @@ const createFarmForm = handleSubmit(async (values) => {
       duration: 2000,
     })
     props.closeForm()
+    action.resetForm()
   } else {
     console.log('Farm creation failed')
     notyf.error({

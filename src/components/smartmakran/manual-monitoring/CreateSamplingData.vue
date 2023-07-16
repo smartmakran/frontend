@@ -16,7 +16,7 @@ const samplingSchema = yup.object({
 const { handleSubmit: samplingHandleSubmit } = useForm({
   validationSchema: samplingSchema,
 })
-const createSamplingData = samplingHandleSubmit(async (values) => {
+const createSamplingData = samplingHandleSubmit(async (values, action) => {
   const { samplingAverageSize: averageSize, samplingDate: createdAt } = values
 
   const result = await pondStore.createSamplingData({
@@ -29,6 +29,7 @@ const createSamplingData = samplingHandleSubmit(async (values) => {
       message: 'اطلاعات ثبت شد.',
       duration: 2000,
     })
+    action.resetForm()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',

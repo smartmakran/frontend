@@ -17,7 +17,7 @@ const feedingSchema = yup.object({
 const { handleSubmit: feedingHandleSubmit } = useForm({
   validationSchema: feedingSchema,
 })
-const createFeedingData = feedingHandleSubmit(async (values) => {
+const createFeedingData = feedingHandleSubmit(async (values, action) => {
   const { feedingAmount: amount, feedingType: type, feedingDate: createdAt } = values
 
   const result = await pondStore.createFeedingData({
@@ -31,6 +31,7 @@ const createFeedingData = feedingHandleSubmit(async (values) => {
       message: 'اطلاعات ثبت شد.',
       duration: 2000,
     })
+    action.resetForm()
   } else {
     notyf.error({
       message: 'اطلاعات ثبت نشده‌اند، دوباره سعی کنید.',

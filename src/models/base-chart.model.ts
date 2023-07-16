@@ -1,5 +1,4 @@
 export type ChartSeries = {
-  name: string
   data: number[]
 }
 export type ChartXaxis = {
@@ -18,6 +17,9 @@ export type ChartYaxis = {
   min: number
   max: number
 }
+export type ChartAnnotations = {
+  yaxis: any
+}
 
 export abstract class ChartBaseOption {
   abstract series: ChartSeries[]
@@ -26,6 +28,7 @@ export abstract class ChartBaseOption {
   abstract labels: string[]
   abstract yaxis: ChartYaxis
   abstract xaxis: ChartXaxis
+  abstract annotations: ChartAnnotations
 
   chart = {
     type: 'area',
@@ -59,4 +62,21 @@ export abstract class ChartBaseOption {
       show: false,
     },
   }
+
+  // annotations = {
+  //   yaxis: [
+  //     {
+  //       y: 5,
+  //       y2: 8,
+  //       borderColor: '#000',
+  //       fillColor: '#400',
+  //     },
+  //     {
+  //       y: 1,
+  //       y2: 9,
+  //       borderColor: '#000',
+  //       fillColor: '#FEB019',
+  //     },
+  //   ],
+  // }
 }
