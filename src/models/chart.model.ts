@@ -9,60 +9,48 @@ import {
 } from './base-chart.model'
 
 export class PHChartOptions extends ChartBaseOption {
-  // series: ChartSeries[] = [
-  //   { name: 'pH', data: [] },
-  //   { name: 'بهینه بالا', data: [1, 2, 4, 5] },
-  //   { name: 'بهینه پایین', data: [] },
-  // ]
-  // colors: string[] = [
-  //   useThemeColors().primary,
-  //   useThemeColors().primary,
-  //   useThemeColors().warning,
-  // ]
-  series: ChartSeries[] = [{ data: [] }]
-  // colors: string[] = [
-  //   useThemeColors().primary,
-  //   useThemeColors().green,
-  //   useThemeColors().warning,
-  // ]
+  series: ChartSeries[] = [
+    { name: 'pH', data: [] },
+    //  { name: 'بهینه بالا', data: [1, 2, 4, 5] },
+    //   { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = ['#000']
   annotations: ChartAnnotations = {
     yaxis: [
       {
-        y: 0,
-        y2: 50,
+        y: 9,
+        y2: 12,
         borderColor: useThemeColors().danger,
         fillColor: useThemeColors().danger,
-        opacity: 1,
+        opacity: 0.2,
       },
       {
-        y: 15,
-        y2: 45,
+        y: 8.5,
+        y2: 9,
         borderColor: useThemeColors().warning,
         fillColor: useThemeColors().warning,
-        opacity: 1,
+        opacity: 0.2,
       },
       {
-        y: 25,
-        y2: 35,
+        y: 8.2,
+        y2: 8.5,
         borderColor: useThemeColors().green,
         fillColor: useThemeColors().green,
-        opacity: 1,
+        opacity: 0.2,
       },
-    ],
-  }
-  annotations: ChartAnnotations = {
-    yaxis: [
       {
-        y: 5,
-        y2: 8,
-        borderColor: '#000',
-        fillColor: '#400',
+        y: 8,
+        y2: 8.2,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
       },
       {
         y: 1,
-        y2: 9,
-        borderColor: '#000',
-        fillColor: '#FEB019',
+        y2: 8,
+        borderColor: useThemeColors().danger,
+        fillColor: useThemeColors().danger,
+        opacity: 0.2,
       },
     ],
   }
@@ -77,9 +65,10 @@ export class PHChartOptions extends ChartBaseOption {
     max: 12,
   }
   xaxis: ChartXaxis = {
-    type: 'date',
+    type: 'datetime',
     labels: {
-      datetimeUTC: false,
+      datetimeUTC: true,
+      hideOverlappingLabels: true,
     },
     tooltip: {
       enabled: false,
@@ -87,7 +76,7 @@ export class PHChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 5,
+    // tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -97,7 +86,7 @@ export class PHChartOptions extends ChartBaseOption {
     labels: string[]
   ) {
     super()
-    // this.series[0].data = data
+    this.series[0].data = data
     // this.series[1].data = optimizeUp
     // this.series[2].data = optimizeDown
     // this.colors[0] = color
@@ -106,29 +95,34 @@ export class PHChartOptions extends ChartBaseOption {
 }
 
 export class OxygenChartOptions extends ChartBaseOption {
-  // series: ChartSeries[] = [
-  //   { name: 'اکسیژن', data: [] },
-  //   { name: 'بهینه بالا', data: [] },
-  //   { name: 'بهینه پایین', data: [] },
-  // ]
-  // colors: string[] = [
-  //   useThemeColors().primary,
-  //   useThemeColors().primary,
-  //   useThemeColors().warning,
-  // ]
+  series: ChartSeries[] = [
+    { name: 'اکسیژن', data: [] },
+    // { name: 'بهینه بالا', data: [] },
+    // { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = ['#000']
   annotations: ChartAnnotations = {
     yaxis: [
       {
         y: 5,
-        y2: 8,
-        borderColor: '#000',
-        fillColor: '#400',
+        y2: 15,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
       },
       {
-        y: 1,
-        y2: 9,
-        borderColor: '#000',
-        fillColor: '#FEB019',
+        y: 4,
+        y2: 5,
+        borderColor: useThemeColors().green,
+        fillColor: useThemeColors().green,
+        opacity: 0.2,
+      },
+      {
+        y: 2.5,
+        y2: 5,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
       },
     ],
   }
@@ -142,9 +136,10 @@ export class OxygenChartOptions extends ChartBaseOption {
     max: 15,
   }
   xaxis: ChartXaxis = {
-    type: 'date',
+    type: 'datetime',
     labels: {
-      datetimeUTC: false,
+      datetimeUTC: true,
+      hideOverlappingLabels: true,
     },
     tooltip: {
       enabled: false,
@@ -152,7 +147,7 @@ export class OxygenChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 5,
+    // tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -162,38 +157,59 @@ export class OxygenChartOptions extends ChartBaseOption {
     labels: string[]
   ) {
     super()
-    // this.series[0].data = data
+    this.series[0].data = data
     // this.series[1].data = optimizeUp
     // this.series[2].data = optimizeDown
-    // this.colors[0] = color
+    this.colors[0] = color
     this.labels = labels
   }
 }
 
 export class OrpChartOptions extends ChartBaseOption {
-  // series: ChartSeries[] = [
-  //   { name: 'ORP', data: [] },
-  //   { name: 'بهینه بالا', data: [] },
-  //   { name: 'بهینه پایین', data: [] },
-  // ]
+  series: ChartSeries[] = [{ name: 'ORP', data: [] }]
+  colors: string[] = ['#000']
   // colors: string[] = [
   //   useThemeColors().primary,
   //   useThemeColors().green,
   //   useThemeColors().warning,
   // ]
+  // series: ChartSeries[] = [{ data: [] }]
   annotations: ChartAnnotations = {
     yaxis: [
       {
-        y: 5,
-        y2: 8,
-        borderColor: '#000',
-        fillColor: '#400',
+        y: 400,
+        y2: 500,
+        borderColor: useThemeColors().danger,
+        fillColor: useThemeColors().danger,
+        opacity: 0.2,
       },
       {
-        y: 1,
-        y2: 9,
-        borderColor: '#000',
-        fillColor: '#FEB019',
+        y: 250,
+        y2: 400,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
+      },
+      {
+        y: 200,
+        y2: 250,
+        borderColor: useThemeColors().green,
+        fillColor: useThemeColors().green,
+        opacity: 0.2,
+      },
+      {
+        y: 100,
+        y2: 250,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
+      },
+      {
+        y: 0,
+        y2: 100,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
       },
     ],
   }
@@ -207,9 +223,10 @@ export class OrpChartOptions extends ChartBaseOption {
     max: 500,
   }
   xaxis: ChartXaxis = {
-    type: 'date',
+    type: 'datetime',
     labels: {
-      datetimeUTC: false,
+      datetimeUTC: true,
+      hideOverlappingLabels: true,
     },
     tooltip: {
       enabled: false,
@@ -217,7 +234,7 @@ export class OrpChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 5,
+    // tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -227,38 +244,62 @@ export class OrpChartOptions extends ChartBaseOption {
     labels: string[]
   ) {
     super()
-    // this.series[0].data = data
+    this.series[0].data = data
     // this.series[1].data = optimizeUp
     // this.series[2].data = optimizeDown
-    // this.colors[0] = color
+    this.colors[0] = color
     this.labels = labels
   }
 }
 
 export class ECChartOptions extends ChartBaseOption {
-  // series: ChartSeries[] = [
-  //   { name: 'میزان شوری', data: [] },
-  //   { name: 'بهینه بالا', data: [] },
-  //   { name: 'بهینه پایین', data: [] },
-  // ]
-  // colors: string[] = [
-  //   useThemeColors().primary,
-  //   useThemeColors().green,
-  //   useThemeColors().warning,
-  // ]
+  series: ChartSeries[] = [
+    { name: 'میزان شوری', data: [] },
+    { name: 'بهینه بالا', data: [] },
+    { name: 'بهینه پایین', data: [] },
+  ]
+  colors: string[] = [
+    useThemeColors().primary,
+    useThemeColors().green,
+    useThemeColors().warning,
+  ]
+  // series: ChartSeries[] = [{ data: [] }]
   annotations: ChartAnnotations = {
     yaxis: [
       {
-        y: 5,
-        y2: 8,
-        borderColor: '#000',
-        fillColor: '#400',
+        y: 40,
+        y2: 50,
+        borderColor: useThemeColors().danger,
+        fillColor: useThemeColors().danger,
+        opacity: 0.2,
       },
       {
-        y: 1,
-        y2: 9,
-        borderColor: '#000',
-        fillColor: '#FEB019',
+        y: 30,
+        y2: 40,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
+      },
+      {
+        y: 20,
+        y2: 30,
+        borderColor: useThemeColors().green,
+        fillColor: useThemeColors().green,
+        opacity: 0.2,
+      },
+      {
+        y: 10,
+        y2: 20,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
+      },
+      {
+        y: 0,
+        y2: 10,
+        borderColor: useThemeColors().danger,
+        fillColor: useThemeColors().danger,
+        opacity: 0.2,
       },
     ],
   }
@@ -272,9 +313,10 @@ export class ECChartOptions extends ChartBaseOption {
     max: 50,
   }
   xaxis: ChartXaxis = {
-    type: 'date',
+    type: 'datetime',
     labels: {
-      datetimeUTC: false,
+      datetimeUTC: true,
+      hideOverlappingLabels: true,
     },
     tooltip: {
       enabled: false,
@@ -282,7 +324,7 @@ export class ECChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 5,
+    // tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -292,38 +334,40 @@ export class ECChartOptions extends ChartBaseOption {
     labels: string[]
   ) {
     super()
-    // this.series[0].data = data
+    this.series[0].data = data
     // this.series[1].data = optimizeUp
     // this.series[2].data = optimizeDown
-    // this.colors[0] = color
+    this.colors[0] = color
     this.labels = labels
   }
 }
 
 export class AmmoniaChartOptions extends ChartBaseOption {
-  // series: ChartSeries[] = [
-  //   { name: 'آمونیاک', data: [] },
-  //   { name: 'بهینه بالا', data: [] },
-  //   { name: 'بهینه پایین', data: [] },
-  // ]
-  // colors: string[] = [
-  //   useThemeColors().primary,
-  //   useThemeColors().green,
-  //   useThemeColors().warning,
-  // ]
+  series: ChartSeries[] = [{ name: 'آمونیاک', data: [] }]
+  colors: string[] = ['#000']
+  // series: ChartSeries[] = [{ data: [] }]
   annotations: ChartAnnotations = {
     yaxis: [
       {
-        y: 5,
-        y2: 8,
-        borderColor: '#000',
-        fillColor: '#400',
+        y: 1,
+        y2: 2,
+        borderColor: useThemeColors().danger,
+        fillColor: useThemeColors().danger,
+        opacity: 0.2,
       },
       {
-        y: 1,
-        y2: 9,
-        borderColor: '#000',
-        fillColor: '#FEB019',
+        y: 0.01,
+        y2: 1,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
+      },
+      {
+        y: 0,
+        y2: 0.1,
+        borderColor: useThemeColors().green,
+        fillColor: useThemeColors().green,
+        opacity: 0.2,
       },
     ],
   }
@@ -337,9 +381,10 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     max: 2,
   }
   xaxis: ChartXaxis = {
-    type: 'date',
+    type: 'datetime',
     labels: {
-      datetimeUTC: false,
+      datetimeUTC: true,
+      hideOverlappingLabels: true,
     },
     tooltip: {
       enabled: false,
@@ -347,7 +392,7 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 5,
+    // tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -357,38 +402,40 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     labels: string[]
   ) {
     super()
-    // this.series[0].data = data
+    this.series[0].data = data
     // this.series[1].data = optimizeUp
     // this.series[2].data = optimizeDown
-    // this.colors[0] = color
+    this.colors[0] = color
     this.labels = labels
   }
 }
 
 export class NitriteChartOptions extends ChartBaseOption {
-  // series: ChartSeries[] = [
-  //   { name: 'نیتریت', data: [] },
-  //   { name: 'بهینه بالا', data: [] },
-  //   { name: 'بهینه پایین', data: [] },
-  // ]
-  // colors: string[] = [
-  //   useThemeColors().primary,
-  //   useThemeColors().green,
-  //   useThemeColors().warning,
-  // ]
+  series: ChartSeries[] = [{ name: 'نیتریت', data: [] }]
+  colors: string[] = ['#000']
+  // series: ChartSeries[] = [{ data: [] }]
   annotations: ChartAnnotations = {
     yaxis: [
       {
-        y: 5,
-        y2: 8,
-        borderColor: '#000',
-        fillColor: '#400',
+        y: 1,
+        y2: 2,
+        borderColor: useThemeColors().danger,
+        fillColor: useThemeColors().danger,
+        opacity: 0.2,
       },
       {
-        y: 1,
-        y2: 9,
-        borderColor: '#000',
-        fillColor: '#FEB019',
+        y: 0.1,
+        y2: 1,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
+      },
+      {
+        y: 0,
+        y2: 0.1,
+        borderColor: useThemeColors().green,
+        fillColor: useThemeColors().green,
+        opacity: 0.2,
       },
     ],
   }
@@ -402,9 +449,10 @@ export class NitriteChartOptions extends ChartBaseOption {
     max: 2,
   }
   xaxis: ChartXaxis = {
-    type: 'date',
+    type: 'datetime',
     labels: {
-      datetimeUTC: false,
+      datetimeUTC: true,
+      hideOverlappingLabels: true,
     },
     tooltip: {
       enabled: false,
@@ -412,7 +460,7 @@ export class NitriteChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 5,
+    // tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -422,43 +470,39 @@ export class NitriteChartOptions extends ChartBaseOption {
     labels: string[]
   ) {
     super()
-    // this.series[0].data = data
+    this.series[0].data = data
     // this.series[1].data = optimizeUp
     // this.series[2].data = optimizeDown
-    // this.colors[0] = color
+    this.colors[0] = color
     this.labels = labels
   }
 }
 
 export class NitrateChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ data: [] }]
-  // colors: string[] = [
-  //   useThemeColors().primary,
-  //   useThemeColors().green,
-  //   useThemeColors().warning,
-  // ]
+  colors: string[] = ['#000']
+  series: ChartSeries[] = [{ name: 'نیترات', data: [] }]
   annotations: ChartAnnotations = {
     yaxis: [
       {
-        y: 0,
-        y2: 50,
+        y: 1,
+        y2: 2,
         borderColor: useThemeColors().danger,
         fillColor: useThemeColors().danger,
-        opacity: 1,
+        opacity: 0.2,
       },
       {
-        y: 15,
-        y2: 45,
+        y: 0.1,
+        y2: 1,
         borderColor: useThemeColors().warning,
         fillColor: useThemeColors().warning,
-        opacity: 1,
+        opacity: 0.2,
       },
       {
-        y: 25,
-        y2: 35,
+        y: 0,
+        y2: 0.1,
         borderColor: useThemeColors().green,
         fillColor: useThemeColors().green,
-        opacity: 1,
+        opacity: 0.2,
       },
     ],
   }
@@ -472,9 +516,10 @@ export class NitrateChartOptions extends ChartBaseOption {
     max: 2,
   }
   xaxis: ChartXaxis = {
-    type: 'date',
+    type: 'datetime',
     labels: {
-      datetimeUTC: false,
+      datetimeUTC: true,
+      hideOverlappingLabels: true,
     },
     tooltip: {
       enabled: false,
@@ -482,7 +527,7 @@ export class NitrateChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 5,
+    // tickAmount: 5,
   }
   constructor(
     data: number[],
@@ -492,43 +537,53 @@ export class NitrateChartOptions extends ChartBaseOption {
     labels: string[]
   ) {
     super()
-    // this.series[0].data = data
+    this.series[0].data = data
     // this.series[1].data = optimizeUp
     // this.series[2].data = optimizeDown
-    // this.colors[0] = color
+    this.colors[0] = color
     this.labels = labels
   }
 }
 
 export class TemperatureChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [{ data: [] }]
-  // colors: string[] = [
-  //   useThemeColors().primary,
-  //   useThemeColors().green,
-  //   useThemeColors().warning,
-  // ]
+  series: ChartSeries[] = [{ name: 'دما', data: [] }]
+  colors: string[] = ['#000']
   annotations: ChartAnnotations = {
     yaxis: [
       {
-        y: 0,
+        y: 45,
         y2: 50,
         borderColor: useThemeColors().danger,
         fillColor: useThemeColors().danger,
-        opacity: 1,
+        opacity: 0.2,
       },
       {
-        y: 15,
+        y: 35,
         y2: 45,
         borderColor: useThemeColors().warning,
         fillColor: useThemeColors().warning,
-        opacity: 1,
+        opacity: 0.2,
       },
       {
         y: 25,
         y2: 35,
         borderColor: useThemeColors().green,
         fillColor: useThemeColors().green,
-        opacity: 1,
+        opacity: 0.2,
+      },
+      {
+        y: 15,
+        y2: 25,
+        borderColor: useThemeColors().warning,
+        fillColor: useThemeColors().warning,
+        opacity: 0.2,
+      },
+      {
+        y: 0,
+        y2: 15,
+        borderColor: useThemeColors().danger,
+        fillColor: useThemeColors().danger,
+        opacity: 0.2,
       },
     ],
   }
@@ -542,9 +597,10 @@ export class TemperatureChartOptions extends ChartBaseOption {
     max: 50,
   }
   xaxis: ChartXaxis = {
-    type: 'date',
+    type: 'datetime',
     labels: {
-      datetimeUTC: false,
+      datetimeUTC: true,
+      hideOverlappingLabels: true,
     },
     tooltip: {
       enabled: false,
@@ -552,7 +608,7 @@ export class TemperatureChartOptions extends ChartBaseOption {
     title: {
       text: 'روز گذشته از زمان کشت',
     },
-    tickAmount: 5,
+    // tickAmount: 5,
   }
   constructor(
     data: number[],

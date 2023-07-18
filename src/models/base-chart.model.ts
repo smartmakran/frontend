@@ -1,3 +1,5 @@
+import { useThemeColors } from '../composable/useThemeColors'
+
 export type ChartSeries = {
   data: number[]
 }
@@ -29,18 +31,22 @@ export abstract class ChartBaseOption {
   abstract yaxis: ChartYaxis
   abstract xaxis: ChartXaxis
   abstract annotations: ChartAnnotations
-
   chart = {
-    type: 'area',
+    type: 'line',
     height: 400,
   }
-
   dataLabels = {
     enabled: false,
   }
 
+  markers = {
+    size: [2, 4],
+    colors: [useThemeColors().danger, useThemeColors().warning],
+    strokeWidth: 0,
+    strokeOpacity: 0.9,
+  }
   stroke = {
-    width: [2, 2, 2],
+    width: [2],
     curve: 'straight',
   }
 
@@ -62,21 +68,4 @@ export abstract class ChartBaseOption {
       show: false,
     },
   }
-
-  // annotations = {
-  //   yaxis: [
-  //     {
-  //       y: 5,
-  //       y2: 8,
-  //       borderColor: '#000',
-  //       fillColor: '#400',
-  //     },
-  //     {
-  //       y: 1,
-  //       y2: 9,
-  //       borderColor: '#000',
-  //       fillColor: '#FEB019',
-  //     },
-  //   ],
-  // }
 }
