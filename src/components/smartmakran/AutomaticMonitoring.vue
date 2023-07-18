@@ -64,12 +64,12 @@ function extractData(data: any, optimal: any) {
   }
 
   const dates = data.map(
-    // (d: SensorData) => moment(d.createdAt).format('jYYYY-jMM-jDD hh:mm:ss')
+    (d: SensorData) => moment(d.createdAt).local().format('jYYYY-jMM-jDD hh:mm')
 
-    (d: SensorData) => moment(moment.now()).diff(d.createdAt, 'days')
+    // (d: SensorData) => //moment(moment.now()).diff(d.createdAt, 'days')
     // '12'
   )
-
+  console.log(dates)
   const phData: number[] = data.map((d: SensorData) => d.ph)
   const phUp = data.map(() => optimal[0].ph + 1.5)
   const phDown = data.map(() => optimal[0].ph - 1.5)
@@ -255,6 +255,56 @@ const temperature = reactive<any>({
   ),
 })
 
+// oxygen.series.data.map((item, index) => {
+//   console.log(item)
+// })
+
+oxygen.series[0].data.map((item, index) => {
+  if (item === undefined) {
+    oxygen.series[0].data[index] = null
+  }
+})
+
+ph.series[0].data.map((item, index) => {
+  if (item === undefined) {
+    ph.series[0].data[index] = null
+  }
+})
+orp.series[0].data.map((item, index) => {
+  if (item === undefined) {
+    orp.series[0].data[index] = null
+  }
+})
+ec.series[0].data.map((item, index) => {
+  if (item === undefined) {
+    ec.series[0].data[index] = null
+  }
+})
+
+ammonia.series[0].data.map((item, index) => {
+  if (item === undefined) {
+    ammonia.series[0].data[index] = null
+  }
+})
+
+nitrate.series[0].data.map((item, index) => {
+  if (item === undefined) {
+    nitrate.series[0].data[index] = null
+  }
+})
+
+nitrite.series[0].data.map((item, index) => {
+  if (item === undefined) {
+    nitrite.series[0].data[index] = null
+  }
+})
+
+temperature.series[0].data.map((item, index) => {
+  if (item === undefined) {
+    temperature.series[0].data[index] = null
+  }
+})
+
 const charts = ref([
   {
     height: ph.chart.height,
@@ -305,11 +355,12 @@ const charts = ref([
     options: temperature,
   },
 ])
-console.log(temperature)
+
 const dragChartHandle = () => {
   localStorage.setItem('chart_automatic_monitoring', JSON.stringify(charts._rawValue))
 }
 const activateDraggable = ref(false)
+
 onMounted(async () => {
   // socket.on('message', (data) => {
   //   const {
