@@ -23,7 +23,7 @@ const props = defineProps<{
 const changingWaterSchema = yup.object({
   changingWaterAmount: yup.number().required('مقدار تعویض آب الزامی است'),
   changingWaterDate: yup.date().required('تاریخ تعویض آب الزامی است'),
-  // pond: yup.string().required('انتخاب استخر الزامی است'),
+  pond: !props.showPondField && yup.string().required('فیلد استخر الزامی است'),
 })
 let filteredPonds = computed<IPond[]>(() => {
   return farmStore.currentFarm.ponds || []
@@ -36,11 +36,11 @@ const createChangingWaterDataHandler = handleSubmit(async (values, action) => {
   console.log(values)
   console.log('object')
   const { changingWaterAmount: amount, changingWaterDate: createdAt, pond } = values
-
+  const pondId = props.showPondField ? route.params.id : pond
   const result = await pondStore.createChangingWaterData({
     amount: Number(amount),
     createdAt: moment(createdAt).utc(),
-    pond: !props.showPondField ? pond : route.params.id,
+    pond: pondId,
   })
   console.log(Number(amount))
   if (result === 201) {

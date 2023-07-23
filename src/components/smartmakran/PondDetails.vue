@@ -31,6 +31,7 @@ let closeTransparencyDataModal = () => (showTransparencyDataModal.value = false)
 
 const pondE = JSON.parse(localStorage.getItem('pond'))
 console.log(pondE)
+console.log(currentPond)
 
 watchEffect(() => {
   const sensorData = JSON.parse(localStorage.getItem('sensorData'))
@@ -163,7 +164,7 @@ const getDencity = (pond) => {
               <i aria-hidden="true" class="fas fa-home"></i>
             </VIconBox>
             <div>
-              <h3>{{ pondE.name }}</h3>
+              <h3>{{ currentPond.name }}</h3>
             </div>
           </div>
           <div class="card-pond-header-detail">

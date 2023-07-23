@@ -1,32 +1,23 @@
 <script setup lang="ts">
 import { useHead } from '@vueuse/head'
-import { onMounted, watchEffect } from 'vue'
+import { onMounted, watchEffect, watch } from 'vue'
 import { useRouter } from 'vue-router'
 const router = useRouter()
 useHead({
   title: import.meta.env.VITE_SITE_TITLE as string,
 })
 localStorage.setItem('page-name', '')
-onMounted(() => {
-  if (!localStorage.getItem('token')) {
-    router.push({ name: 'auth' })
-    location.reload()
-  }
-})
+
 watchEffect(() => {
   if (!localStorage.getItem('token')) {
     router.push({ name: 'auth' })
-    location.reload()
+    // location.reload()
   } else {
     router.push({
       name: 'app',
     })
   }
 })
-if (!localStorage.getItem('token')) {
-  router.push({ name: 'auth' })
-  location.reload()
-}
 </script>
 
 <template>

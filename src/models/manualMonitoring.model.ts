@@ -42,7 +42,10 @@ export class SamplingChartOption extends ChartBaseOption {
 }
 
 export class FeedingChartOption extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'غذادهی', data: [] }]
+  series: ChartSeries[] = [
+    { name: 'غذادهی', data: [] },
+    { name: 'چک غذا', data: [] },
+  ]
   colors: string[] = [
     useThemeColors().primary,
     useThemeColors().danger,

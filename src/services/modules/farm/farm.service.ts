@@ -17,5 +17,6 @@ export async function getFarmDetails(id: string): Promise<IFarm> {
 
 export async function createFarm(farm: ICreateFarm): Promise<number> {
   const { status } = await api.post('/farm', farm)
+  console.log(status)
   return status
 }

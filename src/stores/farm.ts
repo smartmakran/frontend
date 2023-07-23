@@ -7,6 +7,8 @@ import {
 import { IFarm, ICreateFarm } from '../interfaces/farm.interface'
 import { useNotyf } from '../composable/useNotyf'
 import { useRouter } from 'vue-router'
+
+const notif = useNotyf()
 export const useFarmStore = defineStore({
   id: 'farm',
   state: () => ({
@@ -45,9 +47,12 @@ export const useFarmStore = defineStore({
     async createFarm(farm: ICreateFarm) {
       try {
         this.loading = true
+        console.log(farm)
         return await createFarm(farm)
-      } catch (e) {
-        this.error = e as Error
+      } catch ({ e, response }) {
+        notif.error(response.data.message)
+
+        // console.log((this.error = e as Error))
       } finally {
         this.loading = false
       }

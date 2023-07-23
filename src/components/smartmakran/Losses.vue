@@ -13,6 +13,8 @@ import { useLossesStore } from '/@src/stores/losses'
 import { useNotyf } from '/@src/composable/useNotyf'
 import { useRoute } from 'vue-router'
 
+const checked = ref(false)
+
 const route = useRoute()
 const notyf = useNotyf()
 const farmStore = useFarmStore()
@@ -27,8 +29,11 @@ let filteredPonds = computed<IPond[]>(() => {
 })
 
 const schema = yup.object({
-  amountLosses: yup.number().required('تعداد تلفات الزامی است'),
+  amountLosses:
+    checked.value === false && yup.number().required('تعداد تلفات الزامی است'),
+  weightLosses: checked.value === true && yup.number().required('وزن تلفات الزامی است'),
   createdAt: yup.string().required('وارد کردن تاریخ الزامی است'),
+  amount: yup.number().required('مقدار تلفات را مشخص کنید'),
   pondLosses: yup.string(),
 })
 const { handleSubmit } = useForm({
@@ -36,12 +41,14 @@ const { handleSubmit } = useForm({
 })
 
 const feedingCheckingForm = handleSubmit(async (values, action) => {
-  const { amountLosses, createdAt, pondLosses } = values
+  const { amountLosses, createdAt, pondLosses, weightLosses, amount } = values
   const time = moment.utc(createdAt).format('YYYY-MM-DD HH:mm:ss')
   const lossesBody: ILosses = {
-    amount: Math.floor(amountLosses),
+    amount: Math.floor(checked.value === false ? amountLosses : weightLosses),
+    type: checked.value === false ? 'amount' : 'weight',
     pond: props.showPondField === false ? pondLosses : route.params.id,
     createdAt: time,
+    amountLosses: amount,
   }
   const result = await lossesStore.lossesHandler(lossesBody)
 
@@ -69,18 +76,27 @@ const feedingCheckingForm = handleSubmit(async (values, action) => {
 <template>
   <VModal :open="show" @close="closeModal" title="ثبت تلفات">
     <template #content>
+      <label class="checked-draggable-container" for="checked">
+        <span>وزن یا تعداد تلفات</span>
+        <div class="checked-draggable">
+          <input v-model="checked" type="checkbox" name="" id="" />
+          <div class="checked-draggable-btn"></div>
+        </div>
+      </label>
       <form>
         <div class="form-fields">
-          <div v-if="!showPondField" class="form-fields-field mb-20px">
-            <Field v-slot="{ field, errorMessage }" name="pondLosses">
+          <div v-if="checked" class="form-fields-field mb-20px">
+            <Field v-slot="{ field, errorMessage }" name="weightLosses">
               <VField>
-                <label>استخر</label>
+                <label>وزن تلفات</label>
                 <VControl :has-error="Boolean(errorMessage)">
-                  <select v-bind="field">
-                    <option v-for="pond in filteredPonds" :key="pond.id" :value="pond.id">
-                      {{ pond.name }}
-                    </option>
-                  </select>
+                  <input
+                    v-bind="field"
+                    type="text"
+                    class="input"
+                    placeholder=""
+                    autocomplete="given-name"
+                  />
                   <p v-if="errorMessage" class="help is-danger">
                     {{ errorMessage }}
                   </p>
@@ -88,7 +104,8 @@ const feedingCheckingForm = handleSubmit(async (values, action) => {
               </VField>
             </Field>
           </div>
-          <div class="form-fields-field mb-20px">
+
+          <div v-if="!checked" class="form-fields-field mb-20px">
             <Field v-slot="{ field, errorMessage }" name="amountLosses">
               <VField>
                 <label>تعداد تلفات</label>
@@ -100,6 +117,42 @@ const feedingCheckingForm = handleSubmit(async (values, action) => {
                     placeholder=""
                     autocomplete="given-name"
                   />
+                  <p v-if="errorMessage" class="help is-danger">
+                    {{ errorMessage }}
+                  </p>
+                </VControl>
+              </VField>
+            </Field>
+          </div>
+          <div class="form-fields-field mb-20px">
+            <Field v-slot="{ field, errorMessage }" name="amount">
+              <VField>
+                <label>مقدار تلفات</label>
+                <VControl :has-error="Boolean(errorMessage)">
+                  <input
+                    v-bind="field"
+                    type="text"
+                    class="input"
+                    placeholder=""
+                    autocomplete="given-name"
+                  />
+                  <p v-if="errorMessage" class="help is-danger">
+                    {{ errorMessage }}
+                  </p>
+                </VControl>
+              </VField>
+            </Field>
+          </div>
+          <div v-if="!showPondField" class="form-fields-field mb-20px">
+            <Field v-slot="{ field, errorMessage }" name="pondLosses">
+              <VField>
+                <label>استخر</label>
+                <VControl :has-error="Boolean(errorMessage)">
+                  <select v-bind="field">
+                    <option v-for="pond in filteredPonds" :key="pond.id" :value="pond.id">
+                      {{ pond.name }}
+                    </option>
+                  </select>
                   <p v-if="errorMessage" class="help is-danger">
                     {{ errorMessage }}
                   </p>

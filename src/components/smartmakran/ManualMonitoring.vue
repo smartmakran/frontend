@@ -97,6 +97,7 @@ onMounted(async () => {
       series: feeding.value.series,
       options: feeding.value,
     },
+
     {
       height: changingWater.value.chart.height,
       type: changingWater.value.chart.type,

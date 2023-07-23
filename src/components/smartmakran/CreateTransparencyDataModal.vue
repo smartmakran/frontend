@@ -25,6 +25,7 @@ let filteredPonds = computed<IPond[]>(() => {
 const transparencySchema = yup.object({
   transparencyValue: yup.number().required('میزان شفافیت الزامی است'),
   transparencyDate: yup.date().required('تاریخ اندازه‌گیری شفافیت الزامی است'),
+  pond: !props.showPondField && yup.string().required('فیلد استخر الزامی است'),
 })
 const { handleSubmit: transparencyHandleSubmit } = useForm({
   validationSchema: transparencySchema,
@@ -32,10 +33,11 @@ const { handleSubmit: transparencyHandleSubmit } = useForm({
 const createTransparencyData = transparencyHandleSubmit(async (values, action) => {
   const { transparencyValue: amount, transparencyDate: createdAt, pond } = values
 
+  const pondId = props.showPondField ? route.params.id : pond
   const result = await pondStore.createTransparencyData({
     amount: Number(amount),
     createdAt: moment(createdAt).utc(),
-    pond: !props.showPondField ? pond : route.params.id,
+    pond: pondId,
   })
   if (result === 201) {
     notyf.success({

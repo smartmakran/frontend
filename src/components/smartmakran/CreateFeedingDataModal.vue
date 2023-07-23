@@ -11,6 +11,7 @@ import { useFeedingCheckingDataStore } from '/@src/stores/feedingCheckingData'
 import { IFeedingCheckingData } from '/@src/interfaces/feeding_checking_data.interface'
 import moment from 'moment-jalaali'
 import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 const route = useRoute()
 const notyf = useNotyf()
 const pondStore = usePondStore()
@@ -31,19 +32,23 @@ const schema = yup.object({
   pond: yup.string(),
   status: yup.string(),
   createdAt: yup.string().required('وارد کردن تاریخ الزامی است'),
+  feedingTime: yup.string().required('وارد کردن زمان غذادهی الزامی است'),
+  checkTime: yup.string().required('وارد کردن زمان چک کردن الزامی است'),
 })
 const { handleSubmit: handleSubmit } = useForm({
   validationSchema: schema,
 })
 
 const feedingChecking = handleSubmit(async (values, action) => {
-  const { status, pond, createdAt } = values
+  const { status, pond, createdAt, feedingTime, checkTime } = values
   console.log(values)
   const time = moment.utc(createdAt).format('YYYY-MM-DD HH:mm:ss')
   const feedingBody: IFeedingCheckingData = {
     pond: !props.showPondField ? pond : route.params.id,
     status: status,
     createdAt: time,
+    feedingTime: feedingTime,
+    checkTime: checkTime,
   }
   const result = await feedingCheckingDataStore.feedingCheckingDataHandler(feedingBody)
   console.log(result)
@@ -74,7 +79,7 @@ const feedingChecking = handleSubmit(async (values, action) => {
       <form class="form-body form-body-responsive">
         <!--Fieldset-->
 
-        <div class="form-fieldset" v-if="!showPondField">
+        <!-- <div class="form-fieldset" v-if="!showPondField">
           <div class="columns is-multiline">
             <div class="column is-12">
               <Field v-slot="{ field, errorMessage }" name="pond">
@@ -118,6 +123,41 @@ const feedingChecking = handleSubmit(async (values, action) => {
               </Field>
             </div>
           </div>
+        </div> -->
+
+        <div class="mb-20px mb-0">
+          <Field v-slot="{ field, errorMessage }" name="feedingTime">
+            <VField>
+              <label>زمان غذادهی</label>
+              <VControl :has-error="Boolean(errorMessage)">
+                <custom-date-picker
+                  v-bind="field"
+                  type="datetime"
+                  compact-time
+                ></custom-date-picker>
+              </VControl>
+              <p v-if="errorMessage" class="help is-danger">
+                {{ errorMessage }}
+              </p>
+            </VField>
+          </Field>
+        </div>
+        <div class="mb-20px mb-0">
+          <Field v-slot="{ field, errorMessage }" name="checkTime">
+            <VField>
+              <label>زمان چک کردن</label>
+              <VControl :has-error="Boolean(errorMessage)">
+                <custom-date-picker
+                  v-bind="field"
+                  type="datetime"
+                  compact-time
+                ></custom-date-picker>
+              </VControl>
+              <p v-if="errorMessage" class="help is-danger">
+                {{ errorMessage }}
+              </p>
+            </VField>
+          </Field>
         </div>
         <div class="mb-20px mb-0">
           <Field v-slot="{ field, errorMessage }" name="createdAt">

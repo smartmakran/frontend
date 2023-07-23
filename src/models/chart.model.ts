@@ -73,9 +73,9 @@ export class PHChartOptions extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
+    // title: {
+    //   text: 'روز گذشته از زمان کشت',
+    // },
     // tickAmount: 5,
   }
   constructor(
@@ -144,9 +144,9 @@ export class OxygenChartOptions extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
+    // title: {
+    //   text: 'روز گذشته از زمان کشت',
+    // },
     // tickAmount: 5,
   }
   constructor(
@@ -231,9 +231,9 @@ export class OrpChartOptions extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
+    // title: {
+    //   text: 'روز گذشته از زمان کشت',
+    // },
     // tickAmount: 5,
   }
   constructor(
@@ -321,9 +321,9 @@ export class ECChartOptions extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
+    // title: {
+    //   text: 'روز گذشته از زمان کشت',
+    // },
     // tickAmount: 5,
   }
   constructor(
@@ -389,9 +389,9 @@ export class AmmoniaChartOptions extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
+    // title: {
+    //   text: 'روز گذشته از زمان کشت',
+    // },
     // tickAmount: 5,
   }
   constructor(
@@ -457,9 +457,9 @@ export class NitriteChartOptions extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
+    // title: {
+    //   text: 'روز گذشته از زمان کشت',
+    // },
     // tickAmount: 5,
   }
   constructor(
@@ -524,9 +524,9 @@ export class NitrateChartOptions extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
+    // title: {
+    //   text: 'روز گذشته از زمان کشت',
+    // },
     // tickAmount: 5,
   }
   constructor(
@@ -605,9 +605,9 @@ export class TemperatureChartOptions extends ChartBaseOption {
     tooltip: {
       enabled: false,
     },
-    title: {
-      text: 'روز گذشته از زمان کشت',
-    },
+    // title: {
+    //   text: 'روز گذشته از زمان کشت',
+    // },
     // tickAmount: 5,
   }
   constructor(
