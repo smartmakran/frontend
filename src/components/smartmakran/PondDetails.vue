@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
+import { computed, onMounted, watchEffect } from 'vue'
 import { usePondStore } from '/@src/stores/pond'
 import { IPond } from '/@src/interfaces/pond.interface'
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
+
 const route = useRoute()
+
 // define props for using in the component
 // Access params with `params.id`
 const showLossesModal = ref(false)
@@ -14,7 +16,9 @@ const showWaterDataModal = ref(false)
 const showFeedingDataModal = ref(false)
 const showSamplingDataModal = ref(false)
 const showTransparencyDataModal = ref(false)
-
+onMounted(async () => {
+  await pondStore.getPond(route.params.id)
+})
 const pondDetail = ref()
 const pondStore = usePondStore()
 const currentPond = computed<IPond>(() => {
@@ -30,8 +34,6 @@ let closeSamplingDataModal = () => (showSamplingDataModal.value = false)
 let closeTransparencyDataModal = () => (showTransparencyDataModal.value = false)
 
 const pondE = JSON.parse(localStorage.getItem('pond'))
-console.log(pondE)
-console.log(currentPond)
 
 watchEffect(() => {
   const sensorData = JSON.parse(localStorage.getItem('sensorData'))

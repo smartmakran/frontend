@@ -17,7 +17,6 @@ const schema = yup.object({
     checked.value === false && yup.number().required('تعداد تلفات الزامی است'),
   weightLosses: checked.value === true && yup.number().required('وزن تلفات الزامی است'),
   createdAt: yup.string().required('وارد کردن تاریخ الزامی است'),
-  amount: yup.number().required('مقدار تلفات را مشخص کنید'),
 })
 
 const { handleSubmit } = useForm({
@@ -31,7 +30,6 @@ const createLossess = handleSubmit(async (values, action) => {
     amount: Math.floor(checked.value === false ? amountLosses : weightLosses),
     type: checked.value === false ? 'amount' : 'weight',
     createdAt: time,
-    amountLosses: amount,
   }
   const result = await lossesStore.lossesHandler(lossesBody)
 
@@ -104,25 +102,6 @@ const createLossess = handleSubmit(async (values, action) => {
               <Field v-slot="{ field, errorMessage }" name="amountLosses">
                 <VField>
                   <label>تعداد تلفات</label>
-                  <VControl :has-error="Boolean(errorMessage)">
-                    <input
-                      v-bind="field"
-                      type="text"
-                      class="input"
-                      placeholder=""
-                      autocomplete="given-name"
-                    />
-                    <p v-if="errorMessage" class="help is-danger">
-                      {{ errorMessage }}
-                    </p>
-                  </VControl>
-                </VField>
-              </Field>
-            </div>
-            <div class="form-fields-field mb-20px">
-              <Field v-slot="{ field, errorMessage }" name="amount">
-                <VField>
-                  <label>مقدار تلفات</label>
                   <VControl :has-error="Boolean(errorMessage)">
                     <input
                       v-bind="field"
