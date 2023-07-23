@@ -33,7 +33,6 @@ const schema = yup.object({
     checked.value === false && yup.number().required('تعداد تلفات الزامی است'),
   weightLosses: checked.value === true && yup.number().required('وزن تلفات الزامی است'),
   createdAt: yup.string().required('وارد کردن تاریخ الزامی است'),
-  amount: yup.number().required('مقدار تلفات را مشخص کنید'),
   pondLosses: yup.string(),
 })
 const { handleSubmit } = useForm({
@@ -48,7 +47,6 @@ const feedingCheckingForm = handleSubmit(async (values, action) => {
     type: checked.value === false ? 'amount' : 'weight',
     pond: props.showPondField === false ? pondLosses : route.params.id,
     createdAt: time,
-    amountLosses: amount,
   }
   const result = await lossesStore.lossesHandler(lossesBody)
 
@@ -124,25 +122,7 @@ const feedingCheckingForm = handleSubmit(async (values, action) => {
               </VField>
             </Field>
           </div>
-          <div class="form-fields-field mb-20px">
-            <Field v-slot="{ field, errorMessage }" name="amount">
-              <VField>
-                <label>مقدار تلفات</label>
-                <VControl :has-error="Boolean(errorMessage)">
-                  <input
-                    v-bind="field"
-                    type="text"
-                    class="input"
-                    placeholder=""
-                    autocomplete="given-name"
-                  />
-                  <p v-if="errorMessage" class="help is-danger">
-                    {{ errorMessage }}
-                  </p>
-                </VControl>
-              </VField>
-            </Field>
-          </div>
+
           <div v-if="!showPondField" class="form-fields-field mb-20px">
             <Field v-slot="{ field, errorMessage }" name="pondLosses">
               <VField>

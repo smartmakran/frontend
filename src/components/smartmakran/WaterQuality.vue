@@ -31,7 +31,7 @@ const schema = yup.object({
   nitrate: yup.number().required('وارد کردن نیترات الزامی است'),
   temperature: yup.number().required('وارد کردن دما الزامی است'),
   createdAt: yup.string().required('وارد کردن تاریخ الزامی است'),
-  pond: yup.string().required('وارد کردن استتخر الزامی است'),
+  pond: !props.showPondField && yup.string().required('فیلد استخر الزامی است'),
 })
 const { handleSubmit } = useForm({
   validationSchema: schema,
@@ -44,7 +44,7 @@ const waterQualityHandler = handleSubmit(async (values, action) => {
     ph: Math.floor(values.ph),
     oxygen: Math.floor(values.oxygen),
     orp: Math.floor(values.orp),
-    nitrate : Math.floor(values.nitrate),
+    nitrate: Math.floor(values.nitrate),
     ec: Math.floor(values.ec),
     ammonia: Math.floor(values.ammonia),
     nitrite: Math.floor(values.nitrite),
@@ -53,7 +53,7 @@ const waterQualityHandler = handleSubmit(async (values, action) => {
     pond: !props.showPondField ? values.pond : route.params.id,
     sensorsKey: localStorage.getItem('sensorKey'),
   }
-
+  console.log('cd')
   const result = await waterQuality.waterQualityHandler(waterQualityBody)
   console.log(result)
   if (result !== 400 || result !== 404 || result !== 500) {

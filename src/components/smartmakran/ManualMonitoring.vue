@@ -40,18 +40,18 @@ onMounted(async () => {
   sampling.value = new SamplingChartOption(
     currentPond.samplingData.map((s: any) => s.size as number),
     '#000',
-    currentPond.samplingData.map((s: any) =>
-      // moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
-      moment(moment.now()).diff(s.createdAt, 'days')
+    currentPond.samplingData.map(
+      (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+      // moment(moment.now()).diff(s.createdAt, 'days')
     )
   )
   // update feeding diagram
   feeding.value = new FeedingChartOption(
     currentPond.feedingData.map((s: any) => s.amount as number),
     '#000',
-    currentPond.feedingData.map((s: any) =>
-      // moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
-      moment(moment.now()).diff(s.createdAt, 'days')
+    currentPond.feedingData.map(
+      (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+      // moment(moment.now()).diff(s.createdAt, 'days')
     )
   )
 
@@ -59,9 +59,9 @@ onMounted(async () => {
   changingWater.value = new ChangingWaterChartOption(
     currentPond?.changingWaterData?.map((s: any) => s.amount as number),
     '#000',
-    currentPond?.changingWaterData?.map((s: any) =>
-      // moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
-      moment(moment.now()).diff(s.createdAt, 'days')
+    currentPond?.changingWaterData?.map(
+      (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+      // moment(moment.now()).diff(s.createdAt, 'days')
     )
   )
 
@@ -69,18 +69,18 @@ onMounted(async () => {
   transparency.value = new TransparencyChartOption(
     currentPond.transparencyData.map((s: any) => s.amount as number),
     '#000',
-    currentPond.transparencyData.map((s: any) =>
-      // moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
-      moment(moment.now()).diff(s.createdAt, 'days')
+    currentPond.transparencyData.map(
+      (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+      // moment(moment.now()).diff(s.createdAt, 'days')
     )
   )
 
   lossess.value = new LossessChartOption(
     currentPond.fatalityData.map((s: any) => s.amount as number),
     '#000',
-    currentPond.fatalityData.map((s: any) =>
-      // moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
-      moment(moment.now()).diff(s.createdAt, 'days')
+    currentPond.fatalityData.map(
+      (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+      // moment(moment.now()).diff(s.createdAt, 'days')
     )
   )
 

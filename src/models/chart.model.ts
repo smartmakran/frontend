@@ -253,16 +253,8 @@ export class OrpChartOptions extends ChartBaseOption {
 }
 
 export class ECChartOptions extends ChartBaseOption {
-  series: ChartSeries[] = [
-    { name: 'میزان شوری', data: [] },
-    { name: 'بهینه بالا', data: [] },
-    { name: 'بهینه پایین', data: [] },
-  ]
-  colors: string[] = [
-    useThemeColors().primary,
-    useThemeColors().green,
-    useThemeColors().warning,
-  ]
+  series: ChartSeries[] = [{ name: 'میزان شوری', data: [] }]
+  colors: string[] = ['#000']
   // series: ChartSeries[] = [{ data: [] }]
   annotations: ChartAnnotations = {
     yaxis: [
