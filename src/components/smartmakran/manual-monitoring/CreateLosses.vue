@@ -6,14 +6,20 @@ import { usePondStore } from '/@src/stores/pond'
 import { useNotyf } from '/@src/composable/useNotyf'
 import { ILosses } from '/@src/interfaces/losses.interface'
 import { useLossesStore } from '/@src/stores/losses'
+import { ref } from 'vue'
 
 const notyf = useNotyf()
 const pondStore = usePondStore()
 const lossesStore = useLossesStore()
+const checked = ref(false)
 const schema = yup.object({
-  amount: yup.number().required('تعداد تلفات الزامی است'),
+  amountLosses:
+    checked.value === false && yup.number().required('تعداد تلفات الزامی است'),
+  weightLosses: checked.value === true && yup.number().required('وزن تلفات الزامی است'),
   createdAt: yup.string().required('وارد کردن تاریخ الزامی است'),
+  amount: yup.number().required('مقدار تلفات را مشخص کنید'),
 })
+
 const { handleSubmit } = useForm({
   validationSchema: schema,
 })
@@ -21,9 +27,11 @@ const createLossess = handleSubmit(async (values, action) => {
   const { amount, createdAt } = values
   const time = moment.utc(createdAt).format('YYYY-MM-DD HH:mm:ss')
   const lossesBody: ILosses = {
-    amount: Math.floor(amount),
     pond: pondStore.currentPond.id,
+    amount: Math.floor(checked.value === false ? amountLosses : weightLosses),
+    type: checked.value === false ? 'amount' : 'weight',
     createdAt: time,
+    amountLosses: amount,
   }
   const result = await lossesStore.lossesHandler(lossesBody)
 
@@ -64,27 +72,71 @@ const createLossess = handleSubmit(async (values, action) => {
           </div>
         </div>
         <div class="form-body">
+          <label class="checked-draggable-container" for="checked">
+            <span>وزن یا تعداد تلفات</span>
+            <div class="checked-draggable">
+              <input v-model="checked" type="checkbox" name="" id="" />
+              <div class="checked-draggable-btn"></div>
+            </div>
+          </label>
           <div class="form-fieldset">
-            <div class="columns is-multiline">
-              <div class="column is-12">
-                <Field v-slot="{ field, errorMessage }" name="amount">
-                  <VField>
-                    <label>تعداد تلفات</label>
-                    <VControl :has-error="Boolean(errorMessage)">
-                      <input
-                        v-bind="field"
-                        type="text"
-                        class="input"
-                        placeholder=""
-                        autocomplete="given-name"
-                      />
-                      <p v-if="errorMessage" class="help is-danger">
-                        {{ errorMessage }}
-                      </p>
-                    </VControl>
-                  </VField>
-                </Field>
-              </div>
+            <div v-if="checked" class="form-fields-field mb-20px">
+              <Field v-slot="{ field, errorMessage }" name="weightLosses">
+                <VField>
+                  <label>وزن تلفات</label>
+                  <VControl :has-error="Boolean(errorMessage)">
+                    <input
+                      v-bind="field"
+                      type="text"
+                      class="input"
+                      placeholder=""
+                      autocomplete="given-name"
+                    />
+                    <p v-if="errorMessage" class="help is-danger">
+                      {{ errorMessage }}
+                    </p>
+                  </VControl>
+                </VField>
+              </Field>
+            </div>
+
+            <div v-if="!checked" class="form-fields-field mb-20px">
+              <Field v-slot="{ field, errorMessage }" name="amountLosses">
+                <VField>
+                  <label>تعداد تلفات</label>
+                  <VControl :has-error="Boolean(errorMessage)">
+                    <input
+                      v-bind="field"
+                      type="text"
+                      class="input"
+                      placeholder=""
+                      autocomplete="given-name"
+                    />
+                    <p v-if="errorMessage" class="help is-danger">
+                      {{ errorMessage }}
+                    </p>
+                  </VControl>
+                </VField>
+              </Field>
+            </div>
+            <div class="form-fields-field mb-20px">
+              <Field v-slot="{ field, errorMessage }" name="amount">
+                <VField>
+                  <label>مقدار تلفات</label>
+                  <VControl :has-error="Boolean(errorMessage)">
+                    <input
+                      v-bind="field"
+                      type="text"
+                      class="input"
+                      placeholder=""
+                      autocomplete="given-name"
+                    />
+                    <p v-if="errorMessage" class="help is-danger">
+                      {{ errorMessage }}
+                    </p>
+                  </VControl>
+                </VField>
+              </Field>
             </div>
           </div>
           <!--Fieldset-->

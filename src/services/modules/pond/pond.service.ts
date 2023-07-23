@@ -64,5 +64,6 @@ export async function createTransparencyData(
   body: ICreateTransparencyData
 ): Promise<number> {
   const { status } = await api.post('/manualMonitoring/transparency', body)
+  console.log(status)
   return status
 }

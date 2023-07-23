@@ -17,6 +17,7 @@ const schema = yup.object({
   ec: yup.number().required('وارد کردن میزان شوری الزامی است'),
   ammonia: yup.number().required('وارد کردن آمونیاک الزامی است'),
   nitrite: yup.number().required('وارد کردن نیتریت الزامی است'),
+  nitrate: yup.number().required('وارد کردن نیترات الزامی است'),
   temperature: yup.number().required('وارد کردن دما الزامی است'),
   createdAt: yup.string().required('وارد کردن تاریخ الزامی است'),
 })
@@ -33,7 +34,9 @@ const waterQualityHandler = handleSubmit(async (values, action) => {
     ec: Math.floor(values.ec),
     ammonia: Math.floor(values.ammonia),
     nitrite: Math.floor(values.nitrite),
+    nitrate: Math.floor(values.nitrate),
     temperature: Math.floor(values.temperature),
+
     createdAt: time,
     pond: pondStore.currentPond.id,
     sensorsKey: localStorage.getItem('sensorKey'),
@@ -178,6 +181,7 @@ const waterQualityHandler = handleSubmit(async (values, action) => {
                   </VField>
                 </Field>
               </div>
+
               <div class="column is-4">
                 <Field v-slot="{ field, errorMessage }" name="ammonia">
                   <VField>
@@ -201,7 +205,7 @@ const waterQualityHandler = handleSubmit(async (values, action) => {
           </div>
           <div class="form-fieldset">
             <div class="columns is-multiline">
-              <div class="column is-6">
+              <div class="column is-4">
                 <Field v-slot="{ field, errorMessage }" name="temperature">
                   <VField>
                     <label>دما</label>
@@ -220,7 +224,7 @@ const waterQualityHandler = handleSubmit(async (values, action) => {
                   </VField>
                 </Field>
               </div>
-              <div class="column is-6">
+              <div class="column is-8">
                 <Field v-slot="{ field, errorMessage }" name="createdAt">
                   <VField>
                     <label>تاریخ</label>
@@ -237,6 +241,27 @@ const waterQualityHandler = handleSubmit(async (values, action) => {
                   </VField>
                 </Field>
               </div>
+            </div>
+          </div>
+          <div class="form-fieldset">
+            <div class="column is-4">
+              <Field v-slot="{ field, errorMessage }" name="nitrate">
+                <VField>
+                  <label>نیترات</label>
+                  <VControl :has-error="Boolean(errorMessage)">
+                    <input
+                      v-bind="field"
+                      type="text"
+                      class="input"
+                      placeholder=""
+                      autocomplete="given-name"
+                    />
+                    <p v-if="errorMessage" class="help is-danger">
+                      {{ errorMessage }}
+                    </p>
+                  </VControl>
+                </VField>
+              </Field>
             </div>
           </div>
         </div>

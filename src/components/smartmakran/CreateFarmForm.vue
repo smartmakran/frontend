@@ -45,6 +45,7 @@ const createFarmForm = handleSubmit(async (values, action) => {
   }
 
   const result = await farmStore.createFarm(createFarmBody)
+  console.log(result)
   if (result === 201) {
     console.log('Farm created successfully')
     farmStore.getFarmsList()

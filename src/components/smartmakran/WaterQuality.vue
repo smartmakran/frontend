@@ -22,15 +22,16 @@ const props = defineProps<{
 }>()
 
 const schema = yup.object({
-  ph: yup.number(),
-  oxygen: yup.number(),
-  orp: yup.number(),
-  ec: yup.number(),
-  ammonia: yup.number(),
-  nitrite: yup.number(),
-  temperature: yup.number(),
-  createdAt: yup.string(),
-  pond: yup.string(),
+  ph: yup.number().required('وارد کردن pH الزامی است'),
+  oxygen: yup.number().required('وارد کردن اکسیژن الزامی است'),
+  orp: yup.number().required('وارد کردن orp الزامی است'),
+  ec: yup.number().required('وارد کردن میزان شوری الزامی است'),
+  ammonia: yup.number().required('وارد کردن آمونیاک الزامی است'),
+  nitrite: yup.number().required('وارد کردن نیتریت الزامی است'),
+  nitrate: yup.number().required('وارد کردن نیترات الزامی است'),
+  temperature: yup.number().required('وارد کردن دما الزامی است'),
+  createdAt: yup.string().required('وارد کردن تاریخ الزامی است'),
+  pond: yup.string().required('وارد کردن استتخر الزامی است'),
 })
 const { handleSubmit } = useForm({
   validationSchema: schema,
@@ -43,6 +44,7 @@ const waterQualityHandler = handleSubmit(async (values, action) => {
     ph: Math.floor(values.ph),
     oxygen: Math.floor(values.oxygen),
     orp: Math.floor(values.orp),
+    nitrate : Math.floor(values.nitrate),
     ec: Math.floor(values.ec),
     ammonia: Math.floor(values.ammonia),
     nitrite: Math.floor(values.nitrite),
@@ -231,6 +233,27 @@ let filteredPonds = computed<IPond[]>(() => {
             </VField>
           </Field>
         </div>
+
+        <div class="form-fields-field mb-20px">
+          <Field v-slot="{ field, errorMessage }" name="nitrate">
+            <VField>
+              <label>نیترات</label>
+              <VControl :has-error="Boolean(errorMessage)">
+                <input
+                  v-bind="field"
+                  type="text"
+                  class="input"
+                  placeholder=""
+                  autocomplete="given-name"
+                />
+                <p v-if="errorMessage" class="help is-danger">
+                  {{ errorMessage }}
+                </p>
+              </VControl>
+            </VField>
+          </Field>
+        </div>
+
         <!-- <div class="form-fields-field mb-20px mb-0">
           <Field v-slot="{ field, errorMessage }" name="pond">
             <VField>
