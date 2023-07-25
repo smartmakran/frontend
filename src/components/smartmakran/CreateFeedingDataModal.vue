@@ -57,7 +57,7 @@ const feedingChecking = handleSubmit(async (values, action) => {
     console.log('Farm created successfully')
     // notyf.green('تلفات با موفقیت ثبت شد')
     notyf.success({
-      message: 'تلفات با موفقیت ثبت شد',
+      message: 'چک غذادهی با موفقیت ثبت شد',
     })
     props.closeModal()
     // farmStore.getFarmsList()

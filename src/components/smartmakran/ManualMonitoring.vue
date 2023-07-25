@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import ApexChart from 'vue3-apexcharts'
 import moment from 'moment-jalaali'
-import { computed, onMounted, watchEffect } from 'vue'
+import { computed, onMounted, watch, watchEffect } from 'vue'
 import { usePondStore } from '/@src/stores/pond'
 import draggable from 'vuedraggable'
+import { getPondDetails } from '../../services/modules/pond/pond.service'
+
 import {
   ChangingWaterChartOption,
   FeedingChartOption,
@@ -21,10 +23,14 @@ const params = defineProps({
 })
 
 const pondStore = usePondStore()
-// const currentPond = computed<IPond>(() => {
-//   return pondStore.currentPond || {}
-// })
-const currentPond = JSON.parse(localStorage.getItem('pond'))
+const currentPond = ref()
+
+watchEffect(async () => {
+  currentPond.value = await getPondDetails(params.id)
+})
+onMounted(async () => {
+  await pondStore.getPond(params.id)
+})
 
 const sampling = ref(new SamplingChartOption([], '#000', []))
 const lossess = ref(new LossessChartOption([], '#000', []))
@@ -32,53 +38,108 @@ const feeding = ref(new FeedingChartOption([], '#000', []))
 const changingWater = ref(new ChangingWaterChartOption([], '#000', []))
 const transparency = ref(new TransparencyChartOption([], '#000', []))
 const charts = ref()
-onMounted(async () => {
-  // const result = await pondStore.manualMonitoring(params.id)
-  const result = JSON.parse(localStorage.getItem('pond'))
 
-  // update sampling diagram
+const sortingSamplingData = ref([])
+const sortingFeedingData = ref([])
+const sortingChangingWaterData = ref([])
+const sortingTransparencyData = ref([])
+const sortingFatalityData = ref([])
+
+watchEffect(() => {
+  if (currentPond.value) {
+    sortingSamplingData.value = currentPond.value.samplingData.sort(function (
+      left,
+      right
+    ) {
+      return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+    })
+
+    sortingFeedingData.value = currentPond.value.fatalityData.sort(function (
+      left,
+      right
+    ) {
+      return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+    })
+
+    sortingChangingWaterData.value = currentPond.value.changingWaterData
+      ? currentPond.value.changingWaterData.sort(function (left, right) {
+          return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+        })
+      : []
+
+    sortingTransparencyData.value = currentPond.value.transparencyData
+      ? currentPond.value.transparencyData.sort(function (left, right) {
+          return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+        })
+      : []
+
+    sortingFatalityData.value = currentPond.value.fatalityData
+      ? currentPond.value.fatalityData.sort(function (left, right) {
+          return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+        })
+      : []
+
+    console.log(sortingFatalityData.value)
+  }
+})
+
+watchEffect(async () => {
   sampling.value = new SamplingChartOption(
-    currentPond.samplingData.map((s: any) => s.size as number),
+    sortingSamplingData.value
+      ? sortingSamplingData.value.map((s: any) => s.size as number)
+      : [],
     '#000',
-    currentPond.samplingData.map(
-      (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
-      // moment(moment.now()).diff(s.createdAt, 'days')
-    )
+    sortingSamplingData.value
+      ? sortingSamplingData.value.map(
+          (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+          // moment(moment.now()).diff(s.createdAt, 'days')
+        )
+      : []
   )
   // update feeding diagram
   feeding.value = new FeedingChartOption(
-    currentPond.feedingData.map((s: any) => s.amount as number),
+    sortingFeedingData.value
+      ? sortingFeedingData.value.map((s: any) => s.amount as number)
+      : [],
     '#000',
-    currentPond.feedingData.map(
-      (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
-      // moment(moment.now()).diff(s.createdAt, 'days')
-    )
+    sortingFeedingData.value
+      ? sortingFeedingData.value.map(
+          (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+          // moment(moment.now()).diff(s.createdAt, 'days')
+        )
+      : []
   )
 
   // update changing water diagram
   changingWater.value = new ChangingWaterChartOption(
-    currentPond?.changingWaterData?.map((s: any) => s.amount as number),
+    sortingChangingWaterData.value
+      ? sortingChangingWaterData.value.map((s: any) => s.amount as number)
+      : [],
     '#000',
-    currentPond?.changingWaterData?.map(
-      (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
-      // moment(moment.now()).diff(s.createdAt, 'days')
-    )
+    sortingChangingWaterData.value
+      ? sortingChangingWaterData.value.map(
+          (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
+          // moment(moment.now()).diff(s.createdAt, 'days')
+        )
+      : []
   )
 
   // update transparency diagram
   transparency.value = new TransparencyChartOption(
-    currentPond.transparencyData.map((s: any) => s.amount as number),
+    sortingTransparencyData.value.map((s: any) => s.amount as number),
     '#000',
-    currentPond.transparencyData.map(
+    sortingTransparencyData.value.map(
       (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
       // moment(moment.now()).diff(s.createdAt, 'days')
     )
   )
 
   lossess.value = new LossessChartOption(
-    currentPond.fatalityData.map((s: any) => s.amount as number),
+    sortingFatalityData.value
+      ? sortingFatalityData.value.map((s: any) => s.amount as number)
+      : [],
     '#000',
-    currentPond.fatalityData.map(
+    currentPond.value.fatalityData.map(
       (s: any) => moment(s.createdAt).format('jYYYY-jMM-jDD HH:mm:ss')
       // moment(moment.now()).diff(s.createdAt, 'days')
     )
@@ -120,13 +181,6 @@ onMounted(async () => {
 })
 
 const activateDraggable = ref(false)
-
-console.log(charts)
-// watchEffect(() => {
-//   if (localStorage.getItem('chart_manual') !== null) {
-//     charts.value = JSON.parse(localStorage.getItem('chart_manual'))
-//   }
-// })
 
 const dragChartHandle = () => {
   localStorage.setItem('chart_manual', JSON.stringify(charts._rawValue))
