@@ -1,6 +1,8 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { usePondStore } from '/@src/stores/pond'
+import { IPond } from '/@src/interfaces/pond.interface'
+
 // define props for using in the component
 // Access params with `params.id`
 const params = defineProps({
@@ -11,6 +13,9 @@ const params = defineProps({
 })
 
 const pondStore = usePondStore()
+const currentPond = computed<IPond>(() => {
+  return pondStore.currentPond || {}
+})
 
 onMounted(async () => {
   await pondStore.getPond(params.id)

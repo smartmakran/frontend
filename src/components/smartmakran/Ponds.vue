@@ -20,6 +20,53 @@ watchEffect(async () => {
 const ponds = JSON.parse(localStorage.getItem('poolList'))
 let closing = () => (showCreatePond.value = false)
 console.log(ponds)
+const getBiomass = (size, larv) => {
+  // console.log(array)
+  if (size && larv) {
+    let sum = size.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue
+    }, 0)
+
+    let length = size.length
+    let avarage = sum / length
+    let getKiloGram = avarage / 1000
+    return getKiloGram * larv
+  } else {
+    return 0
+  }
+}
+
+const getAverageSize = (size) => {
+  if (size) {
+    let sum = size.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue
+    }, 0)
+
+    let length = size.length
+    let avarage = sum / length
+    let getKiloGram = avarage / 1000
+    return getKiloGram
+  } else {
+    return 0
+  }
+}
+
+const getFCR = (pond) => {
+  if (pond.samplingData.length) {
+    let res = pond.feedingData.map((obj) => obj.amount)
+    let sum = res.reduce((accumulator, currentValue) => {
+      return accumulator + currentValue
+    }, 0)
+    let biomass = getBiomass(pond.samplingData[0].size, pond.larvaCount)
+    return sum / biomass
+  }
+}
+
+const getDencity = (pond) => {
+  let area = pond.dimensions.width * pond.dimensions.length
+  let dencity = pond.larvaCount / area
+  return dencity
+}
 </script>
 
 <template>
@@ -130,7 +177,14 @@ console.log(ponds)
                       <img src="/@src/assets/smartmakran/icons-box/bio.svg" alt="" />
                     </div>
                     <h4>حجم توده زنده</h4>
-                    <p>12</p>
+                    <p>
+                      {{
+                        getBiomass(
+                          pond?.samplingData && pond?.samplingData[0].size,
+                          pond?.larvaCount
+                        )
+                      }}
+                    </p>
                   </div>
                 </div>
                 <div class="card-pond-body">
@@ -139,7 +193,7 @@ console.log(ponds)
                       <img src="/@src/assets/smartmakran/icons-box/sal1.svg" alt="" />
                     </div>
                     <h4>میزان شوری</h4>
-                    <p>32</p>
+                    <p>{{ pond?.sensorData ? pond?.sensorData[0].ec : 0 }}</p>
                   </div>
                 </div>
                 <div class="card-pond-body">
@@ -148,7 +202,7 @@ console.log(ponds)
                       <img src="/@src/assets/smartmakran/icons-box/do1.svg" alt="" />
                     </div>
                     <h4>اکسیژن</h4>
-                    <p>12</p>
+                    <p>{{ pond?.sensorData ? pond?.sensorData[0]?.oxygen : 0 }}</p>
                   </div>
                 </div>
                 <div class="card-pond-body">
@@ -157,7 +211,11 @@ console.log(ponds)
                       <img src="/@src/assets/smartmakran/icons-box/size.svg" alt="" />
                     </div>
                     <h4>میانگین سایز</h4>
-                    <p>12</p>
+                    <p>
+                      {{
+                        getAverageSize(pond?.samplingData && pond?.samplingData[0].size)
+                      }}
+                    </p>
                   </div>
                 </div>
 
@@ -167,7 +225,7 @@ console.log(ponds)
                       <img src="/@src/assets/smartmakran/icons-box/ph.svg" alt="" />
                     </div>
                     <h4>pH</h4>
-                    <p>12</p>
+                    <p>{{ pond?.sensorData ? pond?.sensorData[0]?.ph : 0 }}</p>
                   </div>
                 </div>
                 <div class="card-pond-body">
@@ -176,7 +234,7 @@ console.log(ponds)
                       <img src="/@src/assets/smartmakran/icons-box/temp.svg" alt="" />
                     </div>
                     <h4>دما</h4>
-                    <p>12</p>
+                    <p>{{ pond?.sensorData ? pond?.sensorData[0]?.temperature : 0 }}</p>
                   </div>
                 </div>
               </div>

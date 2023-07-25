@@ -20,6 +20,7 @@ export const usePondStore = defineStore({
   state: () => ({
     list: [] as IPond[],
     currentPond: {} as IPond,
+    pondObj: {} as IPond,
     loading: false,
     error: null as null | Error,
   }),
@@ -38,6 +39,7 @@ export const usePondStore = defineStore({
       try {
         this.loading = true
         this.currentPond = await getPondDetails(id)
+        this.pondObj = await getPondDetails(id)
       } catch (e) {
         this.error = e as Error
       } finally {

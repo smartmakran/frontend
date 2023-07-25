@@ -54,8 +54,12 @@ const { sensorData, optimalData, ponds } = await dashboard(`/dashboard/${user.id
 function getPond() {
   let Sensorf = sensorData.filter((item) => item.pond === router.params.id)
   let optimalf = sensorData.filter((item) => item.pond === router.params.id)
-  filteringSensor.value = Sensorf
-  filteringoptimal.value = optimalf
+
+  let sortedSensor = Sensorf.sort((a, b) => b.createdAt - a.createdAt)
+  let optimalSensor = optimalf.sort((a, b) => b.createdAt - a.createdAt)
+
+  filteringSensor.value = sortedSensor
+  filteringoptimal.value = optimalSensor
 }
 getPond()
 function extractData(data: any, optimal: any) {
@@ -63,13 +67,17 @@ function extractData(data: any, optimal: any) {
     data = data.slice(data.length - 50, data.length)
   }
 
-  const dates = data.map(
+  let sort = data.sort(function (left, right) {
+    return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+  })
+
+  const dates = sort.map(
     (d: SensorData) => moment(d.createdAt).local().format('jYYYY-jMM-jDD hh:mm')
 
     // (d: SensorData) => //moment(moment.now()).diff(d.createdAt, 'days')
     // '12'
   )
-  console.log(dates)
+
   const phData: number[] = data.map((d: SensorData) => d.ph)
   const phUp = data.map(() => optimal[0].ph + 1.5)
   const phDown = data.map(() => optimal[0].ph - 1.5)
@@ -131,6 +139,7 @@ function extractData(data: any, optimal: any) {
   }
 
   const nitrateData = data.map((d: SensorData) => d.nitrate)
+
   const nitrateUp = data.map(() => (optimal[0].nitrate + 0.5).toFixed(2))
   const nitrateDown = data.map(() => (optimal[0].nitrate - 0.5).toFixed(2))
   let nitrateColor = useThemeColors().primary

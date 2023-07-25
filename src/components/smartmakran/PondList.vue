@@ -4,7 +4,7 @@ import { IPond } from '/@src/interfaces/pond.interface'
 import { useFarmStore } from '/@src/stores/farm'
 import { usePondStore } from '/@src/stores/pond'
 import { ref } from 'vue'
-
+import moment from 'moment-jalaali'
 const farmStore = useFarmStore()
 const showCreatePond = ref(false)
 const pondStore = usePondStore()
@@ -64,6 +64,37 @@ const getDencity = (pond) => {
   let dencity = pond.larvaCount / area
   return dencity
 }
+
+// let ponds = filteredPonds.value.forEach((pond) => {
+//   let sortsensor=pond.sensorData.sort(function (left, right) {
+//     return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+//   })
+
+//   let sortsample= pond.samplingData.sort(function (left, right) {
+//     return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+//   })
+
+//   let sortfeeding=pond.feedingData.sort(function (left, right) {
+//     return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+//   })
+
+//   let sorttrans=pond.transparencyData.sort(function (left, right) {
+//     return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+//   })
+
+//   let sortfatality= pond.fatalityData.sort(function (left, right) {
+//     return moment.utc(left.createdAt).diff(moment.utc(right.createdAt))
+//   })
+
+//   pond.sensorData = sortsensor
+//   pond.samplingData = sortsample
+//   pond.feedingData = sortfeeding
+//   pond.transparencyData = sorttrans
+//   pond.fatalityData = sortfatality
+// })
+
+// console.log('objectdchdskjcds')
+// console.log(ponds)
 </script>
 
 <template>

@@ -78,14 +78,14 @@ export class FeedingChartOption extends ChartBaseOption {
 }
 
 export class ChangingWaterChartOption extends ChartBaseOption {
-  series: ChartSeries[] = [{ name: 'غذادهی', data: [] }]
+  series: ChartSeries[] = [{ name: 'تعویض آب', data: [] }]
   colors: string[] = [
     useThemeColors().primary,
     useThemeColors().danger,
     useThemeColors().lightText,
   ]
   title: ChartTitle = {
-    text: 'غذادهی (kg)',
+    text: 'تعویض آب (درصد)',
     align: 'right',
   }
   labels: string[]
