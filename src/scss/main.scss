@@ -69,3 +69,7 @@ SCSS Imports
 @import './abstracts/dark';
 
 @import './rtl';
+
+.v-modal .modal-content {
+  width: 90% !important;
+}

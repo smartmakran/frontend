@@ -119,7 +119,7 @@ export class OxygenChartOptions extends ChartBaseOption {
       },
       {
         y: 2.5,
-        y2: 5,
+        y2: 4,
         borderColor: useThemeColors().warning,
         fillColor: useThemeColors().warning,
         opacity: 0.2,
@@ -199,7 +199,7 @@ export class OrpChartOptions extends ChartBaseOption {
       },
       {
         y: 100,
-        y2: 250,
+        y2: 200,
         borderColor: useThemeColors().warning,
         fillColor: useThemeColors().warning,
         opacity: 0.2,
@@ -356,7 +356,7 @@ export class AmmoniaChartOptions extends ChartBaseOption {
       },
       {
         y: 0,
-        y2: 0.1,
+        y2: 0.01,
         borderColor: useThemeColors().green,
         fillColor: useThemeColors().green,
         opacity: 0.2,
